@@ -3,19 +3,31 @@
 SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
-; @name         Windows-Hotkey-for-iFlyVoice
-; @description  Customize Win + H as the Hotkey of iFLYTEK Voice Input Floating Window
+#SingleInstance Force
+;@Ahk2Exe-AddResource icon_256x256.ico, 141
+;@Ahk2Exe-Obey U_bits, = %A_PtrSize% * 8
+;@Ahk2Exe-ExeName %A_ScriptDir%\bin\%A_ScriptName~\.[^\.]+$%-%U_bits%bit
+;@Ahk2Exe-SetMainIcon  icon_256x256.ico
+;@Ahk2Exe-SetName      WinHotkey for iFlyVoice
+;@Ahk2Exe-SetDescription  Customize Win + H as the Hotkey of iFLYTEK Voice Input Floating Window
 ;               A fork of snomiao/CapsLockX/Modules/应用-讯飞输入法语音悬浮窗.ahk for iFlyIME 3.0.1725.
-; @author       @chriskyfung
-; @version      2.1.2(20210327)
+;@Ahk2Exe-SetCopyright	chriskyfung.github.io
+;@Ahk2Exe-UpdateManifest 1, AutoHotkey , 2.1.2.0 ,0
 
-; AppendHelp("
-; (
-; iFLYTEK Voice Input Floating Window
-; | Win + H | Switch ON/OFF iFLYTEK Voice Input
-; )")
+if %A_IsCompiled% {
+	Menu, Tray, Icon, , -141, 1
+}
+else {
+	Menu, Tray, Icon, icon_256x256.ico , 1, 1
+}
+Menu, Tray, NoStandard
+Menu, Tray, Add, Exit
+Menu, Tray, Tip, Win + H | Start/Stop iFLYTEK Voice Input
+return
 
-; Return
+Exit:
+ExitApp
+return
 
 #h::
     If (WinExist("ahk_class BaseGui ahk_exe iFlyVoice.exe")) {
