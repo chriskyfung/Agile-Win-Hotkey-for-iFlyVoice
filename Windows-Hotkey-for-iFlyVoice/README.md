@@ -2,7 +2,7 @@
 
 An [AutoHotKey](https://www.autohotkey.com/) script to configure `Win + H` as the custom Hotkey for quick start of the **iFLYTEK Voice Input** Floating Window (讯飞语音悬浮窗).
 
-![Windows-Hotkey-for-iFlyVoice-Logo](https://github.com/chriskyfung/voice-input-tools-for-windows/raw/3795c09f7926ce9470db8339e39321ed05db32de/Windows-Hotkey-for-iFlyVoice/doc/images/icon_256x256.png){: style="text-align:center"}
+<img src="https://github.com/chriskyfung/voice-input-tools-for-windows/raw/main/Windows-Hotkey-for-iFlyVoice/doc/images/icon_256x256.png" width="256" height="256" alt="Windows-Hotkey-for-iFlyVoice-Logo" style="margin: auto;">
 
 ## 🚀 Usages
 
@@ -11,11 +11,11 @@ An [AutoHotKey](https://www.autohotkey.com/) script to configure `Win + H` as th
 
   - Launch **iFLYTEK Voice Input** if the program is not running in the background.
 
-    ![Start iFLYTEK Voice Input with Hotkey](https://github.com/chriskyfung/voice-input-tools-for-windows/raw/3795c09f7926ce9470db8339e39321ed05db32de/Windows-Hotkey-for-iFlyVoice/doc/images/launch-iflyvoice-using-hotkey.png)
+    ![Start iFLYTEK Voice Input with Hotkey](https://github.com/chriskyfung/voice-input-tools-for-windows/raw/main/Windows-Hotkey-for-iFlyVoice/doc/images/launch-iflyvoice-using-hotkey.png)
 
   - **Start/stop listening** if the Floating Window is on the desktop.
 
-    ![Toggle iFLYTEK Voice Input to start/stop dictating your voices](https://github.com/chriskyfung/voice-input-tools-for-windows/raw/3795c09f7926ce9470db8339e39321ed05db32de/Windows-Hotkey-for-iFlyVoice/doc/images/toggle-iflyvoice-onoff.png)
+    ![Toggle iFLYTEK Voice Input to start/stop dictating your voices](https://github.com/chriskyfung/voice-input-tools-for-windows/raw/main/Windows-Hotkey-for-iFlyVoice/doc/images/toggle-iflyvoice-onoff.png)
 
   - Ask to download the installation package and install it to the default directory if [iFlyIME (讯飞输入法) v3.0.1725](https://srf.xunfei.cn/) does not exist on your computer.
 
@@ -26,4 +26,4 @@ An [AutoHotKey](https://www.autohotkey.com/) script to configure `Win + H` as th
 - **Operation System**: Windows Only
 - **Software**: iFlyIME (讯飞输入法) for Windows v3.0.1725
 
-   ![iFlyIME (讯飞输入法) for Windows v3.0.1725](https://github.com/chriskyfung/voice-input-tools-for-windows/raw/3795c09f7926ce9470db8339e39321ed05db32de/Windows-Hotkey-for-iFlyVoice/doc/images/iflyime-for-windwos-pc.png)
+   ![iFlyIME (讯飞输入法) for Windows v3.0.1725](https://github.com/chriskyfung/voice-input-tools-for-windows/raw/main/Windows-Hotkey-for-iFlyVoice/doc/images/iflyime-for-windwos-pc.png)
