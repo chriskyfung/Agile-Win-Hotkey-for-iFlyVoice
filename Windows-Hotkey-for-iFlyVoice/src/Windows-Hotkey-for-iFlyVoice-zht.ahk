@@ -34,8 +34,9 @@ return
         ; 原方案使用熱鍵觸發
         ; Send ^+h
         ; 新方案直接發送模擬點擊消息
-		WinSet, Top ,, ahk_class BaseGui ahk_exe iFlyVoice.exe
+		WinSet, AlwaysOnTop , on, ahk_class BaseGui ahk_exe iFlyVoice.exe
 		ControlClick, x119 y59, ahk_class BaseGui ahk_exe iFlyVoice.exe
+        WinSet, AlwaysOnTop , off, ahk_class BaseGui ahk_exe iFlyVoice.exe
     }Else{
         If (FileExist("C:\Program Files (x86)\iFlytek\iFlyIME\3.0.1725\iFlyVoice.exe")){
             Run "C:\Program Files (x86)\iFlytek\iFlyIME\3.0.1725\iFlyVoice.exe"
