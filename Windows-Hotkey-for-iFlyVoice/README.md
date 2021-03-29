@@ -43,7 +43,7 @@ An [AutoHotKey](https://www.autohotkey.com/) script to configure `Win + H` as th
 ## 🔽 Download
 
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/chriskyfung/voice-input-tools-for-windows)  \
-![US flag](https://cdn.jsdelivr.net/gh/hjnilsson/country-flags@master/svg/us.svg){: width=16 } [English](https://github.com/chriskyfung/voice-input-tools-for-windows/releases/download/v2.1.2/Windows-Hotkey-for-iFlyVoice-en-32bit.exe) | ![China flag](https://cdn.jsdelivr.net/gh/hjnilsson/country-flags@master/svg/cn.svg){: width=16} [简体中文](https://github.com/chriskyfung/voice-input-tools-for-windows/releases/download/v2.1.2/Windows-Hotkey-for-iFlyVoice-zhs-32bit.exe) | ![Hong Kong flag](https://cdn.jsdelivr.net/gh/hjnilsson/country-flags@master/svg/hk.svg){: width=16} [繁體中文](https://github.com/chriskyfung/voice-input-tools-for-windows/releases/download/v2.1.2/Windows-Hotkey-for-iFlyVoice-zht-32bit.exe)
+<img src="https://cdn.jsdelivr.net/gh/hjnilsson/country-flags@master/svg/us.svg" height="16" alt="US"> [English](https://github.com/chriskyfung/voice-input-tools-for-windows/releases/download/v2.1.2/Windows-Hotkey-for-iFlyVoice-en-32bit.exe) | <img src="https://cdn.jsdelivr.net/gh/hjnilsson/country-flags@master/svg/cn.svg" height="16" alt="China"> [简体中文](https://github.com/chriskyfung/voice-input-tools-for-windows/releases/download/v2.1.2/Windows-Hotkey-for-iFlyVoice-zhs-32bit.exe) | <img src="https://cdn.jsdelivr.net/gh/hjnilsson/country-flags@master/svg/hk.svg" height="16" alt="Hong Kong"> [繁體中文](https://github.com/chriskyfung/voice-input-tools-for-windows/releases/download/v2.1.2/Windows-Hotkey-for-iFlyVoice-zht-32bit.exe)
 
 * * *
 
