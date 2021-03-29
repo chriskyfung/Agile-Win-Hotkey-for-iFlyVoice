@@ -40,18 +40,23 @@ An [AutoHotKey](https://www.autohotkey.com/) script to configure `Win + H` as th
     ✅ OneNote for Windows 10
     ✅ Visual Studio Code
 
-## 🔽 Download ![GitHub release (latest by date)](https://img.shields.io/github/v/release/chriskyfung/voice-input-tools-for-windows)
+## 🔽 Download
 
-- [English (US) :us:](https://github.com/chriskyfung/voice-input-tools-for-windows/releases/download/v2.1.2/Windows-Hotkey-for-iFlyVoice-en-32bit.exe)
-- [简体中文 :cn:](https://github.com/chriskyfung/voice-input-tools-for-windows/releases/download/v2.1.2/Windows-Hotkey-for-iFlyVoice-zhs-32bit.exe)
-- [繁體中文 :taiwan:](https://github.com/chriskyfung/voice-input-tools-for-windows/releases/download/v2.1.2/Windows-Hotkey-for-iFlyVoice-zht-32bit.exe)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/chriskyfung/voice-input-tools-for-windows)  \
+![US flag](https://cdn.jsdelivr.net/gh/hjnilsson/country-flags@master/svg/us.svg){: width=16 } [English](https://github.com/chriskyfung/voice-input-tools-for-windows/releases/download/v2.1.2/Windows-Hotkey-for-iFlyVoice-en-32bit.exe) | ![China flag](https://cdn.jsdelivr.net/gh/hjnilsson/country-flags@master/svg/cn.svg){: width=16} [简体中文](https://github.com/chriskyfung/voice-input-tools-for-windows/releases/download/v2.1.2/Windows-Hotkey-for-iFlyVoice-zhs-32bit.exe) | ![Hong Kong flag](https://cdn.jsdelivr.net/gh/hjnilsson/country-flags@master/svg/hk.svg){: width=16} [繁體中文](https://github.com/chriskyfung/voice-input-tools-for-windows/releases/download/v2.1.2/Windows-Hotkey-for-iFlyVoice-zht-32bit.exe)
 
 * * *
 
+## Like my stuff?
+
+> Would you like to buy me a coffee? I would really appreciate it if you could support me for the app development.
+>
+> <a href="https://www.buymeacoffee.com/chrisfungky"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" target="_blank"></a>
+
 ## Contributing
 
-Pull requests for new features, bug fixes, and suggestions are welcome!
+> Pull requests for new features, bug fixes, and suggestions are welcome!
 
 ## License
 
-GNU General Public License v3.0
+> GNU General Public License v3.0
