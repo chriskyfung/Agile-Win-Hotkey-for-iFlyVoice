@@ -1,8 +1,14 @@
-# Windows-Hotkey-for-iFlyVoice
+
+![Made for Windows](https://img.shields.io/badge/Made%20for-Windows-1f425f.svg) [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) ![GitHub release (latest by date)](https://img.shields.io/github/v/release/chriskyfung/voice-input-tools-for-windows) ![GitHub all releases
+ Download Count](https://img.shields.io/github/downloads/chriskyfung/voice-input-tools-for-windows/total)
+
+# Windows-Hotkey-for-iFlyVoice ![Windows badge](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white)
 
 An [AutoHotKey](https://www.autohotkey.com/) script to configure `Win + H` as the custom Hotkey for quick start of the **iFLYTEK Voice Input** Floating Window (讯飞语音悬浮窗).
 
-<img src="https://github.com/chriskyfung/voice-input-tools-for-windows/raw/main/Windows-Hotkey-for-iFlyVoice/doc/images/icon_256x256.png" width="256" height="256" alt="Windows-Hotkey-for-iFlyVoice-Logo" style="margin: auto;">
+<p style="text-align:center">
+  <img src="https://github.com/chriskyfung/voice-input-tools-for-windows/raw/main/Windows-Hotkey-for-iFlyVoice/doc/images/icon_256x256.png" width="256" height="256" alt="Windows-Hotkey-for-iFlyVoice-Logo">
+</p>
 
 ## 🚀 Usages
 
@@ -27,3 +33,25 @@ An [AutoHotKey](https://www.autohotkey.com/) script to configure `Win + H` as th
 - **Software**: iFlyIME (讯飞输入法) for Windows v3.0.1725
 
    ![iFlyIME (讯飞输入法) for Windows v3.0.1725](https://github.com/chriskyfung/voice-input-tools-for-windows/raw/main/Windows-Hotkey-for-iFlyVoice/doc/images/iflyime-for-windwos-pc.png)
+
+## 🧪 Tested applications
+
+    ✅ Microsoft OneNote
+    ✅ OneNote for Windows 10
+    ✅ Visual Studio Code
+
+## 🔽 Download ![GitHub release (latest by date)](https://img.shields.io/github/v/release/chriskyfung/voice-input-tools-for-windows)
+
+- [English (US) :us:](https://github.com/chriskyfung/voice-input-tools-for-windows/releases/download/v2.1.2/Windows-Hotkey-for-iFlyVoice-en-32bit.exe)
+- [简体中文 :cn:](https://github.com/chriskyfung/voice-input-tools-for-windows/releases/download/v2.1.2/Windows-Hotkey-for-iFlyVoice-zhs-32bit.exe)
+- [繁體中文 :taiwan:](https://github.com/chriskyfung/voice-input-tools-for-windows/releases/download/v2.1.2/Windows-Hotkey-for-iFlyVoice-zht-32bit.exe)
+
+* * *
+
+## Contributing
+
+Pull requests for new features, bug fixes, and suggestions are welcome!
+
+## License
+
+GNU General Public License v3.0
