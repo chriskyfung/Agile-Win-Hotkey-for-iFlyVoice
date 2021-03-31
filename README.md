@@ -23,13 +23,17 @@
 
 🛴 **Chrome Extension Enabling (Speech-to-Text)**
 
-- [Voice In](https://dictanote.co/voicein/a/244277/)
+- [Voice In - #1 Speech To Text Extension for Chrome](https://dictanote.co/voicein/a/244277/)
+- [Speechnotes Speech To Text & More - Chrome Web Store](https://chrome.google.com/webstore/detail/speechnotes-speech-to-tex/nncconplehmbkbhkgkodmnkfaflopkji)
 
 <br>
 
 ⚡ **Speech Recognition and Transcription Software (SaaS)**
 
-- [Dictanote](https://dictanote.co/a/244277/)
+- [Dictanote - Make your voice type for you](https://dictanote.co/a/244277/)
+- [Speechnotes - Speech to Text Online Notepad](https://speechnotes.co/) | Mobile App: [Android](https://play.google.com/store/apps/details?id=co.speechnotes.speechnotes)
+- [Speechnotes 港式粵語 - Speech to Text Online Notepad](https://speechnotes.co/yue/)
+- [Speechlogger - Automatic transcription, captioning & instant translation](https://speechlogger.appspot.com/)
 
 * * *
 
@@ -44,4 +48,4 @@
 > Pull requests for new features, bug fixes, and suggestions are welcome!
 ## License
 
-> GNU General Public License v3.0
+> Distributed under the [GNU General Public License v3.0](LICENSE)

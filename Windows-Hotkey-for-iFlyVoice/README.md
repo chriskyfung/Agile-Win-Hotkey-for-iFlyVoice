@@ -7,7 +7,7 @@
 An [AutoHotKey](https://www.autohotkey.com/) script to configure `Win + H` as the custom Hotkey for quick start of the **iFLYTEK Voice Input** Floating Window (讯飞语音悬浮窗).
 
 <p style="text-align:center">
-  <img src="https://github.com/chriskyfung/voice-input-tools-for-windows/raw/main/Windows-Hotkey-for-iFlyVoice/doc/images/icon_256x256.png" width="256" height="256" alt="Windows-Hotkey-for-iFlyVoice-Logo">
+  <img src="doc/images/icon_256x256.png" width="256" height="256" alt="Windows-Hotkey-for-iFlyVoice-Logo">
 </p>
 
 ## 🚀 Usages
@@ -17,15 +17,15 @@ An [AutoHotKey](https://www.autohotkey.com/) script to configure `Win + H` as th
 
   - Launch **iFLYTEK Voice Input** if the program is not running in the background.
 
-    ![Start iFLYTEK Voice Input with Hotkey](https://github.com/chriskyfung/voice-input-tools-for-windows/raw/main/Windows-Hotkey-for-iFlyVoice/doc/images/launch-iflyvoice-using-hotkey.png)
+    ![Start iFLYTEK Voice Input with Hotkey](/doc/images/launch-iflyvoice-using-hotkey.png)
 
   - **Start/stop listening** if the Floating Window is on the desktop.
 
-    ![Toggle iFLYTEK Voice Input to start/stop dictating your voices](https://github.com/chriskyfung/voice-input-tools-for-windows/raw/main/Windows-Hotkey-for-iFlyVoice/doc/images/toggle-iflyvoice-onoff.png)
+    ![Toggle iFLYTEK Voice Input to start/stop dictating your voices](doc/images/toggle-iflyvoice-onoff.png)
 
   - Ask to download the installation package and install it to the default directory if [iFlyIME (讯飞输入法) v3.0.1725](https://srf.xunfei.cn/) does not exist on your computer.
 
-    ![你似乎還沒有安裝訊飛語音輸入法，是否現在下載安裝包並【手動安裝】到預設目錄？](https://github.com/chriskyfung/voice-input-tools-for-windows/raw/3795c09f7926ce9470db8339e39321ed05db32de/Windows-Hotkey-for-iFlyVoice/doc/images/warning-if-cannot-find-iflyvoice-exe.png)
+    ![你似乎還沒有安裝訊飛語音輸入法，是否現在下載安裝包並【手動安裝】到預設目錄？](doc/images/warning-if-cannot-find-iflyvoice-exe.png)
 
 ## ✅ Requirements
 
@@ -59,4 +59,4 @@ An [AutoHotKey](https://www.autohotkey.com/) script to configure `Win + H` as th
 
 ## License
 
-> GNU General Public License v3.0
+> Distributed under the [GNU General Public License v3.0](LICENSE)
