@@ -9,6 +9,19 @@ image:
 download: true
 css:
   custom: >-
+   kbd {
+      background-color: #eee;
+      border-radius: 3px;
+      border: 1px solid #b4b4b4;
+      box-shadow: 0 1px 1px rgba(0, 0, 0, .2), 0 2px 0 0 rgba(255, 255, 255, .7) inset;
+      color: #333;
+      display: inline-block;
+      font-size: .85em;
+      font-weight: 700;
+      line-height: 1;
+      padding: 2px 4px;
+      white-space: nowrap;
+   }
    .ml-li { margin-left: 2.5rem }
    .object-fit img { object-fit: contain }
 ---
@@ -17,22 +30,22 @@ css:
 
 An [AutoHotKey](https://www.autohotkey.com/) script to configure `Win + H` as the custom Hotkey for quick start of the **iFLYTEK Voice Input** Floating Window (讯飞语音悬浮窗).
 
-## 👾 Why did I create "Windows Hotkey for iFlyVoice"
+## Why did I create "Windows Hotkey for iFlyVoice" 👾
 
-iFlyVoice is the #1 AI-based voice recognition in China. Its advantages include:
+**iFlyVoice** is the #1 AI-based voice recognition in China. Its advantages include:
 
 - High accuracy
 - Support in almost every Windows application
 - Support over 40 languages
 - 100% Free
 
-What I think there is not enough is the options of its Hotkey. Only F2, F6, F7, F8, F9, and F10 keys are available for the voice input hotkey in the iFlyIME settings.
+What I think there is not enough is the options of its Hotkey. Only <kbd>F2</kbd>, <kbd>F6</kbd>, <kbd>F7</kbd>, <kbd>F8</kbd>, <kbd>F9</kbd>, and <kbd>F10</kbd> keys are available for the voice input hotkey in the iFlyIME settings.
 
 It is bad because those keys are often been used by other applications.
 
-<kbd>Win + H</kbd> is an ideal option in this case. By default, it is the shortcut to open the dictation toolbar in Windows 10. However, Windows Dictation commands are available in US English only. it is useless for non-English speakers. Therefore, it is a good idea to override this unneeded key to fit our purpose.
+<strong><kbd>Win</kbd>+<kbd>H</kbd></strong> is an ideal option in this case. By default, it is the shortcut to open the dictation toolbar in Windows 10. However, Windows Dictation commands are available in US English only. it is useless for non-English speakers. Therefore, it is a good idea to override this unneeded key to fit our purpose.
 
-By running the Hotkey tool in the background, you can utilize the <kbd>Win + H</kbd> hotkey to turn Windows Hearing your voices through the iFlyVoice.
+By running the Hotkey tool in the background, you can utilize the <strong><kbd>Win</kbd>+<kbd>H</kbd></strong> hotkey to turn Windows Hearing your voices through the iFlyVoice.
 
 Thanks to that, I can turn down the idea to have an AI voice input mouse. This saves my time in researching which brand/model is the best, and no need to take a risk to spend money to buy such a toy.
 
@@ -40,8 +53,8 @@ Thanks to that, I can turn down the idea to have an AI voice input mouse. This s
 
 {% include picture.html img="icon_256x256.png" width="256" height="256" class="text-center shadow-none" alt="Windows-Hotkey-for-iFlyVoice-Logo" source="assets" %}
 
-- Change the hotkey for [Windows 10 voice recognition](https://support.microsoft.com/en-us/windows/use-voice-recognition-in-windows-10-83ff75bd-63eb-0b6c-18d4-6fae94050571) from `Win + H` to `Win + Alt + H`
-- Override `Win + H` hotkey and trigger iFLYTEK Voice Input in the following conditions:
+- Change the hotkey for [Windows 10 voice recognition](https://support.microsoft.com/en-us/windows/use-voice-recognition-in-windows-10-83ff75bd-63eb-0b6c-18d4-6fae94050571) from <strong><kbd>Win</kbd>+<kbd>H</kbd></strong> to <strong><kbd>Win</kbd>+<kbd>Alt</kbd>+<kbd>H</kbd></strong>
+- Override <strong><kbd>Win</kbd>+<kbd>H</kbd></strong> hotkey and trigger iFLYTEK Voice Input in the following conditions:
 
   - Launch **iFLYTEK Voice Input** if the program is not running in the background.
 
@@ -64,7 +77,7 @@ Thanks to that, I can turn down the idea to have an AI voice input mouse. This s
 
 ## 🧪 Tested applications
 
-✅ Microsoft OneNote | ✅ OneNote for Windows 10 | ✅ Visual Studio Code
+✅ Microsoft OneNote | ✅ OneNote for Windows 10 | ✅ Visual Studio Code | ✅ WhatsApp Desktop
 
 ## 🔽 Download
 
