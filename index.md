@@ -75,7 +75,7 @@ Thanks to that, I can turn down the idea to have an AI voice input mouse. This s
 
 ## 🧪 Tested applications
 
-✅ Microsoft OneNote | ✅ OneNote for Windows 10 | ✅ Visual Studio Code | ✅ WhatsApp Desktop
+✅ Microsoft OneNote \| ✅ OneNote for Windows 10 \| ✅ Visual Studio Code \| ✅ WhatsApp Desktop
 
 ## 🔽 Download
 
