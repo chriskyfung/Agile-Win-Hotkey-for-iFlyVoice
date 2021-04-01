@@ -16,6 +16,26 @@ css:
 {% include picture.html img="https://repository-images.githubusercontent.com/351967858/27f78800-8f63-11eb-854d-3ef89bbe58fa" width="1280" height="640" alt="Win + H for Windows 1分钟400字 语音输入带你飞 Windows-Hotkey-for-iFlyVoice" source="raw" %}
 
 An [AutoHotKey](https://www.autohotkey.com/) script to configure `Win + H` as the custom Hotkey for quick start of the **iFLYTEK Voice Input** Floating Window (讯飞语音悬浮窗).
+
+## 👾 Why did I create "Windows Hotkey for iFlyVoice"
+
+iFlyVoice is the #1 AI-based voice recognition in China. Its advantages include:
+
+- High accuracy
+- Support in almost every Windows application
+- Support over 40 languages
+- 100% Free
+
+What I think there is not enough is the options of its Hotkey. Only F2, F6, F7, F8, F9, and F10 keys are available for the voice input hotkey in the iFlyIME settings.
+
+It is bad because those keys are often been used by other applications.
+
+<kbd>Win + H</kbd> is an ideal option in this case. By default, it is the shortcut to open the dictation toolbar in Windows 10. However, Windows Dictation commands are available in US English only. it is useless for non-English speakers. Therefore, it is a good idea to override this unneeded key to fit our purpose.
+
+By running the Hotkey tool in the background, you can utilize the <kbd>Win + H</kbd> hotkey to turn Windows Hearing your voices through the iFlyVoice.
+
+Thanks to that, I can turn down the idea to have an AI voice input mouse. This saves my time in researching which brand/model is the best, and no need to take a risk to spend money to buy such a toy.
+
 ## 🚀 Usages
 
 {% include picture.html img="icon_256x256.png" width="256" height="256" class="text-center shadow-none" alt="Windows-Hotkey-for-iFlyVoice-Logo" source="assets" %}
