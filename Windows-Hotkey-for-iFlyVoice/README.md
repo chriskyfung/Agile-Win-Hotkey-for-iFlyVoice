@@ -4,7 +4,7 @@
 
 # Windows-Hotkey-for-iFlyVoice ![Windows badge](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white)
 
-An [AutoHotKey](https://www.autohotkey.com/) script to configure `Win + H` as the custom Hotkey for quick start of the **iFLYTEK Voice Input** Floating Window (讯飞语音悬浮窗).
+An [AutoHotKey](https://www.autohotkey.com/) script to configure <kbd>Win</kbd>+<kbd>H</kbd> as the custom Hotkey for quick start of the **iFLYTEK Voice Input** Floating Window (讯飞语音悬浮窗).
 
 <p style="text-align:center">
   <img src="doc/images/icon_256x256.png" width="256" height="256" alt="Windows-Hotkey-for-iFlyVoice-Logo">
@@ -12,12 +12,12 @@ An [AutoHotKey](https://www.autohotkey.com/) script to configure `Win + H` as th
 
 ## 🚀 Usages
 
-- Change the hotkey for [Windows 10 voice recognition](https://support.microsoft.com/en-us/windows/use-voice-recognition-in-windows-10-83ff75bd-63eb-0b6c-18d4-6fae94050571) from `Win + H` to `Win + Alt + H`
-- Override `Win + H` hotkey and trigger iFLYTEK Voice Input in the following conditions:
+- Change the hotkey for [Windows 10 voice recognition](https://support.microsoft.com/en-us/windows/use-voice-recognition-in-windows-10-83ff75bd-63eb-0b6c-18d4-6fae94050571) from <kbd>Win</kbd>+<kbd>H</kbd> to <kbd>Win</kbd>+<kbd>Alt</kbd>+<kbd>H</kbd>
+- Override <kbd>Win</kbd>+<kbd>H</kbd> hotkey and trigger iFLYTEK Voice Input in the following conditions:
 
   - Launch **iFLYTEK Voice Input** if the program is not running in the background.
 
-    ![Start iFLYTEK Voice Input with Hotkey](/doc/images/launch-iflyvoice-using-hotkey.png)
+    ![Start iFLYTEK Voice Input with Hotkey](doc/images/launch-iflyvoice-using-hotkey.png)
 
   - **Start/stop listening** if the Floating Window is on the desktop.
 
@@ -39,11 +39,12 @@ An [AutoHotKey](https://www.autohotkey.com/) script to configure `Win + H` as th
     ✅ Microsoft OneNote
     ✅ OneNote for Windows 10
     ✅ Visual Studio Code
+    ✅ WhatsApp Desktop
 
 ## 🔽 Download
 
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/chriskyfung/voice-input-tools-for-windows)  \
-<img src="https://cdn.jsdelivr.net/gh/hjnilsson/country-flags@master/svg/us.svg" height="16" alt="US"> [English](https://github.com/chriskyfung/voice-input-tools-for-windows/releases/download/v2.1.2/Windows-Hotkey-for-iFlyVoice-en-32bit.exe) | <img src="https://cdn.jsdelivr.net/gh/hjnilsson/country-flags@master/svg/cn.svg" height="16" alt="China"> [简体中文](https://github.com/chriskyfung/voice-input-tools-for-windows/releases/download/v2.1.2/Windows-Hotkey-for-iFlyVoice-zhs-32bit.exe) | <img src="https://cdn.jsdelivr.net/gh/hjnilsson/country-flags@master/svg/hk.svg" height="16" alt="Hong Kong"> [繁體中文](https://github.com/chriskyfung/voice-input-tools-for-windows/releases/download/v2.1.2/Windows-Hotkey-for-iFlyVoice-zht-32bit.exe)
+<img src="https://cdn.jsdelivr.net/gh/hjnilsson/country-flags@master/svg/us.svg" width="24" height="16" alt="US"> [English](https://github.com/chriskyfung/voice-input-tools-for-windows/releases/download/v2.1.2/Windows-Hotkey-for-iFlyVoice-en-32bit.exe) | <img src="https://cdn.jsdelivr.net/gh/hjnilsson/country-flags@master/svg/cn.svg" width="24" height="16" alt="China"> [简体中文](https://github.com/chriskyfung/voice-input-tools-for-windows/releases/download/v2.1.2/Windows-Hotkey-for-iFlyVoice-zhs-32bit.exe) | <img src="https://cdn.jsdelivr.net/gh/hjnilsson/country-flags@master/svg/hk.svg" width="24" height="16" alt="Hong Kong"> [繁體中文](https://github.com/chriskyfung/voice-input-tools-for-windows/releases/download/v2.1.2/Windows-Hotkey-for-iFlyVoice-zht-32bit.exe)
 
 * * *
 
