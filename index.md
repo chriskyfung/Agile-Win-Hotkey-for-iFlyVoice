@@ -1,7 +1,7 @@
 ---
 layout: page-right-sidebar
 date: 2021-03-30
-title: "Windows Hotkey for iFlyVoice 🗣"
+title: "Windows Hotkey for iFlyVoice"
 image:
    path: https://repository-images.githubusercontent.com/351967858/27f78800-8f63-11eb-854d-3ef89bbe58fa
    width: 1280
@@ -26,7 +26,7 @@ css:
 
 {% include picture.html img="https://repository-images.githubusercontent.com/351967858/27f78800-8f63-11eb-854d-3ef89bbe58fa" width="1280" height="640" alt="Win + H for Windows 1分钟400字 语音输入带你飞 Windows-Hotkey-for-iFlyVoice" source="raw" %}
 
-An [AutoHotKey](https://www.autohotkey.com/) script to configure `Win + H` as the custom Hotkey for quick start of the **iFLYTEK Voice Input** Floating Window (讯飞语音悬浮窗).
+A Windows gadget to configure <kbd>Win</kbd>+<kbd>H</kbd> as the custom Hotkey for quick start of the **iFLYTEK Voice Input** Floating Window (讯飞语音悬浮窗).
 
 ## Why did I create "Windows Hotkey for iFlyVoice" 👾
 
