@@ -1,5 +1,32 @@
-﻿CodeVersion := "2.1.4", copyright := "chriskyfung.github.io" ; // Declare the Current Version and state the copyright
+﻿CodeVersion := "3.0.1", copyright := "chriskyfung.github.io" ; // Declare the Current Version and state the copyright
 ;@Ahk2Exe-Let version = %A_PriorLine~U)^(.+"){1}(.+)".*$~$2% ; // Extract the version number (=> x.x.x) from the Prior Line
+
+UiLang := "en-US"
+ConfigPath = %A_ScriptDir%\config.ini
+If FileExist(ConfigPath) {
+  IniRead, UiLang, % ConfigPath, Preference, Langauge
+}
+
+LangFilePath = %A_ScriptDir%\lang\%UiLang%.lang
+IF FileExist(LangFilePath) {
+  IniRead, LangSections, % LangFilePath
+  RegStr := {}
+  Loop, Parse, % LangSections, `n, `r
+  {
+    LangSection := A_LoopField
+    IniRead, LangOutput, % LangFilePath, %LangSection%
+    Loop, Parse, LangOutput, `n, `r
+    {
+      Array := StrSplit(A_LoopField, "=" )
+      RegStr[LangSection, Array[1]] := Array[2]
+    }
+  }
+} Else {
+  MsgBox % LangFilePath " does not exist!"
+  RegStr := { Menu: {}, Msg: {} }
+  RegStr.Menu := { CheckUpdate: "Check Update (&U)", Exit: "Exit (&X)", Help: "Help (&H)", Tip: "Win + H | Start/Stop iFLYTEK Voice Input", ReinstallIFlyIME: "Reinstall IFlyIME" }
+  RegStr.Msg := { CurrentVersion: "Current Version", ThisIsLastVersion: "It is already the latest version!", NoIflyimeMsg: "It seems that you haven't installed the iFLYTEK Voice Input Method. Would you like to download the installation package and [Manually install] to the default directory?" }
+}
 
 #NoEnv  ; // Recommended for performance and compatibility with future AutoHotkey releases.
 ; #Warn  ; // Enable warnings to assist with detecting common errors.
@@ -10,40 +37,44 @@ SetWorkingDir %A_ScriptDir%  ; // Ensures a consistent starting directory.
   Parameters for Compiling AHK to EXE
   */
 #SingleInstance Force
-;@Ahk2Exe-UpdateManifest 1, , ,0
+;@Ahk2Exe-UpdateManifest 0, , ,0
 ;@Ahk2Exe-Obey U_bits, = %A_PtrSize% * 8
-;@Ahk2Exe-ExeName %A_ScriptDir%\%A_ScriptName~\.[^\.]+$%-%U_bits%bit.exe
+;@Ahk2Exe-Obey U_type, = "%A_IsUnicode%" ? "Unicode" : "ANSI"
 ;@Ahk2Exe-AddResource icon_256x256.ico, 141
 ;@Ahk2Exe-SetMainIcon  icon_256x256.ico
 ;@Ahk2Exe-SetName      WinHotkey for iFlyVoice
-;@Ahk2Exe-SetDescription  自定義 Win + H 為快速啟動訊飛語音懸浮窗熱鍵
+;@Ahk2Exe-SetDescription  Customize Win + H as the Hotkey of iFLYTEK Voice Input Floating Window
 ;@Ahk2Exe-SetCopyright	Copyright (c) 2020
 ;@Ahk2Exe-SetCompanyName chriskyfung.github.io
-;@Ahk2Exe-SetLanguage 0x0404 ; // Compile EXE in Chinese (Taiwan)
 ;@Ahk2Exe-SetVersion %U_version%.0 ; // Format CodeVersion to x.x.x.0
+;@Ahk2Exe-ExeName %A_ScriptName~\.[^\.]+$%-%U_bits%bit.exe
 
 /**
   Set up custom Tray icon menu
   */
 Menu, Tray, NoStandard
-Menu, Tray, Add, 檢查更新, CheckUpdate
-Menu, Tray, Add, 說明, Help
+Menu, Tray, Add, % RegStr.Menu.RunAsAdministrator, RunAsAdministrator
+Menu, Tray, Add  ; // Add a separator line
+Menu, Tray, Add, % RegStr.Menu.CheckUpdate, CheckUpdate
+Menu, Tray, Add, % RegStr.Menu.Help, Help
 Menu, Tray, Add  ; // Add a separator line.
-Menu, Tray, Add, 結束, Exit
-Menu, Tray, Tip, 按 Win + H 啟動 / 切換 訊飛語音輸入
+Menu, Tray, Add, % RegStr.Menu.Exit, Exit
+Menu, Tray, Tip, % RegStr.Menu.Tip
 ; // Conditional set the image resource of Tray Icon based on the Compiled Status
 If %A_IsCompiled% {
 	Menu, Tray, Icon, , -141, 1
 }
 Else {
 	Menu, Tray, Icon, icon_256x256.ico , 1, 1
+  Menu, Tray, Add  ; // Add a separator line.
+  Menu, Tray, Add, % RegStr.Menu.ReinstallIFlyIME , InstallIFlyIME
 }
 Return
 
 /**
   Handle the keypress event of Win + H
   */
-#h:: 
+#h::
   If (WinExist("ahk_class BaseGui ahk_exe iFlyVoice.exe")) {
     /**
       原方案使用熱鍵觸發
@@ -55,14 +86,15 @@ Return
     ControlClick, x119 y59, ahk_class BaseGui ahk_exe iFlyVoice.exe ; Click on the center of iFlyVoice floating window
     WinSet, AlwaysOnTop , off, ahk_class BaseGui ahk_exe iFlyVoice.exe
   } Else {
-    If (FileExist("C:\Program Files (x86)\iFlytek\iFlyIME\3.0.1725\iFlyVoice.exe")){
-      Run "C:\Program Files (x86)\iFlytek\iFlyIME\3.0.1725\iFlyVoice.exe"
-    } Else{
-      MsgBox, 4, , 你似乎還沒有安裝訊飛語音輸入法，是否現在下載安裝包並【手動安裝】到預設目錄？
-      IfMsgBox, NO, Return
-      TEMPFILEPATH = %A_Temp%\iFlyIME_Setup3.0.1725.exe
-      DownloadFile("https://download.voicecloud.cn/200ime/iFlyIME_Setup3.0.1725.exe", TEMPFILEPATH)
-      Run %TEMP%\iFlyIME_Setup3.0.1725.exe
+    try {
+      AppPath := "C:\Program Files (x86)\iFlytek\iFlyIME\3.0.1725\iFlyVoice.exe"
+      If (FileExist(AppPath)){
+        Run, % AppPath
+      } Else{
+        MsgBox, 4, , RegStr.Msg.NoIflyimeMsg
+        IfMsgBox, NO, Return
+        InstallIFlyIME()
+      }
     }
   }
 Return
@@ -88,23 +120,45 @@ CheckUpdate:
 	if (Util_VersionCompare(LatestVersion,CodeVersion)) {
 		Run, https://github.com/chriskyfung/voice-input-tools-for-windows/releases/latest
 	} else {
-		MsgBox % "當前版本: v" . CodeVersion . "`n已經是最新版本!"
+		MsgBox % RegStr.Msg.CurrentVersion . ": v" . CodeVersion . "`n`n" . RegStr.Msg.ThisIsLastVersion
 	}
-return
+Return
 
 /**
   Open the help page in the default browser
   */
 Help:
   Run, https://chriskyfung.github.io/voice-input-tools-for-windows/
-return
+Return
 
 /**
   Close this AHK script / execuable
   */
 Exit:
   ExitApp
-return
+Return
+
+RunAsAdministrator:
+  full_command_line := DllCall("GetCommandLine", "str")
+  if not (A_IsAdmin or RegExMatch(full_command_line, " /restart(?!\S)"))
+  {
+      try
+      {
+          if A_IsCompiled
+              Run *RunAs "%A_ScriptFullPath%" /restart
+          else
+              Run *RunAs "%A_AhkPath%" /restart "%A_ScriptFullPath%"
+      }
+      ExitApp
+  }
+Return
+
+InstallIFlyIME() {
+  Run, https://srf.xunfei.cn/
+  TEMPFILEPATH = %A_Temp%\iFlyIME_Setup3.0.1725.exe
+  DownloadFile("https://download.voicecloud.cn/200ime/iFlyIME_Setup3.0.1725.exe", TEMPFILEPATH)
+  Run %A_Temp%\iFlyIME_Setup3.0.1725.exe
+}
 
 /**
   by Joe DF
