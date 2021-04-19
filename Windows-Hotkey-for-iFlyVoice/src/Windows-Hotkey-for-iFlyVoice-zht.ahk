@@ -1,53 +1,169 @@
-﻿#NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
-; #Warn  ; Enable warnings to assist with detecting common errors.
-SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
-SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
+﻿CodeVersion := "2.1.4", copyright := "chriskyfung.github.io" ; // Declare the Current Version and state the copyright
+;@Ahk2Exe-Let version = %A_PriorLine~U)^(.+"){1}(.+)".*$~$2% ; // Extract the version number (=> x.x.x) from the Prior Line
 
+#NoEnv  ; // Recommended for performance and compatibility with future AutoHotkey releases.
+; #Warn  ; // Enable warnings to assist with detecting common errors.
+SendMode Input  ; // Recommended for new scripts due to its superior speed and reliability.
+SetWorkingDir %A_ScriptDir%  ; // Ensures a consistent starting directory.
+
+/**
+  Parameters for Compiling AHK to EXE
+  */
 #SingleInstance Force
-;@Ahk2Exe-AddResource icon_256x256.ico, 141
+;@Ahk2Exe-UpdateManifest 1, , ,0
 ;@Ahk2Exe-Obey U_bits, = %A_PtrSize% * 8
-;@Ahk2Exe-ExeName %A_ScriptDir%\bin\%A_ScriptName~\.[^\.]+$%-%U_bits%bit
+;@Ahk2Exe-ExeName %A_ScriptDir%\%A_ScriptName~\.[^\.]+$%-%U_bits%bit.exe
+;@Ahk2Exe-AddResource icon_256x256.ico, 141
 ;@Ahk2Exe-SetMainIcon  icon_256x256.ico
 ;@Ahk2Exe-SetName      WinHotkey for iFlyVoice
 ;@Ahk2Exe-SetDescription  自定義 Win + H 為快速啟動訊飛語音懸浮窗熱鍵
-;               A fork of snomiao/CapsLockX/Modules/应用-讯飞输入法语音悬浮窗.ahk for iFlyIME 3.0.1725.
-;@Ahk2Exe-SetCopyright	chriskyfung.github.io
-;@Ahk2Exe-UpdateManifest 1, AutoHotkey , 2.1.2.0 ,0
+;@Ahk2Exe-SetCopyright	Copyright (c) 2020
+;@Ahk2Exe-SetCompanyName chriskyfung.github.io
+;@Ahk2Exe-SetLanguage 0x0404 ; // Compile EXE in Chinese (Taiwan)
+;@Ahk2Exe-SetVersion %U_version%.0 ; // Format CodeVersion to x.x.x.0
 
-if %A_IsCompiled% {
+/**
+  Set up custom Tray icon menu
+  */
+Menu, Tray, NoStandard
+Menu, Tray, Add, 檢查更新, CheckUpdate
+Menu, Tray, Add, 說明, Help
+Menu, Tray, Add  ; // Add a separator line.
+Menu, Tray, Add, 結束, Exit
+Menu, Tray, Tip, 按 Win + H 啟動 / 切換 訊飛語音輸入
+; // Conditional set the image resource of Tray Icon based on the Compiled Status
+If %A_IsCompiled% {
 	Menu, Tray, Icon, , -141, 1
 }
-else {
+Else {
 	Menu, Tray, Icon, icon_256x256.ico , 1, 1
 }
-Menu, Tray, NoStandard
-Menu, Tray, Add, Exit
-Menu, Tray, Tip, 按 Win + H 啟動 / 切換訊飛語音輸入
-return
-
-Exit:
-ExitApp
-return
-
-#h::
-    If (WinExist("ahk_class BaseGui ahk_exe iFlyVoice.exe")) {
-        ; 原方案使用熱鍵觸發
-        ; Send ^+h
-        ; 新方案直接發送模擬點擊消息
-		WinSet, AlwaysOnTop , on, ahk_class BaseGui ahk_exe iFlyVoice.exe
-		ControlClick, x119 y59, ahk_class BaseGui ahk_exe iFlyVoice.exe
-        WinSet, AlwaysOnTop , off, ahk_class BaseGui ahk_exe iFlyVoice.exe
-    }Else{
-        If (FileExist("C:\Program Files (x86)\iFlytek\iFlyIME\3.0.1725\iFlyVoice.exe")){
-            Run "C:\Program Files (x86)\iFlytek\iFlyIME\3.0.1725\iFlyVoice.exe"
-        }else{
-            MsgBox, 4, , 你似乎還沒有安裝訊飛語音輸入法，是否現在下載安裝包並【手動安裝】到預設目錄？
-            IfMsgBox, NO, Return
-            UrlDownloadToFile https://download.voicecloud.cn/200ime/iFlyIME_Setup3.0.1725.exe, %TEMP%\iFlyIME_Setup3.0.1725.exe
-            Run %TEMP%\iFlyIME_Setup3.0.1725.exe
-        }
-    }
 Return
 
-; 加 Alt 訪問原熱鍵
+/**
+  Handle the keypress event of Win + H
+  */
+#h:: 
+  If (WinExist("ahk_class BaseGui ahk_exe iFlyVoice.exe")) {
+    /**
+      原方案使用熱鍵觸發
+      Send ^+h
+      新方案直接發送模擬點擊消息
+      A fork of snomiao/CapsLockX/Modules/应用-讯飞输入法语音悬浮窗.ahk for iFlyIME 3.0.1725.
+    */
+    WinSet, AlwaysOnTop , on, ahk_class BaseGui ahk_exe iFlyVoice.exe
+    ControlClick, x119 y59, ahk_class BaseGui ahk_exe iFlyVoice.exe ; Click on the center of iFlyVoice floating window
+    WinSet, AlwaysOnTop , off, ahk_class BaseGui ahk_exe iFlyVoice.exe
+  } Else {
+    If (FileExist("C:\Program Files (x86)\iFlytek\iFlyIME\3.0.1725\iFlyVoice.exe")){
+      Run "C:\Program Files (x86)\iFlytek\iFlyIME\3.0.1725\iFlyVoice.exe"
+    } Else{
+      MsgBox, 4, , 你似乎還沒有安裝訊飛語音輸入法，是否現在下載安裝包並【手動安裝】到預設目錄？
+      IfMsgBox, NO, Return
+      TEMPFILEPATH = %A_Temp%\iFlyIME_Setup3.0.1725.exe
+      DownloadFile("https://download.voicecloud.cn/200ime/iFlyIME_Setup3.0.1725.exe", TEMPFILEPATH)
+      Run %TEMP%\iFlyIME_Setup3.0.1725.exe
+    }
+  }
+Return
+
+/**
+  Add Alt to the original hotkey for Windows 10 Dictating
+  */
 #!h:: Send #h
+
+/**
+  Get the latest release tag via GitHub API and compare it to the currect code version
+  */
+CheckUpdate:
+  ; // Initialize the WinHttpRequest Object
+	WebRequest := ComObjCreate("WinHttp.WinHttpRequest.5.1")
+  ; // Download the JSON-formatted release data from GitHub API
+	WebRequest.Open("GET", "https://api.github.com/repos/chriskyfung/voice-input-tools-for-windows/releases/latest")
+	WebRequest.Send()
+  ; // Use Regex to extract the latest version number
+	RegExMatch(WebRequest.ResponseText, "O)""tag_name"":""v(?<ver>[0-9a-zA-Z\.]+)""", SubPat)
+	LatestVersion := SubPat["ver"]
+  ; // Compare the version numbers
+	if (Util_VersionCompare(LatestVersion,CodeVersion)) {
+		Run, https://github.com/chriskyfung/voice-input-tools-for-windows/releases/latest
+	} else {
+		MsgBox % "當前版本: v" . CodeVersion . "`n已經是最新版本!"
+	}
+return
+
+/**
+  Open the help page in the default browser
+  */
+Help:
+  Run, https://chriskyfung.github.io/voice-input-tools-for-windows/
+return
+
+/**
+  Close this AHK script / execuable
+  */
+Exit:
+  ExitApp
+return
+
+/**
+  by Joe DF
+  https://github.com/ahkscript/ASPDM/blob/master/Local-Client/Lib/Util.ahk
+*/
+Util_VersionCompare(other,local) {
+	ver_other:=StrSplit(other,".")
+	ver_local:=StrSplit(local,".")
+	for _index, _num in ver_local
+		if ( (ver_other[_index]+0) > (_num+0) )
+			return 1
+		else if ( (ver_other[_index]+0) < (_num+0) )
+			return 0
+	return 0
+}
+
+/*
+  by Bruttosozialprodukt 
+  https://autohotkey.com/board/topic/101007-super-simple-download-with-progress-bar/
+*/
+DownloadFile(UrlToFile, SaveFileAs, Overwrite := True, UseProgressBar := True) {
+  ; // Check if the file already exists and if we must not overwrite it
+  If (!Overwrite && FileExist(SaveFileAs))
+    Return
+  ; // Check if the user wants a progressbar
+  If (UseProgressBar) {
+    ;Initialize the WinHttpRequest Object
+      WebRequest := ComObjCreate("WinHttp.WinHttpRequest.5.1")
+    ; // Download the headers
+      WebRequest.Open("HEAD", UrlToFile)
+      WebRequest.Send()
+    ; // Store the header which holds the file size in a variable:
+      FinalSize := WebRequest.GetResponseHeader("Content-Length")
+    ; // Create the progressbar and the timer
+      Progress, H80, , Downloading..., %UrlToFile%
+      SetTimer, __UpdateProgressBar, 100
+  }
+  ; // Download the file
+  UrlDownloadToFile, %UrlToFile%, %SaveFileAs%
+  ; // Remove the timer and the progressbar because the download has finished
+  If (UseProgressBar) {
+    Progress, Off
+    SetTimer, __UpdateProgressBar, Off
+  }
+  Return
+  
+  ; // The label that updates the progressbar
+  __UpdateProgressBar:
+    ; // Get the current filesize and tick
+    CurrentSize := FileOpen(SaveFileAs, "r").Length ;FileGetSize wouldn't return reliable results
+    CurrentSizeTick := A_TickCount
+    ; // Calculate the downloadspeed
+    Speed := Round((CurrentSize/1024-LastSize/1024)/((CurrentSizeTick-LastSizeTick)/1000)) . " Kb/s"
+    ; // Save the current filesize and tick for the next time
+    LastSizeTick := CurrentSizeTick
+    LastSize := FileOpen(SaveFileAs, "r").Length
+    ; // Calculate percent done
+    PercentDone := Round(CurrentSize/FinalSize*100)
+    ; // Update the ProgressBar
+    Progress, %PercentDone%, %PercentDone%`% Done, Downloading...  (%Speed%), Downloading %SaveFileAs% (%PercentDone%`%)
+    Return
+}
