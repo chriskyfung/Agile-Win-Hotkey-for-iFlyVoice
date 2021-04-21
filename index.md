@@ -86,7 +86,7 @@ Thanks to that, I can turn down the idea to have an AI voice input mouse. This s
 
 <amp-img src="https://img.shields.io/github/v/release/chriskyfung/voice-input-tools-for-windows" width="94" height="20" layout="fixed" alt="GitHub release (latest by date)"></amp-img> <amp-img src="https://cdn.jsdelivr.net/gh/hjnilsson/country-flags@master/svg/us.svg" width="24" height="16" layout="fixed" alt="US"></amp-img> <amp-img src="https://cdn.jsdelivr.net/gh/hjnilsson/country-flags@master/svg/cn.svg" width="24" height="16" layout="fixed" alt="China"></amp-img> <amp-img src="https://cdn.jsdelivr.net/gh/hjnilsson/country-flags@master/svg/hk.svg" width="24" height="16" layout="fixed" alt="Hong Kong"></amp-img>
 
-[MSI installer](https://github.com/chriskyfung/voice-input-tools-for-windows/releases/download/v3.0.1/Windows-Hotkey-for-iFlyVoice.msi) | [Portable (ZIP)](https://github.com/chriskyfung/voice-input-tools-for-windows/releases/download/v3.0.1/Win-Hotkey-for-iFlyVoice-Portable.zip)
+<i class="fas fa-archive"></i> [MSI installer](https://github.com/chriskyfung/voice-input-tools-for-windows/releases/download/v3.0.1/Windows-Hotkey-for-iFlyVoice.msi) \| <i class="fas fa-file-archive"></i> [Portable (ZIP)](https://github.com/chriskyfung/voice-input-tools-for-windows/releases/download/v3.0.1/Win-Hotkey-for-iFlyVoice-Portable.zip)
 
 ## Contributing
 
