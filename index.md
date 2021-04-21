@@ -75,20 +75,18 @@ Thanks to that, I can turn down the idea to have an AI voice input mouse. This s
 
 ## 🧪 Tested applications
 
-✅ Microsoft OneNote \| ✅ OneNote for Windows 10 \| ✅ Visual Studio Code \| ✅ WhatsApp Desktop
-
+✅ Microsoft Word
+✅ Microsoft Excel
+✅ Microsoft OneNote
+✅ Notion for Windows
+✅ OneNote for Windows 10
+✅ Visual Studio Code
+✅ WhatsApp Desktop
 ## 🔽 Download
 
-<amp-img src="https://img.shields.io/github/v/release/chriskyfung/voice-input-tools-for-windows" width="94" height="20" layout="fixed" alt="GitHub release (latest by date)"></amp-img>
+<amp-img src="https://img.shields.io/github/v/release/chriskyfung/voice-input-tools-for-windows" width="94" height="20" layout="fixed" alt="GitHub release (latest by date)"></amp-img> <amp-img src="https://cdn.jsdelivr.net/gh/hjnilsson/country-flags@master/svg/us.svg" width="24" height="16" layout="fixed" alt="US"></amp-img> <amp-img src="https://cdn.jsdelivr.net/gh/hjnilsson/country-flags@master/svg/cn.svg" width="24" height="16" layout="fixed" alt="China"></amp-img> <amp-img src="https://cdn.jsdelivr.net/gh/hjnilsson/country-flags@master/svg/hk.svg" width="24" height="16" layout="fixed" alt="Hong Kong"></amp-img>
 
-<p>
-   <amp-img src="https://cdn.jsdelivr.net/gh/hjnilsson/country-flags@master/svg/us.svg" width="24" height="16" layout="fixed" alt="US"></amp-img>
-   <a href="{{ site.github.releases_url }}/{{ site.github.latest_release.tag_name }}/Windows-Hotkey-for-iFlyVoice-en-32bit.exe" rel="noopener" target="_blank">English</a> | 
-   <amp-img src="https://cdn.jsdelivr.net/gh/hjnilsson/country-flags@master/svg/cn.svg" width="24" height="16" layout="fixed" alt="China"></amp-img>
-   <a href="{{ site.github.releases_url }}/{{ site.github.latest_release.tag_name }}/Windows-Hotkey-for-iFlyVoice-zhs-32bit.exe" rel="noopener" target="_blank">简体中文</a> | 
-   <amp-img src="https://cdn.jsdelivr.net/gh/hjnilsson/country-flags@master/svg/hk.svg" width="24" height="16" layout="fixed" alt="Hong Kong"></amp-img>
-   <a href="{{ site.github.releases_url }}/{{ site.github.latest_release.tag_name }}/Windows-Hotkey-for-iFlyVoice-zht-32bit.exe" rel="noopener" target="_blank">繁體中文</a>
-</p>
+[MSI installer](https://github.com/chriskyfung/voice-input-tools-for-windows/releases/download/v3.0.1/Windows-Hotkey-for-iFlyVoice.msi) | [Portable (ZIP)](https://github.com/chriskyfung/voice-input-tools-for-windows/releases/download/v3.0.1/Win-Hotkey-for-iFlyVoice-Portable.zip)
 
 ## Contributing
 
