@@ -10,6 +10,8 @@ An [AutoHotKey](https://www.autohotkey.com/) script to configure <kbd>Win</kbd>+
   <img src="doc/images/icon_256x256.png" width="256" height="256" alt="Windows-Hotkey-for-iFlyVoice-Logo">
 </p>
 
+[**中文版網站**](https://medium.com/agile-win-hotkey-for-iflyvoice)
+
 ## 🚀 Usages
 
 - Change the hotkey for [Windows 10 voice recognition](https://support.microsoft.com/en-us/windows/use-voice-recognition-in-windows-10-83ff75bd-63eb-0b6c-18d4-6fae94050571) from <kbd>Win</kbd>+<kbd>H</kbd> to <kbd>Win</kbd>+<kbd>Alt</kbd>+<kbd>H</kbd>
@@ -36,7 +38,10 @@ An [AutoHotKey](https://www.autohotkey.com/) script to configure <kbd>Win</kbd>+
 
 ## 🧪 Tested applications
 
+    ✅ Microsoft Word
+    ✅ Microsoft Excel
     ✅ Microsoft OneNote
+    ✅ Notion for Windows
     ✅ OneNote for Windows 10
     ✅ Visual Studio Code
     ✅ WhatsApp Desktop
@@ -44,7 +49,7 @@ An [AutoHotKey](https://www.autohotkey.com/) script to configure <kbd>Win</kbd>+
 ## 🔽 Download
 
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/chriskyfung/voice-input-tools-for-windows)  \
-<img src="https://cdn.jsdelivr.net/gh/hjnilsson/country-flags@master/svg/us.svg" width="24" height="16" alt="US"> [English](https://github.com/chriskyfung/voice-input-tools-for-windows/releases/download/v2.1.2/Windows-Hotkey-for-iFlyVoice-en-32bit.exe) | <img src="https://cdn.jsdelivr.net/gh/hjnilsson/country-flags@master/svg/cn.svg" width="24" height="16" alt="China"> [简体中文](https://github.com/chriskyfung/voice-input-tools-for-windows/releases/download/v2.1.2/Windows-Hotkey-for-iFlyVoice-zhs-32bit.exe) | <img src="https://cdn.jsdelivr.net/gh/hjnilsson/country-flags@master/svg/hk.svg" width="24" height="16" alt="Hong Kong"> [繁體中文](https://github.com/chriskyfung/voice-input-tools-for-windows/releases/download/v2.1.2/Windows-Hotkey-for-iFlyVoice-zht-32bit.exe)
+<img src="https://cdn.jsdelivr.net/gh/hjnilsson/country-flags@master/svg/us.svg" width="24" height="16" alt="US"> <img src="https://cdn.jsdelivr.net/gh/hjnilsson/country-flags@master/svg/cn.svg" width="24" height="16" alt="China"> <img src="https://cdn.jsdelivr.net/gh/hjnilsson/country-flags@master/svg/hk.svg" width="24" height="16" alt="Hong Kong"> [MSI installer](https://github.com/chriskyfung/voice-input-tools-for-windows/releases/download/v3.0.1/Windows-Hotkey-for-iFlyVoice.msi) | [Portable (ZIP)](https://github.com/chriskyfung/voice-input-tools-for-windows/releases/download/v3.0.1/Win-Hotkey-for-iFlyVoice-Portable.zip)
 
 * * *
 
