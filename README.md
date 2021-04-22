@@ -10,7 +10,9 @@ An [AutoHotKey](https://www.autohotkey.com/) script to configure <kbd>Win</kbd>+
   <img src="doc/images/icon_128x128.png" width="128" height="128" alt="Windows-Hotkey-for-iFlyVoice-Logo">
 </p>
 
-## <i class="fas fa-language"></i> 🀄 [**中文版網站**](https://medium.com/agile-win-hotkey-for-iflyvoice)
+## 🀄 [**中文版網站**](https://medium.com/agile-win-hotkey-for-iflyvoice)
+
+<br>
 
 ## 🚀 Usages
 
