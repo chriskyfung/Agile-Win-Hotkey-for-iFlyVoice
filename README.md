@@ -1,51 +1,68 @@
-![Made for Windows](https://img.shields.io/badge/Made%20for-Windows-1f425f.svg) [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) ![GitHub last commit
-](https://img.shields.io/github/last-commit/chriskyfung/voice-input-tools-for-windows) ![GitHub Release Date
-](https://img.shields.io/github/release-date/chriskyfung/voice-input-tools-for-windows)
 
-# voice-input-tools-for-windows
+![Made for Windows](https://img.shields.io/badge/Made%20for-Windows-1f425f.svg) [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) ![GitHub release (latest by date)](https://img.shields.io/github/v/release/chriskyfung/Agile-Win-Hotkey-for-iFlyVoice) ![GitHub all releases
+ Download Count](https://img.shields.io/github/downloads/chriskyfung/Agile-Win-Hotkey-for-iFlyVoice/total)
 
-🛸 **A Collection of Voice Input Tools for Windows** 🛸
+# Windows-Hotkey-for-iFlyVoice ![Windows badge](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white)
 
-<br>
+An [AutoHotKey](https://www.autohotkey.com/) script to configure <kbd>Win</kbd>+<kbd>H</kbd> as the custom Hotkey for quick start of the **iFLYTEK Voice Input** Floating Window (讯飞语音悬浮窗).
 
-🔠 **Voice Typing IME**
+<p style="text-align:center">
+  <img src="doc/images/icon_128x128.png" width="128" height="128" alt="Windows-Hotkey-for-iFlyVoice-Logo">
+</p>
 
-- ## [Windows-Hotkey-for-iFlyVoice](https://github.com/chriskyfung/voice-input-tools-for-windows/tree/main/Windows-Hotkey-for-iFlyVoice)
+## <i class="fas fa-language"></i> 🀄 [**中文版網站**](https://medium.com/agile-win-hotkey-for-iflyvoice)
 
-    ![Win + H for Windows 1分钟400字 语音输入带你飞 Windows-Hotkey-for-iFlyVoice](https://repository-images.githubusercontent.com/351967858/27f78800-8f63-11eb-854d-3ef89bbe58fa)
-  ### Download 
+## 🚀 Usages
 
-  ![GitHub release (latest by date)](https://img.shields.io/github/v/release/chriskyfung/voice-input-tools-for-windows) <img src="https://cdn.jsdelivr.net/gh/hjnilsson/country-flags@master/svg/us.svg" width="24" height="16" alt="US"> <img src="https://cdn.jsdelivr.net/gh/hjnilsson/country-flags@master/svg/cn.svg" width="24" height="16" alt="China"> <img src="https://cdn.jsdelivr.net/gh/hjnilsson/country-flags@master/svg/hk.svg" width="24" height="16" alt="Hong Kong">
+- Change the hotkey for [Windows 10 voice recognition](https://support.microsoft.com/en-us/windows/use-voice-recognition-in-windows-10-83ff75bd-63eb-0b6c-18d4-6fae94050571) from <kbd>Win</kbd>+<kbd>H</kbd> to <kbd>Win</kbd>+<kbd>Alt</kbd>+<kbd>H</kbd>
+- Override <kbd>Win</kbd>+<kbd>H</kbd> hotkey and trigger iFLYTEK Voice Input in the following conditions:
 
-  [MSI installer](https://github.com/chriskyfung/voice-input-tools-for-windows/releases/download/v3.0.1/Windows-Hotkey-for-iFlyVoice.msi) | [Portable (ZIP)](https://github.com/chriskyfung/voice-input-tools-for-windows/releases/download/v3.0.1/Win-Hotkey-for-iFlyVoice-Portable.zip)
+  - Launch **iFLYTEK Voice Input** if the program is not running in the background.
 
-<br>
+    ![Start iFLYTEK Voice Input with Hotkey](doc/images/launch-iflyvoice-using-hotkey.png)
 
-🛴 **Chrome Extension Enabling (Speech-to-Text)**
+  - **Start/stop listening** if the Floating Window is on the desktop.
 
-- [Voice In - #1 Speech To Text Extension for Chrome](https://dictanote.co/voicein/a/244277/)
-- [Speechnotes Speech To Text & More - Chrome Web Store](https://chrome.google.com/webstore/detail/speechnotes-speech-to-tex/nncconplehmbkbhkgkodmnkfaflopkji)
+    ![Toggle iFLYTEK Voice Input to start/stop dictating your voices](doc/images/toggle-iflyvoice-onoff.png)
 
-<br>
+  - Ask to download the installation package and install it to the default directory if [iFlyIME (讯飞输入法) v3.0.1725](https://srf.xunfei.cn/) does not exist on your computer.
 
-⚡ **Speech Recognition and Transcription Software (SaaS)**
+    ![你似乎還沒有安裝訊飛語音輸入法，是否現在下載安裝包並【手動安裝】到預設目錄？](doc/images/warning-if-cannot-find-iflyvoice-exe.png)
 
-- [Dictanote - Make your voice type for you](https://dictanote.co/a/244277/)
-- [Speechnotes - Speech to Text Online Notepad](https://speechnotes.co/) | Mobile App: [Android](https://play.google.com/store/apps/details?id=co.speechnotes.speechnotes)
-- [Speechnotes 港式粵語 - Speech to Text Online Notepad](https://speechnotes.co/yue/)
-- [Speechlogger - Automatic transcription, captioning & instant translation](https://speechlogger.appspot.com/)
+## ✅ Requirements
+
+- **Operation System**: Windows Only
+- **Software**: iFlyIME (讯飞输入法) for Windows v3.0.1725
+
+   ![iFlyIME (讯飞输入法) for Windows v3.0.1725](https://github.com/chriskyfung/Agile-Win-Hotkey-for-iFlyVoice/raw/main/Windows-Hotkey-for-iFlyVoice/doc/images/iflyime-for-windwos-pc.png)
+
+## 🧪 Tested applications
+
+    ✅ Microsoft Word
+    ✅ Microsoft Excel
+    ✅ Microsoft OneNote
+    ✅ Notion for Windows
+    ✅ OneNote for Windows 10
+    ✅ Visual Studio Code
+    ✅ WhatsApp Desktop
+
+## 🔽 Download
+
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/chriskyfung/Agile-Win-Hotkey-for-iFlyVoice)  \
+<img src="https://cdn.jsdelivr.net/gh/hjnilsson/country-flags@master/svg/us.svg" width="24" height="16" alt="US"> <img src="https://cdn.jsdelivr.net/gh/hjnilsson/country-flags@master/svg/cn.svg" width="24" height="16" alt="China"> <img src="https://cdn.jsdelivr.net/gh/hjnilsson/country-flags@master/svg/hk.svg" width="24" height="16" alt="Hong Kong"> [MSI installer](https://github.com/chriskyfung/Agile-Win-Hotkey-for-iFlyVoice/releases/latest/download/Windows-Hotkey-for-iFlyVoice.msi) | [Portable (ZIP)](https://github.com/chriskyfung/Agile-Win-Hotkey-for-iFlyVoice/releases/latest/download/Win-Hotkey-for-iFlyVoice-Portable.zip)
 
 * * *
 
 ## Like my stuff?
 
 > Would you like to buy me a coffee? I would really appreciate it if you could support me for the app development.
-
+>
 > <a href="https://www.buymeacoffee.com/chrisfungky"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" target="_blank"></a>
 
 ## Contributing
 
 > Pull requests for new features, bug fixes, and suggestions are welcome!
+
 ## License
 
 > Distributed under the [GNU General Public License v3.0](LICENSE)
