@@ -1,4 +1,4 @@
-﻿CodeVersion := "3.0.1", copyright := "chriskyfung.github.io" ; // Declare the Current Version and state the copyright
+﻿CodeVersion := "3.1.0", copyright := "chriskyfung.github.io" ; // Declare the Current Version and state the copyright
 ;@Ahk2Exe-Let version = %A_PriorLine~U)^(.+"){1}(.+)".*$~$2% ; // Extract the version number (=> x.x.x) from the Prior Line
 
 UiLang := "en-US"
@@ -91,7 +91,8 @@ Return
       If (FileExist(AppPath)){
         Run, % AppPath
       } Else{
-        MsgBox, 4, , RegStr.Msg.NoIflyimeMsg
+
+        MsgBox, 4, , % RegStr.Msg.NoIflyimeMsg
         IfMsgBox, NO, Return
         InstallIFlyIME()
       }
@@ -128,7 +129,7 @@ Return
   Open the help page in the default browser
   */
 Help:
-  Run, https://chriskyfung.github.io/voice-input-tools-for-windows/
+  Run, % RegStr.Info.HelpUrl
 Return
 
 /**
@@ -142,22 +143,29 @@ RunAsAdministrator:
   full_command_line := DllCall("GetCommandLine", "str")
   if not (A_IsAdmin or RegExMatch(full_command_line, " /restart(?!\S)"))
   {
-      try
-      {
-          if A_IsCompiled
-              Run *RunAs "%A_ScriptFullPath%" /restart
-          else
-              Run *RunAs "%A_AhkPath%" /restart "%A_ScriptFullPath%"
-      }
-      ExitApp
+    try
+    {
+      if A_IsCompiled
+        Run *RunAs "%A_ScriptFullPath%" /restart
+      else
+        Run *RunAs "%A_AhkPath%" /restart "%A_ScriptFullPath%"
+    }
+    Return
   }
 Return
 
 InstallIFlyIME() {
-  Run, https://srf.xunfei.cn/
-  TEMPFILEPATH = %A_Temp%\iFlyIME_Setup3.0.1725.exe
-  DownloadFile("https://download.voicecloud.cn/200ime/iFlyIME_Setup3.0.1725.exe", TEMPFILEPATH)
-  Run %A_Temp%\iFlyIME_Setup3.0.1725.exe
+  Try {
+    Run, https://srf.xunfei.cn/
+    TEMPFILEPATH = %A_Temp%\iFlyIME_Setup3.0.1725.exe
+    DownloadFile("https://download.voicecloud.cn/200ime/iFlyIME_Setup3.0.1725.exe", TEMPFILEPATH)
+    Run %A_Temp%\iFlyIME_Setup3.0.1725.exe
+    Return True
+  } Catch {
+      global RegStr
+    MsgBox, % RegStr.Msg.FailToInstalliFlyIME
+  }
+  Return False
 }
 
 /**
