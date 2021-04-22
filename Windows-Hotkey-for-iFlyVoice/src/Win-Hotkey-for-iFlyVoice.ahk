@@ -1,4 +1,4 @@
-﻿CodeVersion := "3.1.0", copyright := "chriskyfung.github.io" ; // Declare the Current Version and state the copyright
+﻿CodeVersion := "3.0.3", copyright := "chriskyfung.github.io" ; // Declare the Current Version and state the copyright
 ;@Ahk2Exe-Let version = %A_PriorLine~U)^(.+"){1}(.+)".*$~$2% ; // Extract the version number (=> x.x.x) from the Prior Line
 
 UiLang := "en-US"
@@ -112,14 +112,14 @@ CheckUpdate:
   ; // Initialize the WinHttpRequest Object
 	WebRequest := ComObjCreate("WinHttp.WinHttpRequest.5.1")
   ; // Download the JSON-formatted release data from GitHub API
-	WebRequest.Open("GET", "https://api.github.com/repos/chriskyfung/voice-input-tools-for-windows/releases/latest")
+	WebRequest.Open("GET", "https://api.github.com/repos/chriskyfung/Agile-Win-Hotkey-for-iFlyVoice/releases/latest")
 	WebRequest.Send()
   ; // Use Regex to extract the latest version number
 	RegExMatch(WebRequest.ResponseText, "O)""tag_name"":""v(?<ver>[0-9a-zA-Z\.]+)""", SubPat)
 	LatestVersion := SubPat["ver"]
   ; // Compare the version numbers
 	if (Util_VersionCompare(LatestVersion,CodeVersion)) {
-		Run, https://github.com/chriskyfung/voice-input-tools-for-windows/releases/latest
+		Run, https://github.com/chriskyfung/Agile-Win-Hotkey-for-iFlyVoice/releases/latest
 	} else {
 		MsgBox % RegStr.Msg.CurrentVersion . ": v" . CodeVersion . "`n`n" . RegStr.Msg.ThisIsLastVersion
 	}
