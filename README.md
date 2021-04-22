@@ -6,11 +6,13 @@
 
 An [AutoHotKey](https://www.autohotkey.com/) script to configure <kbd>Win</kbd>+<kbd>H</kbd> as the custom Hotkey for quick start of the **iFLYTEK Voice Input** Floating Window (讯飞语音悬浮窗).
 
-<p style="text-align:center">
+<p align="center">
   <img src="doc/images/icon_128x128.png" width="128" height="128" alt="Windows-Hotkey-for-iFlyVoice-Logo">
 </p>
 
-## 🀄 [**中文版網站**](https://medium.com/agile-win-hotkey-for-iflyvoice)
+## 🔣 中文版網站
+
+🔗 https://medium.com/agile-win-hotkey-for-iflyvoice
 
 <br>
 
