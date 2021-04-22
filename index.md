@@ -1,7 +1,7 @@
 ---
 layout: page-right-sidebar
 date: 2021-03-30
-title: "Windows Hotkey for iFlyVoice"
+title: "Agile Win Hotkey for iFlyVoice"
 image:
    path: https://repository-images.githubusercontent.com/351967858/27f78800-8f63-11eb-854d-3ef89bbe58fa
    width: 1280
@@ -75,25 +75,28 @@ Thanks to that, I can turn down the idea to have an AI voice input mouse. This s
 
 ## 🧪 Tested applications
 
-✅ Microsoft OneNote \| ✅ OneNote for Windows 10 \| ✅ Visual Studio Code \| ✅ WhatsApp Desktop
+|                      |                      |                     |
+| -------------------- | -------------------- | ------------------- |
+| ✅ Microsoft Word     | ✅ Microsoft Excel    | ✅ Microsoft OneNote |
+| ✅ Notion for Windows | ✅ Visual Studio Code | ✅ WhatsApp Desktop  |
+{: style="width:100%" }
 
-## 🔽 Download
-
-<amp-img src="https://img.shields.io/github/v/release/chriskyfung/voice-input-tools-for-windows" width="94" height="20" layout="fixed" alt="GitHub release (latest by date)"></amp-img>
+## <i class="fas fa-download"></i> Download
 
 <p>
+   <i class="fas fa-archive"></i> <a href="(https://github.com/chriskyfung/Agile-Win-Hotkey-for-iFlyVoice/releases/latest/download/Windows-Hotkey-for-iFlyVoice.msi" rel="noopener" target="_blank">MSI Installer</a> | <i class="fas fa-file-archive"></i> <a href="https://github.com/chriskyfung/Agile-Win-Hotkey-for-iFlyVoice/releases/latest/download/Win-Hotkey-for-iFlyVoice-Portable.zip" target="_blank">Portable (ZIP)</a>
+
+   <br>
+   <amp-img src="https://img.shields.io/github/v/release/chriskyfung/Agile-Win-Hotkey-for-iFlyVoice" width="94" height="20" layout="fixed" alt="GitHub release (latest by date)"></amp-img>
    <amp-img src="https://cdn.jsdelivr.net/gh/hjnilsson/country-flags@master/svg/us.svg" width="24" height="16" layout="fixed" alt="US"></amp-img>
-   <a href="{{ site.github.releases_url }}/{{ site.github.latest_release.tag_name }}/Windows-Hotkey-for-iFlyVoice-en-32bit.exe" rel="noopener" target="_blank">English</a> | 
    <amp-img src="https://cdn.jsdelivr.net/gh/hjnilsson/country-flags@master/svg/cn.svg" width="24" height="16" layout="fixed" alt="China"></amp-img>
-   <a href="{{ site.github.releases_url }}/{{ site.github.latest_release.tag_name }}/Windows-Hotkey-for-iFlyVoice-zhs-32bit.exe" rel="noopener" target="_blank">简体中文</a> | 
    <amp-img src="https://cdn.jsdelivr.net/gh/hjnilsson/country-flags@master/svg/hk.svg" width="24" height="16" layout="fixed" alt="Hong Kong"></amp-img>
-   <a href="{{ site.github.releases_url }}/{{ site.github.latest_release.tag_name }}/Windows-Hotkey-for-iFlyVoice-zht-32bit.exe" rel="noopener" target="_blank">繁體中文</a>
 </p>
 
-## Contributing
+## 🤝 Contributing
 
 Pull requests for new features, bug fixes, and suggestions are welcome!
 
-## License
+## <i class="fas fa-balance-scale"></i> License
 
 [GNU Affero General Public License v3.0](LICENSE.md)

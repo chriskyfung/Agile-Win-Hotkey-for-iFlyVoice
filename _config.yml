@@ -4,8 +4,8 @@ title: "Windows Hotkey for iFlyVoice"
 description: "A Collection of Voice Input Tools for Windows"
 meta_description: "A Collection of Voice Input Tools for Windows"
 url: https://chriskyfung.github.io
-baseurl: '/voice-input-tools-for-windows'
-repository: chriskyfung/voice-input-tools-for-windows
+baseurl: '/Agile-Win-Hotkey-for-iFlyVoice'
+repository: chriskyfung/Agile-Win-Hotkey-for-iFlyVoice
 favicon: 'assets/images/favicon_96x96.png'
 logo: 'assets/images/logo-plainSVG.svg'
 timezone: 'Asia/Hong_Kong'
