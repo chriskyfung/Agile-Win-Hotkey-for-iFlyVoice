@@ -38,8 +38,6 @@ An [AutoHotKey](https://www.autohotkey.com/) script to configure <kbd>Win</kbd>+
 - **Operation System**: Windows Only
 - **Software**: iFlyIME (讯飞输入法) for Windows v3.0.1725
 
-   ![iFlyIME (讯飞输入法) for Windows v3.0.1725](https://github.com/chriskyfung/Agile-Win-Hotkey-for-iFlyVoice/raw/main/Windows-Hotkey-for-iFlyVoice/doc/images/iflyime-for-windwos-pc.png)
-
 ## 🧪 Tested applications
 
     ✅ Microsoft Word
