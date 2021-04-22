@@ -1,6 +1,6 @@
 ---
 layout: page-right-sidebar
-date: 2021-03-30
+date: 2021-04-22
 title: "Agile Win Hotkey for iFlyVoice"
 image:
    path: https://repository-images.githubusercontent.com/351967858/27f78800-8f63-11eb-854d-3ef89bbe58fa
@@ -84,7 +84,7 @@ Thanks to that, I can turn down the idea to have an AI voice input mouse. This s
 ## <i class="fas fa-download"></i> Download
 
 <p>
-   <i class="fas fa-archive"></i> <a href="(https://github.com/chriskyfung/Agile-Win-Hotkey-for-iFlyVoice/releases/latest/download/Windows-Hotkey-for-iFlyVoice.msi" rel="noopener" target="_blank">MSI Installer</a> | <i class="fas fa-file-archive"></i> <a href="https://github.com/chriskyfung/Agile-Win-Hotkey-for-iFlyVoice/releases/latest/download/Win-Hotkey-for-iFlyVoice-Portable.zip" target="_blank">Portable (ZIP)</a>
+   <i class="fas fa-archive"></i> <a href="https://github.com/chriskyfung/Agile-Win-Hotkey-for-iFlyVoice/releases/latest/download/Windows-Hotkey-for-iFlyVoice.msi" rel="noopener" target="_blank">MSI Installer</a> | <i class="fas fa-file-archive"></i> <a href="https://github.com/chriskyfung/Agile-Win-Hotkey-for-iFlyVoice/releases/latest/download/Win-Hotkey-for-iFlyVoice-Portable.zip" target="_blank">Portable (ZIP)</a>
 
    <br>
    <amp-img src="https://img.shields.io/github/v/release/chriskyfung/Agile-Win-Hotkey-for-iFlyVoice" width="94" height="20" layout="fixed" alt="GitHub release (latest by date)"></amp-img>
