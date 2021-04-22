@@ -13,11 +13,11 @@
 - ## [Windows-Hotkey-for-iFlyVoice](https://github.com/chriskyfung/voice-input-tools-for-windows/tree/main/Windows-Hotkey-for-iFlyVoice)
 
     ![Win + H for Windows 1分钟400字 语音输入带你飞 Windows-Hotkey-for-iFlyVoice](https://repository-images.githubusercontent.com/351967858/27f78800-8f63-11eb-854d-3ef89bbe58fa)
-  ### Download ![GitHub release (latest by date)](https://img.shields.io/github/v/release/chriskyfung/voice-input-tools-for-windows)
+  ### Download 
 
-   - <img src="https://cdn.jsdelivr.net/gh/hjnilsson/country-flags@master/svg/us.svg" width="24" height="16" alt="US"> [English](https://github.com/chriskyfung/voice-input-tools-for-windows/releases/download/v2.1.2/Windows-Hotkey-for-iFlyVoice-en-32bit.exe)
-   - <img src="https://cdn.jsdelivr.net/gh/hjnilsson/country-flags@master/svg/cn.svg" width="24" height="16" alt="China"> [简体中文](https://github.com/chriskyfung/voice-input-tools-for-windows/releases/download/v2.1.2/Windows-Hotkey-for-iFlyVoice-zhs-32bit.exe)
-   - <img src="https://cdn.jsdelivr.net/gh/hjnilsson/country-flags@master/svg/hk.svg" width="24" height="16" alt="Hong Kong"> [繁體中文](https://github.com/chriskyfung/voice-input-tools-for-windows/releases/download/v2.1.2/Windows-Hotkey-for-iFlyVoice-zht-32bit.exe)
+  ![GitHub release (latest by date)](https://img.shields.io/github/v/release/chriskyfung/voice-input-tools-for-windows) <img src="https://cdn.jsdelivr.net/gh/hjnilsson/country-flags@master/svg/us.svg" width="24" height="16" alt="US"> <img src="https://cdn.jsdelivr.net/gh/hjnilsson/country-flags@master/svg/cn.svg" width="24" height="16" alt="China"> <img src="https://cdn.jsdelivr.net/gh/hjnilsson/country-flags@master/svg/hk.svg" width="24" height="16" alt="Hong Kong">
+
+  [MSI installer](https://github.com/chriskyfung/voice-input-tools-for-windows/releases/download/v3.0.1/Windows-Hotkey-for-iFlyVoice.msi) | [Portable (ZIP)](https://github.com/chriskyfung/voice-input-tools-for-windows/releases/download/v3.0.1/Win-Hotkey-for-iFlyVoice-Portable.zip)
 
 <br>
 
