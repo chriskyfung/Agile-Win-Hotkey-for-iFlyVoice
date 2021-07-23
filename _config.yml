@@ -63,5 +63,8 @@ authors:
     description: "Author of this blog, M.Phil."
 
 plugins:
-  - jekyll-remote-theme
-  - jekyll-github-metadata
+  - github-pages
+#  - jekyll-remote-theme
+#  - jekyll-github-metadata
+  - jekyll-seo-tag
+  
