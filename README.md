@@ -1,10 +1,8 @@
+# Windows-Hotkey-for-iFlyVoice ![Windows badge](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white) (English Site)
+
 ![Made for Windows](https://img.shields.io/badge/Made%20for-Windows-1f425f.svg) [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) ![GitHub last commit
 ](https://img.shields.io/github/last-commit/chriskyfung/Agile-Win-Hotkey-for-iFlyVoice) ![GitHub Release Date
 ](https://img.shields.io/github/release-date/chriskyfung/Agile-Win-Hotkey-for-iFlyVoice) ![GitHub release (latest by date)](https://img.shields.io/github/v/release/chriskyfung/Agile-Win-Hotkey-for-iFlyVoice)
-
-# English Website for Agile-Win-Hotkey-for-iFlyVoice
-
-# Windows-Hotkey-for-iFlyVoice ![Windows badge](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white)
 
 An [AutoHotKey](https://www.autohotkey.com/) script to configure <kbd>Win</kbd>+<kbd>H</kbd> as the custom Hotkey for quick start of the **iFLYTEK Voice Input** Floating Window (讯飞语音悬浮窗).
 
