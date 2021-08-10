@@ -1,8 +1,7 @@
-remote_theme: chriskyfung/amp-affiliately-jekyll-theme
+remote_theme: chriskyfung/amp-affiliately-jekyll-theme@v2.0.1-alpha
 name: "Chris KY FUNG's Page"
 title: "Windows Hotkey for iFlyVoice"
 description: "A Collection of Voice Input Tools for Windows"
-meta_description: "A Collection of Voice Input Tools for Windows"
 url: https://chriskyfung.github.io
 baseurl: '/Agile-Win-Hotkey-for-iFlyVoice'
 repository: chriskyfung/Agile-Win-Hotkey-for-iFlyVoice
@@ -41,8 +40,7 @@ medium_id: chriskyfung
 buymeacoffee: chriskyfung
 # Copyright Start Year
 copyright: 
-  prefix: 
-  ownership: Chris KY FUNG
+  owner: Chris KY FUNG
   link: https://chriskyfung.github.io/
 
 defaults:

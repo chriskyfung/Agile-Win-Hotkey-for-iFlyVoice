@@ -6,7 +6,10 @@ image:
    path: https://repository-images.githubusercontent.com/351967858/27f78800-8f63-11eb-854d-3ef89bbe58fa
    width: 1280
    height: 640
-download: true
+download: 
+   files:
+      - name: Patch for Non-Admin Users
+        url: https://www.buymeacoffee.com/chriskyfung/e/40258
 css:
   custom: >-
    kbd {
