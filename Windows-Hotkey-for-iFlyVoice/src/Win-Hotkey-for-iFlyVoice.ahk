@@ -1,4 +1,4 @@
-﻿CodeVersion := "3.0.3", copyright := "chriskyfung.github.io" ; // Declare the Current Version and state the copyright
+CodeVersion := "3.0.4", copyright := "chriskyfung.github.io" ; // Declare the Current Version and state the copyright
 ;@Ahk2Exe-Let version = %A_PriorLine~U)^(.+"){1}(.+)".*$~$2% ; // Extract the version number (=> x.x.x) from the Prior Line
 
 UiLang := "en-US"
@@ -80,14 +80,14 @@ Return
       原方案使用熱鍵觸發
       Send ^+h
       新方案直接發送模擬點擊消息
-      A fork of snomiao/CapsLockX/Modules/应用-讯飞输入法语音悬浮窗.ahk for iFlyIME 3.0.1725.
+      A fork of snomiao/CapsLockX/Modules/应用-讯飞输入法语音悬浮窗.ahk for iFlyIME 3.0.1746.
     */
     WinSet, AlwaysOnTop , on, ahk_class BaseGui ahk_exe iFlyVoice.exe
     ControlClick, x119 y59, ahk_class BaseGui ahk_exe iFlyVoice.exe ; Click on the center of iFlyVoice floating window
     WinSet, AlwaysOnTop , off, ahk_class BaseGui ahk_exe iFlyVoice.exe
   } Else {
     try {
-      AppPath := "C:\Program Files (x86)\iFlytek\iFlyIME\3.0.1725\iFlyVoice.exe"
+      AppPath := "C:\Program Files (x86)\iFlytek\iFlyIME\3.0.1746\iFlyVoice.exe"
       If (FileExist(AppPath)){
         Run, % AppPath
       } Else{
@@ -157,9 +157,9 @@ Return
 InstallIFlyIME() {
   Try {
     Run, https://srf.xunfei.cn/
-    TEMPFILEPATH = %A_Temp%\iFlyIME_Setup3.0.1725.exe
-    DownloadFile("https://download.voicecloud.cn/200ime/iFlyIME_Setup3.0.1725.exe", TEMPFILEPATH)
-    Run %A_Temp%\iFlyIME_Setup3.0.1725.exe
+    TEMPFILEPATH = %A_Temp%\iFlyIME_Setup_3.0.1746.exe
+    DownloadFile("https://download.voicecloud.cn/200ime/iFlyIME_Setup_3.0.1746.exe", TEMPFILEPATH)
+    Run %A_Temp%\iFlyIME_Setup_3.0.1746.exe
     Return True
   } Catch {
       global RegStr

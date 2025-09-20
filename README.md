@@ -29,14 +29,14 @@ An [AutoHotKey](https://www.autohotkey.com/) script to configure <kbd>Win</kbd>+
 
     ![Toggle iFLYTEK Voice Input to start/stop dictating your voices](doc/images/toggle-iflyvoice-onoff.png)
 
-  - Ask to download the installation package and install it to the default directory if [iFlyIME (讯飞输入法) v3.0.1725](https://srf.xunfei.cn/) does not exist on your computer.
+  - Ask to download the installation package and install it to the default directory if [iFlyIME (讯飞输入法) v3.0.1746](https://srf.xunfei.cn/) does not exist on your computer.
 
     ![你似乎還沒有安裝訊飛語音輸入法，是否現在下載安裝包並【手動安裝】到預設目錄？](doc/images/warning-if-cannot-find-iflyvoice-exe.png)
 
 ## ✅ Requirements
 
 - **Operation System**: Windows Only
-- **Software**: iFlyIME (讯飞输入法) for Windows v3.0.1725
+- **Software**: iFlyIME (讯飞输入法) for Windows v3.0.1746
 
 ## 🧪 Tested applications
 
