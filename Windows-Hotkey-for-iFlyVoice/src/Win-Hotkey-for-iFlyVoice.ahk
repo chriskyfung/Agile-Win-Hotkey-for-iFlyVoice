@@ -1,4 +1,4 @@
-CodeVersion := "3.0.4", copyright := "chriskyfung.github.io" ; // Declare the Current Version and state the copyright
+CodeVersion := "4.0.0", copyright := "chriskyfung.github.io" ; // Declare the Current Version and state the copyright
 ;@Ahk2Exe-Let version = %A_PriorLine~U)^(.+"){1}(.+)".*$~$2% ; // Extract the version number (=> x.x.x) from the Prior Line
 
 UiLang := "en-US"
