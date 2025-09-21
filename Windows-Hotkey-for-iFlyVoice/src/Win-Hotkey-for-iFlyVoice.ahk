@@ -158,12 +158,23 @@ InstallIFlyIME() {
   Try {
     Run, https://srf.xunfei.cn/
     TEMPFILEPATH = %A_Temp%\iFlyIME_Setup_3.0.1746.exe
-    DownloadFile("https://download.voicecloud.cn/200ime/iFlyIME_Setup_3.0.1746.exe", TEMPFILEPATH)
-    Run %A_Temp%\iFlyIME_Setup_3.0.1746.exe
+
+    If !FileExist(TEMPFILEPATH)
+    {
+      DownloadFile("https://download.voicecloud.cn/200ime/iFlyIME_Setup_3.0.1746.exe", TEMPFILEPATH)
+
+      If !FileExist(TEMPFILEPATH)
+      {
+        MsgBox, 16, Installation failed, Could not download the installer. Please check your internet connection.
+        Return False
+      }
+    }
+
+    Run, %TEMPFILEPATH%
     Return True
-  } Catch {
+  } Catch e {
       global RegStr
-    MsgBox, % RegStr.Msg.FailToInstalliFlyIME
+    MsgBox, 16, Installation failed, % RegStr.Msg.FailToInstalliFlyIME . "`n`nDetails: " . e.Message
   }
   Return False
 }
