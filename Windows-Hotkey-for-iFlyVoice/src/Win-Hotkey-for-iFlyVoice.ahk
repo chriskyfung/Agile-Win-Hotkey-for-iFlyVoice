@@ -183,10 +183,6 @@ Util_VersionCompare(other,local) {
 	return 0
 }
 
-/*
-  by Bruttosozialprodukt 
-  https://autohotkey.com/board/topic/101007-super-simple-download-with-progress-bar/
-*/
 DownloadFile(UrlToFile, SaveFileAs, Overwrite := True, UseProgressBar := True) {
   ; // Check if the file already exists and if we must not overwrite it
   If (!Overwrite && FileExist(SaveFileAs))
@@ -194,15 +190,32 @@ DownloadFile(UrlToFile, SaveFileAs, Overwrite := True, UseProgressBar := True) {
   ; // Check if the user wants a progressbar
   If (UseProgressBar) {
     ;Initialize the WinHttpRequest Object
-      WebRequest := ComObjCreate("WinHttp.WinHttpRequest.5.1")
+    WebRequest := ComObjCreate("WinHttp.WinHttpRequest.5.1")
     ; // Download the headers
-      WebRequest.Open("HEAD", UrlToFile)
-      WebRequest.Send()
+    WebRequest.Open("HEAD", UrlToFile)
+    WebRequest.Send()
+
     ; // Store the header which holds the file size in a variable:
-      FinalSize := WebRequest.GetResponseHeader("Content-Length")
+    FinalSize := Trim(WebRequest.GetResponseHeader("Content-Length"))
+    
+    ; // === Unit Validation ===
+    FinalSizeInMB := FinalSize
+    if (FinalSize is not number or FinalSize <= 0)
+    {
+      MsgBox, 16, Download Error, Invalid file size received from server: '%FinalSize%'.
+      Return
+    }
+    if (FinalSize < 1024) {
+      FinalSize := FinalSize * 1024 * 1024
+    } else {
+      FinalSizeInMB := FinalSize / 1024 / 1024
+    }
+
     ; // Create the progressbar and the timer
-      Progress, H80, , Downloading..., %UrlToFile%
-      SetTimer, __UpdateProgressBar, 100
+    Progress, H80, , Downloading..., %UrlToFile%
+    LastSize := 0
+    LastSizeTick := A_TickCount
+    SetTimer, __UpdateProgressBar, 100
   }
   ; // Download the file
   UrlDownloadToFile, %UrlToFile%, %SaveFileAs%
@@ -216,16 +229,31 @@ DownloadFile(UrlToFile, SaveFileAs, Overwrite := True, UseProgressBar := True) {
   ; // The label that updates the progressbar
   __UpdateProgressBar:
     ; // Get the current filesize and tick
-    CurrentSize := FileOpen(SaveFileAs, "r").Length ;FileGetSize wouldn't return reliable results
+    CurrentSize := FileOpen(SaveFileAs, "r").Length ; FileGetSize wouldn't return reliable results
     CurrentSizeTick := A_TickCount
-    ; // Calculate the downloadspeed
-    Speed := Round((CurrentSize/1024-LastSize/1024)/((CurrentSizeTick-LastSizeTick)/1000)) . " Kb/s"
+
+    ; // Calculate percent done
+    PercentDone := Round(CurrentSize / FinalSize * 100)
+
+    ; // Calculate download speed
+    TimeElapsed := (CurrentSizeTick - LastSizeTick) / 1000 ; in seconds
+    if (TimeElapsed > 0) {
+      SpeedInKBps := (CurrentSize - LastSize) / 1024 / TimeElapsed
+    } else {
+      SpeedInKBps := 0
+    }
+    
+    if (SpeedInKBps > 0) {
+      Speed := Round(SpeedInKBps) . " Kb/s"
+    } else {
+      Speed := "0 Kb/s"
+    }
+
     ; // Save the current filesize and tick for the next time
     LastSizeTick := CurrentSizeTick
-    LastSize := FileOpen(SaveFileAs, "r").Length
-    ; // Calculate percent done
-    PercentDone := Round(CurrentSize/FinalSize*100)
+    LastSize := CurrentSize
+    
     ; // Update the ProgressBar
-    Progress, %PercentDone%, %PercentDone%`% Done, Downloading...  (%Speed%), Downloading %SaveFileAs% (%PercentDone%`%)
+    Progress, %PercentDone%, %PercentDone%`% of %FinalSizeInMB% MB, Downloading...  (%Speed%), Downloading %SaveFileAs%
     Return
 }
