@@ -1,7 +1,8 @@
 ---
 layout: page-right-sidebar
-date: 2021-04-22
-title: "Agile Win Hotkey for iFlyVoice"
+date: 2025-09-21
+title: "Agile Win Hotkey for iFlyVoice - Custom Win+H for iFlytek"
+excerpt: "Remap Win+H to instantly launch iFlytek Voice Input (讯飞语音). A free, agile Windows hotkey utility for fast, accurate voice dictation in any application. Now with custom path configuration."
 image:
    path: https://repository-images.githubusercontent.com/351967858/27f78800-8f63-11eb-854d-3ef89bbe58fa
    width: 1280
@@ -14,76 +15,77 @@ css:
   custom: >-
    .ml-li { margin-left: 2.5rem }
    .object-fit img { object-fit: contain }
+   table { width: 100%; margin: -1.5rem auto 1rem auto }
 ---
 
 {% include picture.html img="https://repository-images.githubusercontent.com/351967858/27f78800-8f63-11eb-854d-3ef89bbe58fa" width="1280" height="640" alt="Win + H for Windows 1分钟400字 语音输入带你飞 Windows-Hotkey-for-iFlyVoice" source="raw" %}
 
-A Windows gadget to configure <kbd>Win</kbd>+<kbd>H</kbd> as the custom Hotkey for quick start of the **iFLYTEK Voice Input** Floating Window (讯飞语音悬浮窗).
+A free Windows utility to remap <kbd>Win</kbd>+<kbd>H</kbd> as a powerful, custom hotkey to instantly launch and control the **iFlytek Voice Input** Floating Window (讯飞语音悬浮窗). Achieve fast and accurate voice dictation in any application.
 
-## Why did I create "Windows Hotkey for iFlyVoice" 👾
+## Why Use a Custom Hotkey for iFlyVoice? 👾
 
-**iFlyVoice** is the #1 AI-based voice recognition in China. Its advantages include:
+**iFlyVoice (讯飞语音)** is a leading AI voice recognition engine, known for its:
 
-- High accuracy
-- Support in almost every Windows application
-- Support over 40 languages
-- 100% Free
+- High accuracy in voice-to-text transcription.
+- Broad compatibility with almost every Windows application.
+- Support for over 40 languages.
+- Being 100% free to use.
 
-What I think there is not enough is the options of its Hotkey. Only <kbd>F2</kbd>, <kbd>F6</kbd>, <kbd>F7</kbd>, <kbd>F8</kbd>, <kbd>F9</kbd>, and <kbd>F10</kbd> keys are available for the voice input hotkey in the iFlyIME settings.
+However, the default hotkey options in iFlyIME are limited to keys like <kbd>F2</kbd>, <kbd>F6</kbd>, <kbd>F7</kbd>, etc., which often conflict with other applications.
 
-It is bad because those keys are often been used by other applications.
+The <kbd>Win</kbd>+<kbd>H</kbd> shortcut, which opens the native Windows Dictation toolbar (available in US English only), is often unused by non-English speakers. This makes it the perfect candidate to be repurposed for a much better tool.
 
-<kbd>Win</kbd>+<kbd>H</kbd> is an ideal option in this case. By default, it is the shortcut to open the dictation toolbar in Windows 10. However, Windows Dictation commands are available in US English only. it is useless for non-English speakers. Therefore, it is a good idea to override this unneeded key to fit our purpose.
+This utility runs quietly in the background, overriding the default <kbd>Win</kbd>+<kbd>H</kbd> behavior to give you instant access to iFlyVoice, saving you the cost and hassle of dedicated voice input hardware.
 
-By running the Hotkey tool in the background, you can utilize the <kbd>Win</kbd>+<kbd>H</kbd> hotkey to turn Windows Hearing your voices through the iFlyVoice.
-
-Thanks to that, I can turn down the idea to have an AI voice input mouse. This saves my time in researching which brand/model is the best, and no need to take a risk to spend money to buy such a toy.
-
-## 🚀 Usages
+## 🚀 How It Works
 
 {% include picture.html img="icon_256x256.png" width="256" height="256" class="text-center shadow-none" alt="Windows-Hotkey-for-iFlyVoice-Logo" source="assets" %}
 
-- Change the hotkey for [Windows 10 voice recognition](https://support.microsoft.com/en-us/windows/use-voice-recognition-in-windows-10-83ff75bd-63eb-0b6c-18d4-6fae94050571) from <kbd>Win</kbd>+<kbd>H</kbd> to <kbd>Win</kbd>+<kbd>Alt</kbd>+<kbd>H</kbd>
-- Override <kbd>Win</kbd>+<kbd>H</kbd> hotkey and trigger iFLYTEK Voice Input in the following conditions:
+- **Re-maps** the default Windows 10 voice recognition hotkey from <kbd>Win</kbd>+<kbd>H</kbd> to <kbd>Win</kbd>+<kbd>Alt</kbd>+<kbd>H</kbd>.
+- **Overrides** the <kbd>Win</kbd>+<kbd>H</kbd> hotkey to intelligently control iFlytek Voice Input:
 
-  - Launch **iFLYTEK Voice Input** if the program is not running in the background.
+  - **Launch**: If the iFlyVoice program isn't running, the hotkey launches it instantly.
 
    {% include picture.html img="launch-iflyvoice-using-hotkey.png" width="730" height="249" class="shadow-none" alt="Start iFLYTEK Voice Input with Hotkey" source="assets" %}
 
-  - **Start/stop listening** if the Floating Window is on the desktop.
+  - **Toggle**: If the iFlyVoice floating window is already on screen, the hotkey will **start or stop** voice listening.
 
    {% include picture.html img="toggle-iflyvoice-onoff.png" width="730" height="294" class="shadow-none" alt="Toggle iFLYTEK Voice Input to start/stop dictating your voices" source="assets" %}
 
-  - Ask to download the installation package and install it to the default directory if [iFlyIME (讯飞输入法) v3.0.1725](https://srf.xunfei.cn/) does not exist on your computer.
+  - **Install**: If iFlyIME is not found, it guides you to download and install the latest version (**v3.0.1746**). The tool now intelligently locates the iFlyVoice executable, and even allows you to **set a custom path** if you have a non-standard installation.
 
-   {% include picture.html img="warning-if-cannot-find-iflyvoice-exe.png" width="469" height="136" alt="你似乎還沒有安裝訊飛語音輸入法，是否現在下載安裝包並【手動安裝】到預設目錄？" source="assets" class="ml-li" %}
+   {% include picture.html img="warning-if-cannot-find-iflyvoice-exe.png" width="469" height="136" alt="You don't seem to have Xunfei voice input method installed yet. Do you want to download the installation package and [manually install] it to the default directory now?" source="assets" class="ml-li" %}
 
 ## ✅ Requirements
 
-- **Operation System**: Windows Only
-- **Software**: iFlyIME (讯飞输入法) for Windows v3.0.1725
+- **Operating System**: Windows 10 or newer
+- **Software**: iFlyIME (讯飞输入法) for Windows v3.0.1746 or newer
 
-   {% include picture.html img="iflyime-for-windwos-pc.png" width="1213" height="777" alt="iFlyIME (讯飞输入法) for Windows v3.0.1725" source="assets" %}
+   {% include picture.html img="iflyime-for-windwos-pc.png" width="1213" height="777" alt="iFlyIME (讯飞输入法) for Windows v3.0.1746" source="assets" %}
 
-## 🧪 Tested applications
+## 🧪 Tested Applications
+
+This hotkey has been successfully tested in a wide range of popular applications:
 
 |                      |                      |                     |
 | -------------------- | -------------------- | ------------------- |
 | ✅ Microsoft Word     | ✅ Microsoft Excel    | ✅ Microsoft OneNote |
 | ✅ Notion for Windows | ✅ Visual Studio Code | ✅ WhatsApp Desktop  |
-{: style="width:100%" }
 
 ## <i class="fas fa-download"></i> Download
 
 <p>
-   <i class="fas fa-archive"></i> <a href="https://github.com/chriskyfung/Agile-Win-Hotkey-for-iFlyVoice/releases/latest/download/Windows-Hotkey-for-iFlyVoice.msi" rel="noopener" target="_blank">MSI Installer</a> | <i class="fas fa-file-archive"></i> <a href="https://github.com/chriskyfung/Agile-Win-Hotkey-for-iFlyVoice/releases/latest/download/Windows-Hotkey-for-iFlyVoice-Portable.zip" target="_blank">Portable (ZIP)</a>
-
-   <br>
-   <amp-img src="https://img.shields.io/github/v/release/chriskyfung/Agile-Win-Hotkey-for-iFlyVoice" width="94" height="20" layout="fixed" alt="GitHub release (latest by date)"></amp-img>
+   <a href="https://github.com/chriskyfung/Agile-Win-Hotkey-for-iFlyVoice/releases/latest/">
+      <amp-img src="https://img.shields.io/github/v/release/chriskyfung/Agile-Win-Hotkey-for-iFlyVoice" width="108" height="23" layout="fixed" alt="GitHub release (latest by date)"></amp-img>
+   </a>
    <amp-img src="https://cdn.jsdelivr.net/gh/hjnilsson/country-flags@master/svg/us.svg" width="24" height="16" layout="fixed" alt="US"></amp-img>
    <amp-img src="https://cdn.jsdelivr.net/gh/hjnilsson/country-flags@master/svg/cn.svg" width="24" height="16" layout="fixed" alt="China"></amp-img>
    <amp-img src="https://cdn.jsdelivr.net/gh/hjnilsson/country-flags@master/svg/hk.svg" width="24" height="16" layout="fixed" alt="Hong Kong"></amp-img>
 </p>
+
+## ❤️ Sponsor
+
+If you find this tool useful, please consider [sponsoring me on GitHub](https://github.com/sponsors/chriskyfung). Your support helps me dedicate more time to open-source projects like this.
 
 ## 🤝 Contributing
 
