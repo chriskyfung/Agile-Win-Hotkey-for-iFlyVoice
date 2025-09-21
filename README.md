@@ -31,6 +31,25 @@ An [AutoHotKey](https://www.autohotkey.com/) script to configure <kbd>Win</kbd>+
 
     ![你似乎還沒有安裝訊飛語音輸入法，是否現在下載安裝包並【手動安裝】到預設目錄？](docs/images/warning-if-cannot-find-iflyvoice-exe.png)
 
+## ⚙️ Configuration (Optional)
+
+You can customize the script's behavior by creating a `config.ini` file in `%APPDATA%\Agile-Win-Hotkey-for-iFlyVoice\`. This folder is typically located at `C:\Users\<Your Username>\AppData\Roaming\Agile-Win-Hotkey-for-iFlyVoice\`.
+
+Here are the available options:
+
+```ini
+[Preference]
+iFlyIME_Path = C:\path\to\your\iFlyVoice.exe
+Langauge = en-US
+```
+
+- **`iFlyIME_Path`**: Set a custom path for `iFlyVoice.exe`. If not specified, the script will look for it in the default installation directory (`C:\Program Files (x86)\iFlytek\iFlyIME\3.0.1746\`).
+
+- **`Langauge`**: Change the display language for messages and the tray menu. Supported languages are:
+  - `en-US` (English - default)
+  - `zh-CN` (Simplified Chinese)
+  - `zh-TW` (Traditional Chinese)
+
 ## ✅ Requirements
 
 - **Operation System**: Windows Only

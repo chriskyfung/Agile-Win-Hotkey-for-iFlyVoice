@@ -2,9 +2,14 @@ CodeVersion := "3.0.4", copyright := "chriskyfung.github.io" ; // Declare the Cu
 ;@Ahk2Exe-Let version = %A_PriorLine~U)^(.+"){1}(.+)".*$~$2% ; // Extract the version number (=> x.x.x) from the Prior Line
 
 UiLang := "en-US"
-ConfigPath = %A_ScriptDir%\config.ini
+ConfigPath = %A_AppData%\Win-Hotkey-for-iFlyVoice\config.ini
+
+; Default path for iFlyVoice executable. This can be overridden in config.ini
+AppPath := "C:\Program Files (x86)\iFlytek\iFlyIME\3.0.1746\iFlyVoice.exe"
+
 If FileExist(ConfigPath) {
   IniRead, UiLang, % ConfigPath, Preference, Langauge
+  IniRead, AppPath, % ConfigPath, Preference, iFlyIME_Path, %AppPath%
 }
 
 LangFilePath = %A_ScriptDir%\lang\%UiLang%.lang
@@ -87,7 +92,6 @@ Return
     WinSet, AlwaysOnTop , off, ahk_class BaseGui ahk_exe iFlyVoice.exe
   } Else {
     try {
-      AppPath := "C:\Program Files (x86)\iFlytek\iFlyIME\3.0.1746\iFlyVoice.exe"
       If (FileExist(AppPath)){
         Run, % AppPath
       } Else{
