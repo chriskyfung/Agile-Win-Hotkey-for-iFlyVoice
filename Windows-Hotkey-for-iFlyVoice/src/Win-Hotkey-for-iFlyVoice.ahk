@@ -3,12 +3,14 @@ CodeVersion := "4.0.0", copyright := "chriskyfung.github.io" ; // Declare the Cu
 
 UiLang := "en-US"
 ConfigPath = %A_AppData%\Win-Hotkey-for-iFlyVoice\config.ini
+if !FileExist(ConfigPath)
+    ConfigPath = %A_ScriptDir%\config.ini
 
 ; Default path for iFlyVoice executable. This can be overridden in config.ini
 AppPath := "C:\Program Files (x86)\iFlytek\iFlyIME\3.0.1746\iFlyVoice.exe"
 
 If FileExist(ConfigPath) {
-  IniRead, UiLang, % ConfigPath, Preference, Langauge
+  IniRead, UiLang, % ConfigPath, Preference, Langauge, %UiLang%
   IniRead, AppPath, % ConfigPath, Preference, iFlyIME_Path, %AppPath%
 }
 
