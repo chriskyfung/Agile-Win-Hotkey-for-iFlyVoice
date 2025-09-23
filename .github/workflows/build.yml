@@ -1,0 +1,45 @@
+name: Build AutoHotkey Executable
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'Windows-Hotkey-for-iFlyVoice/src/**'
+  pull_request:
+    paths:
+      - 'Windows-Hotkey-for-iFlyVoice/src/**'
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Compile AHK script to EXE
+        uses: benmusson/ahk2exe-action@v1
+        with:
+          in: .\Windows-Hotkey-for-iFlyVoice\src\Win-Hotkey-for-iFlyVoice.ahk
+          out: .\Windows-Hotkey-for-iFlyVoice\src\Win-Hotkey-for-iFlyVoice.exe
+          icon: .\Windows-Hotkey-for-iFlyVoice\src\icon_256x256.ico
+          target: x86
+          ahk-tag: v1.1.37.02
+          compression: none
+
+      - name: Sign binary
+        if: github.repository_owner == github.actor
+        uses: dlemstra/code-sign-action@v1
+        with:
+          certificate: '${{ secrets.CERTIFICATE }}'
+          password: '${{ secrets.CERTIFICATE_PASSWORD }}'
+          folder: .\Windows-Hotkey-for-iFlyVoice\src
+          files: |
+            Win-Hotkey-for-iFlyVoice-32bit.exe
+
+      - name: Upload compiled EXE
+        uses: actions/upload-artifact@v4
+        with:
+          name: Win-Hotkey-for-iFlyVoice-32bit
+          path: .\Windows-Hotkey-for-iFlyVoice\src\
