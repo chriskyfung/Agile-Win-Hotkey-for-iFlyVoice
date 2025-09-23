@@ -2,17 +2,19 @@ CodeVersion := "4.0.0", copyright := "chriskyfung.github.io" ; // Declare the Cu
 ;@Ahk2Exe-Let version = %A_PriorLine~U)^(.+"){1}(.+)".*$~$2% ; // Extract the version number (=> x.x.x) from the Prior Line
 
 UiLang := "en-US"
-ConfigPath = %A_AppData%\Win-Hotkey-for-iFlyVoice\config.ini
+ConfigPath := A_AppData . "\Win-Hotkey-for-iFlyVoice\config.ini"
+if !FileExist(ConfigPath)
+    ConfigPath := A_ScriptDir . "\config.ini"
 
 ; Default path for iFlyVoice executable. This can be overridden in config.ini
 AppPath := "C:\Program Files (x86)\iFlytek\iFlyIME\3.0.1746\iFlyVoice.exe"
 
 If FileExist(ConfigPath) {
-  IniRead, UiLang, % ConfigPath, Preference, Langauge
+  IniRead, UiLang, % ConfigPath, Preference, Langauge, %UiLang%
   IniRead, AppPath, % ConfigPath, Preference, iFlyIME_Path, %AppPath%
 }
 
-LangFilePath = %A_ScriptDir%\lang\%UiLang%.lang
+LangFilePath := A_ScriptDir . "\lang\" . UiLang . ".lang"
 IF FileExist(LangFilePath) {
   IniRead, LangSections, % LangFilePath
   RegStr := {}
@@ -161,7 +163,7 @@ Return
 InstallIFlyIME() {
   Try {
     Run, https://srf.xunfei.cn/
-    TEMPFILEPATH = %A_Temp%\iFlyIME_Setup_3.0.1746.exe
+    TEMPFILEPATH := A_Temp . "\iFlyIME_Setup_3.0.1746.exe"
 
     If !FileExist(TEMPFILEPATH)
     {
