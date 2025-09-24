@@ -1,8 +1,8 @@
 ---
 layout: page-right-sidebar
-date: 2025-09-21
+date: 2025-09-24
 title: "Agile Win Hotkey for iFlyVoice - Custom Win+H for iFlytek"
-excerpt: "Remap Win+H to instantly launch iFlytek Voice Input (讯飞语音). A free, agile Windows hotkey utility for fast, accurate voice dictation in any application. Now with custom path configuration."
+excerpt: "Remap Win+H to instantly launch iFlytek Voice Input (讯飞语音). A free, agile Windows hotkey utility for fast, accurate voice dictation in any application. Now with custom path configuration and improved reliability."
 image:
    path: https://repository-images.githubusercontent.com/351967858/27f78800-8f63-11eb-854d-3ef89bbe58fa
    width: 1280
@@ -52,7 +52,7 @@ This utility runs quietly in the background, overriding the default <kbd>Win</kb
 
    {% include picture.html img="toggle-iflyvoice-onoff.png" width="730" height="294" class="shadow-none" alt="Toggle iFLYTEK Voice Input to start/stop dictating your voices" source="assets" %}
 
-  - **Install**: If iFlyIME is not found, it guides you to download and install the latest version (**v3.0.1746**). The tool now intelligently locates the iFlyVoice executable, and even allows you to **set a custom path** if you have a non-standard installation.
+  - **Install & Configure**: If iFlyIME is not found, it guides you to download and install the latest version (**v3.0.1746**). The tool now intelligently locates the iFlyVoice executable, supports custom paths via a centralized `config.ini`, and includes fallback mechanisms for greater reliability.
 
    {% include picture.html img="warning-if-cannot-find-iflyvoice-exe.png" width="469" height="136" alt="You don't seem to have Xunfei voice input method installed yet. Do you want to download the installation package and [manually install] it to the default directory now?" source="assets" class="ml-li" %}
 
