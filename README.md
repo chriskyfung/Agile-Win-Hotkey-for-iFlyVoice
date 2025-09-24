@@ -67,8 +67,7 @@ Langauge = en-US
 
 ## 🔽 Download
 
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/chriskyfung/Agile-Win-Hotkey-for-iFlyVoice)  \
-<img src="https://cdn.jsdelivr.net/gh/hjnilsson/country-flags@master/svg/us.svg" width="24" height="16" alt="US"> <img src="https://cdn.jsdelivr.net/gh/hjnilsson/country-flags@master/svg/cn.svg" width="24" height="16" alt="China"> <img src="https://cdn.jsdelivr.net/gh/hjnilsson/country-flags@master/svg/hk.svg" width="24" height="16" alt="Hong Kong"> [MSI installer](https://github.com/chriskyfung/Agile-Win-Hotkey-for-iFlyVoice/releases/latest/download/Windows-Hotkey-for-iFlyVoice.msi) | [Portable (ZIP)](https://github.com/chriskyfung/Agile-Win-Hotkey-for-iFlyVoice/releases/latest/download/Windows-Hotkey-for-iFlyVoice-Portable.zip)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/chriskyfung/Agile-Win-Hotkey-for-iFlyVoice)](https://github.com/chriskyfung/Agile-Win-Hotkey-for-iFlyVoice/releases)
 
 * * *
 
