@@ -56,11 +56,18 @@ SetWorkingDir %A_ScriptDir%  ; // Ensures a consistent starting directory.
 ;@Ahk2Exe-SetVersion %U_version%.0 ; // Format CodeVersion to x.x.x.0
 ;@Ahk2Exe-ExeName %A_ScriptName~\.[^\.]+$%-%U_bits%bit.exe
 
+; // Bind the AppPath parameter to the functions
+BoundTriggerIFlyVoice := Func("TriggerIFlyVoice").Bind(AppPath)
+
 /**
   Set up custom Tray icon menu
   */
 Menu, Tray, NoStandard
 Menu, Tray, Add, % RegStr.Menu.RunAsAdministrator, RunAsAdministrator
+Menu, Tray, Add  ; // Add a separator line.
+Menu, Tray, Add, % RegStr.Menu.ReinstallIFlyIME , InstallIFlyIME
+Menu, Tray, Add  ; // Add a separator line
+Menu, Tray, Add, % RegStr.Menu.TriggerHotkey, % BoundTriggerIFlyVoice
 Menu, Tray, Add  ; // Add a separator line
 Menu, Tray, Add, % RegStr.Menu.CheckUpdate, CheckUpdate
 Menu, Tray, Add, % RegStr.Menu.Help, Help
@@ -71,10 +78,8 @@ Menu, Tray, Tip, % RegStr.Menu.Tip
 If %A_IsCompiled% {
 	Menu, Tray, Icon, , -141, 1
 }
-Else {
+Else {  
 	Menu, Tray, Icon, icon_256x256.ico , 1, 1
-  Menu, Tray, Add  ; // Add a separator line.
-  Menu, Tray, Add, % RegStr.Menu.ReinstallIFlyIME , InstallIFlyIME
 }
 Return
 
