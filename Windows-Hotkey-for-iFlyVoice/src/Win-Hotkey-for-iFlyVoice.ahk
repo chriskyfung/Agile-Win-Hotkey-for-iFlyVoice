@@ -82,28 +82,7 @@ Return
   Handle the keypress event of Win + H
   */
 #h::
-  If (WinExist("ahk_class BaseGui ahk_exe iFlyVoice.exe")) {
-    /**
-      原方案使用熱鍵觸發
-      Send ^+h
-      新方案直接發送模擬點擊消息
-      A fork of snomiao/CapsLockX/Modules/应用-讯飞输入法语音悬浮窗.ahk for iFlyIME 3.0.1746.
-    */
-    WinSet, AlwaysOnTop , on, ahk_class BaseGui ahk_exe iFlyVoice.exe
-    ControlClick, x119 y59, ahk_class BaseGui ahk_exe iFlyVoice.exe ; Click on the center of iFlyVoice floating window
-    WinSet, AlwaysOnTop , off, ahk_class BaseGui ahk_exe iFlyVoice.exe
-  } Else {
-    try {
-      If (FileExist(AppPath)){
-        Run, % AppPath
-      } Else{
-
-        MsgBox, 4, , % RegStr.Msg.NoIflyimeMsg
-        IfMsgBox, NO, Return
-        InstallIFlyIME()
-      }
-    }
-  }
+  TriggerIFlyVoice(AppPath)
 Return
 
 /**
@@ -160,6 +139,58 @@ RunAsAdministrator:
   }
 Return
 
+/**
+  Trigger the iFlyVoice floating window:
+  If it is already running, focus on it and send a simulated mouse click
+  If it is not running, launch it
+  */
+TriggerIFlyVoice(AppPath) {
+  SplitPath, AppPath, AppExeFile  ; Resolve the execurable file name from AppPath
+
+  If (WinExist("ahk_class BaseGui ahk_exe " . AppExeFile)) {
+    FocusAndClick(AppExeFile)
+  } Else {
+    LaunchIFlyVoice(AppPath)
+  }
+  Return
+}
+
+/**
+  Focus on the iFlyVoice floating window and send a simulated mouse click
+  */
+FocusAndClick(AppExeFile) {
+  /**
+    原方案使用熱鍵觸發
+    Send ^+h
+    新方案直接發送模擬點擊消息
+    A fork of snomiao/CapsLockX/Modules/应用-讯飞输入法语音悬浮窗.ahk for iFlyIME 3.0.1746.
+  */
+  WinSet, AlwaysOnTop , on, ahk_class BaseGui ahk_exe %AppExeFile%
+  ControlClick, x119 y59, ahk_class BaseGui ahk_exe %AppExeFile% ; Click on the center of iFlyVoice floating window
+  WinSet, AlwaysOnTop , off, ahk_class BaseGui ahk_exe %AppExeFile%
+  Return
+}
+
+/**
+  Launch iFlyVoice if it is not running
+  */
+LaunchIFlyVoice(AppPath) {
+  try {
+    If (FileExist(AppPath)){
+      Run, % AppPath
+    } Else{
+      global RegStr
+      MsgBox, 4, , % RegStr.Msg.NoIflyimeMsg
+      IfMsgBox, NO, Return
+      InstallIFlyIME()
+    }
+  }
+  Return
+}
+
+/**
+  Download and install iFlyIME from the official website
+  */
 InstallIFlyIME() {
   Try {
     Run, https://srf.xunfei.cn/
