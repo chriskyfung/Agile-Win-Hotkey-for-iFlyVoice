@@ -191,9 +191,14 @@ FocusAndClick(AppExeFile) {
     Send ^+h
     新方案直接發送模擬點擊消息
     A fork of snomiao/CapsLockX/Modules/应用-讯飞输入法语音悬浮窗.ahk for iFlyIME 3.0.1746.
+
+    Note: These coordinates are based on iFlyIME v3.0.1746.
+    If the floating window UI changes, these may need to be updated.
   */
+  clickX := 119
+  clickY := 59
   WinSet, AlwaysOnTop , on, ahk_class BaseGui ahk_exe %AppExeFile%
-  ControlClick, x119 y59, ahk_class BaseGui ahk_exe %AppExeFile% ; Click on the center of iFlyVoice floating window
+  ControlClick, x%clickX% y%clickY%, ahk_class BaseGui ahk_exe %AppExeFile% ; Click on the center of iFlyVoice floating window
   WinSet, AlwaysOnTop , off, ahk_class BaseGui ahk_exe %AppExeFile%
   Return
 }
