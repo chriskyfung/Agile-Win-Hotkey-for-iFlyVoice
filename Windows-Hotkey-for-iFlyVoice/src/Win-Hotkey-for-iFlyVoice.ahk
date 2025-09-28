@@ -102,20 +102,24 @@ Return
   Get the latest release tag via GitHub API and compare it to the currect code version
   */
 CheckUpdate:
-  ; // Initialize the WinHttpRequest Object
-	WebRequest := ComObjCreate("WinHttp.WinHttpRequest.5.1")
-  ; // Download the JSON-formatted release data from GitHub API
-	WebRequest.Open("GET", "https://api.github.com/repos/chriskyfung/Agile-Win-Hotkey-for-iFlyVoice/releases/latest")
-	WebRequest.Send()
-  ; // Use Regex to extract the latest version number
-	RegExMatch(WebRequest.ResponseText, "O)""tag_name"":""v(?<ver>[0-9a-zA-Z\.]+)""", SubPat)
-	LatestVersion := SubPat["ver"]
-  ; // Compare the version numbers
-	if (Util_VersionCompare(LatestVersion,CodeVersion)) {
-		Run, https://github.com/chriskyfung/Agile-Win-Hotkey-for-iFlyVoice/releases/latest
-	} else {
-		MsgBox % RegStr.Msg.CurrentVersion . ": v" . CodeVersion . "`n`n" . RegStr.Msg.ThisIsLastVersion
-	}
+  try {
+    ; Initialize the WinHttpRequest Object
+    WebRequest := ComObjCreate("WinHttp.WinHttpRequest.5.1")
+    ; Download the JSON-formatted release data from GitHub API
+    WebRequest.Open("GET", "https://api.github.com/repos/chriskyfung/Agile-Win-Hotkey-for-iFlyVoice/releases/latest")
+    WebRequest.Send()
+    ; Use Regex to extract the latest version number
+    RegExMatch(WebRequest.ResponseText, "O)""tag_name"":""v(?<ver>[0-9a-zA-Z\.]+)""", SubPat)
+    LatestVersion := SubPat["ver"]
+    ; Compare the version numbers
+    if (Util_VersionCompare(LatestVersion,CodeVersion)) {
+      Run, https://github.com/chriskyfung/Agile-Win-Hotkey-for-iFlyVoice/releases/latest
+    } else {
+      MsgBox % RegStr.Msg.CurrentVersion . ": v" . CodeVersion . "`n`n" . RegStr.Msg.ThisIsLastVersion
+    }
+  } catch e {
+    MsgBox, 16, Update Check Failed, Could not check for updates. Please check your internet connection.
+  }
 Return
 
 /**
