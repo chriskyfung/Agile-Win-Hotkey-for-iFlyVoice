@@ -1,4 +1,4 @@
-CodeVersion := "4.0.1", copyright := "chriskyfung.github.io" ; // Declare the Current Version and state the copyright
+﻿CodeVersion := "4.0.1", copyright := "chriskyfung.github.io" ; // Declare the Current Version and state the copyright
 ;@Ahk2Exe-Let version = %A_PriorLine~U)^(.+"){1}(.+)".*$~$2% ; // Extract the version number (=> x.x.x) from the Prior Line
 
 UiLang := "en-US"
@@ -35,10 +35,13 @@ IF FileExist(LangFilePath) {
   RegStr.Msg := { CurrentVersion: "Current Version", ThisIsLastVersion: "It is already the latest version!", NoIflyimeMsg: "It seems that you haven't installed the iFLYTEK Voice Input Method. Would you like to download the installation package and [Manually install] to the default directory?" }
 }
 
-#NoEnv  ; // Recommended for performance and compatibility with future AutoHotkey releases.
-; #Warn  ; // Enable warnings to assist with detecting common errors.
-SendMode Input  ; // Recommended for new scripts due to its superior speed and reliability.
-SetWorkingDir %A_ScriptDir%  ; // Ensures a consistent starting directory.
+/**
+  Standard AHK Directives
+  */
+#NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
+#Warn  ; Enable warnings to assist with detecting common errors.
+SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
+SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
 /**
   Parameters for Compiling AHK to EXE
