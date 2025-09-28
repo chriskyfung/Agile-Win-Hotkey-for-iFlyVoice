@@ -200,6 +200,7 @@ LaunchIFlyVoice(AppPath) {
   Download and install iFlyIME from the official website
   */
 InstallIFlyIME() {
+  local TEMPFILEPATH, e
   Try {
     Run, https://srf.xunfei.cn/
     TEMPFILEPATH := A_Temp . "\iFlyIME_Setup_3.0.1746.exe"
@@ -218,7 +219,6 @@ InstallIFlyIME() {
     Run, %TEMPFILEPATH%
     Return True
   } Catch e {
-      global RegStr
     MsgBox, 16, Installation failed, % RegStr.Msg.FailToInstalliFlyIME . "`n`nDetails: " . e.Message
   }
   Return False
@@ -240,6 +240,7 @@ Util_VersionCompare(other,local) {
 }
 
 DownloadFile(UrlToFile, SaveFileAs, Overwrite := True, UseProgressBar := True) {
+  local WebRequest, FinalSize, FinalSizeInMB, LastSize, LastSizeTick, CurrentSize, CurrentSizeTick, PercentDone, TimeElapsed, SpeedInKBps, Speed
   ; // Check if the file already exists and if we must not overwrite it
   If (!Overwrite && FileExist(SaveFileAs))
     Return
