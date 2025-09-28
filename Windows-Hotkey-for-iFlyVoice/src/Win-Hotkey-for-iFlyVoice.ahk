@@ -14,25 +14,15 @@ If FileExist(ConfigPath) {
   IniRead, AppPath, % ConfigPath, Preference, iFlyIME_Path, %AppPath%
 }
 
+/**
+  Load language file based on the selected UI language
+  */
 LangFilePath := A_ScriptDir . "\lang\" . UiLang . ".lang"
-IF FileExist(LangFilePath) {
-  IniRead, LangSections, % LangFilePath
-  RegStr := {}
-  Loop, Parse, % LangSections, `n, `r
-  {
-    LangSection := A_LoopField
-    IniRead, LangOutput, % LangFilePath, %LangSection%
-    Loop, Parse, LangOutput, `n, `r
-    {
-      Array := StrSplit(A_LoopField, "=" )
-      RegStr[LangSection, Array[1]] := Array[2]
-    }
-  }
-} Else {
-  MsgBox % LangFilePath " does not exist!"
-  RegStr := { Menu: {}, Msg: {} }
-  RegStr.Menu := { CheckUpdate: "Check Update (&U)", Exit: "Exit (&X)", Help: "Help (&H)", Tip: "Win + H | Start/Stop iFLYTEK Voice Input", ReinstallIFlyIME: "Reinstall IFlyIME" }
-  RegStr.Msg := { CurrentVersion: "Current Version", ThisIsLastVersion: "It is already the latest version!", NoIflyimeMsg: "It seems that you haven't installed the iFLYTEK Voice Input Method. Would you like to download the installation package and [Manually install] to the default directory?" }
+RegStr := LoadLanguageFile(LangFilePath)
+If !RegStr {
+  MsgBox % "Language file not found: " . LangFilePath
+  ; Default fallback
+  RegStr := { Info: { Description: "Customize Win + H as the Hotkey of iFLYTEK Voice Input Floating Window", HelpUrl: "https://github.com/chriskyfung/Agile-Win-Hotkey-for-iFlyVoice" }, Menu: { CheckUpdate: "Check Update (&U)", Exit: "Exit (&X)", Help: "Help (&H)", ReinstallIFlyIME: "Reinstall IFlyIME (&I)", RunAsAdministrator: "Run as administrator (&A)", TriggerHotkey: "Trigger Hotkey (&T)", Tip: "Win + H | Start/Stop iFLYTEK Voice Input" }, Msg: { CurrentVersion: "Current Version", ThisIsLastVersion: "It is already the latest version!", NoIflyimeMsg: "It seems that you haven't installed the iFLYTEK Voice Input Method. Would you like to download the installation package and [Manually install] to the default directory?", FailToInstalliFlyIME: "Error occurred: Cannot install iFlyIME" } }
 }
 
 /**
@@ -42,6 +32,7 @@ IF FileExist(LangFilePath) {
 #Warn  ; Enable warnings to assist with detecting common errors.
 SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
+
 
 /**
   Parameters for Compiling AHK to EXE
@@ -150,6 +141,30 @@ RunAsAdministrator:
     Return
   }
 Return
+
+/**
+  Load language file and return a nested associative array of sections and keys
+  LangFilePath: The path to the language file
+  Returns: A nested associative array or false if the file does not exist
+  */
+LoadLanguageFile(LangFilePath) {
+  if !FileExist(LangFilePath) {
+    return false
+  }
+  IniRead, LangSections, % LangFilePath
+  LocalRegStr := {}
+  Loop, Parse, % LangSections, `n, `r
+  {
+    LangSection := A_LoopField
+    IniRead, LangOutput, % LangFilePath, %LangSection%
+    Loop, Parse, LangOutput, `n, `r
+    {
+      Array := StrSplit(A_LoopField, "=" )
+      LocalRegStr[LangSection, Array[1]] := Array[2]
+    }
+  }
+  return LocalRegStr
+}
 
 /**
   Trigger the iFlyVoice floating window:
