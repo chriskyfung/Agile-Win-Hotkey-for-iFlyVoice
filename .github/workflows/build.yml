@@ -8,6 +8,7 @@ on:
       - 'Windows-Hotkey-for-iFlyVoice/src/**'
   pull_request:
     paths:
+      - '.github/workflows/build.yml'
       - 'Windows-Hotkey-for-iFlyVoice/src/**'
 
 permissions:
