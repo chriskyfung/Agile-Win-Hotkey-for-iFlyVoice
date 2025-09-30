@@ -65,7 +65,7 @@ jobs:
 
       - name: Build MSI package
         # This step should only run in the original repository, not in forks.
-        if: github.event_name == 'push' && github.repository_owner == github.actor
+        if: github.repository_owner == github.actor
         uses: caphyon/advinst-github-action@v2.0
         with:
           advinst-version: '22.0' # Specify your Advanced Installer version
