@@ -30,12 +30,20 @@ jobs:
         id: get_version
         run: |
           $fileContent = Get-Content -Path "Windows-Hotkey-for-iFlyVoice\src\Win-Hotkey-for-iFlyVoice.ahk" -TotalCount 1
-          if ($fileContent -match 'CodeVersion := "([0-9\.]+)') {
-            $version = $matches[1]
+          if ($fileContent -match 'CodeVersion := "([0-9\.]+-?\w*)') {
+            $semantic_version = $matches[1]
+            $four_part_version = $semantic_version -replace '-.*'
+            # Ensure four_part_version has 4 parts
+            $version_parts = $four_part_version.Split('.')
+            if ($version_parts.Length -lt 4) {
+              $four_part_version = $four_part_version + ".0" * (4 - $version_parts.Length)
+            }
           } else {
-            $version = "0.0.0.${{ github.run_number }}"
+            $semantic_version = "build.${{ github.run_number }}"
+            $four_part_version = "0.0.0.${{ github.run_number }}"
           }
-          echo "version=$version" >> $env:GITHUB_OUTPUT
+          echo "semantic_version=$semantic_version" >> $env:GITHUB_OUTPUT
+          echo "four_part_version=$four_part_version" >> $env:GITHUB_OUTPUT
 
       - name: Compile AHK script to EXE
         uses: benmusson/ahk2exe-action@v1
@@ -61,7 +69,7 @@ jobs:
       - name: Upload compiled EXE with Src files (portable version)
         uses: actions/upload-artifact@v4
         with:
-          name: win-hotkey-for-iflyvoice-v${{ steps.get_version.outputs.version }}-portable
+          name: win-hotkey-for-iflyvoice-v${{ steps.get_version.outputs.semantic_version }}-portable
           path: 'Windows-Hotkey-for-iFlyVoice\src'
 
       - name: Build MSI package
@@ -73,10 +81,10 @@ jobs:
           advinst-license: ${{ secrets.ADVINST_LICENSE_KEY }}
           aip-path: ${{ github.workspace }}\Windows-Hotkey-for-iFlyVoice\installer.aip # Path to your .aip project file
           aip-build-name: 'Build'
-          aip-package-name: 'win-hotkey-for-iflyvoice-v${{ steps.get_version.outputs.version }}.msi'
+          aip-package-name: 'win-hotkey-for-iflyvoice-v${{ steps.get_version.outputs.semantic_version }}.msi'
           aip-output-dir: ${{ github.workspace }}\Windows-Hotkey-for-iFlyVoice\dist
           aip-commands: |
-            SetVersion ${{ steps.get_version.outputs.version }}
+            SetVersion ${{ steps.get_version.outputs.four_part_version }}
 
       - name: Sign MSI package
         # This step should only run in the original repository, not in forks.
@@ -87,10 +95,10 @@ jobs:
           password: '${{ secrets.CERTIFICATE_PASSWORD }}'
           folder: 'Windows-Hotkey-for-iFlyVoice\dist'
           files: |
-            win-hotkey-for-iflyvoice-v${{ steps.get_version.outputs.version }}.msi
+            win-hotkey-for-iflyvoice-v${{ steps.get_version.outputs.semantic_version }}.msi
 
       - name: Upload compiled MSI package
         uses: actions/upload-artifact@v4
         with:
-          name: win-hotkey-for-iflyvoice-installer-v${{ steps.get_version.outputs.version }}
-          path: ${{ github.workspace }}\Windows-Hotkey-for-iFlyVoice\dist\win-hotkey-for-iflyvoice-v${{ steps.get_version.outputs.version }}.msi
+          name: win-hotkey-for-iflyvoice-v${{ steps.get_version.outputs.semantic_version }}-installer
+          path: ${{ github.workspace }}\Windows-Hotkey-for-iFlyVoice\dist\win-hotkey-for-iflyvoice-v${{ steps.get_version.outputs.semantic_version }}.msi
