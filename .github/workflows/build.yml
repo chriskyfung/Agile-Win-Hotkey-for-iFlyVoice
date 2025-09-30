@@ -10,6 +10,12 @@ on:
     paths:
       - 'Windows-Hotkey-for-iFlyVoice/src/**'
 
+permissions:
+  # Needed to checkout the repository.
+  contents: read
+  # Needed to upload artifacts.
+  actions: write
+
 jobs:
   build:
     runs-on: windows-latest
@@ -18,28 +24,67 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Get version from AHK file
+        id: get_version
+        run: |
+          $fileContent = Get-Content -Path "Windows-Hotkey-for-iFlyVoice\src\Win-Hotkey-for-iFlyVoice.ahk" -TotalCount 1
+          $fileContent -match 'CodeVersion := "([0-9\.]+)"'
+          $version = $matches[1]
+          echo "version=$version" >> $env:GITHUB_OUTPUT
+
       - name: Compile AHK script to EXE
         uses: benmusson/ahk2exe-action@v1
         with:
-          in: .\Windows-Hotkey-for-iFlyVoice\src\Win-Hotkey-for-iFlyVoice.ahk
-          out: .\Windows-Hotkey-for-iFlyVoice\src\Win-Hotkey-for-iFlyVoice.exe
-          icon: .\Windows-Hotkey-for-iFlyVoice\src\icon_256x256.ico
+          in: 'Windows-Hotkey-for-iFlyVoice\src\Win-Hotkey-for-iFlyVoice.ahk'
+          out: 'Windows-Hotkey-for-iFlyVoice\src\Win-Hotkey-for-iFlyVoice-32bit.exe'
+          icon: 'Windows-Hotkey-for-iFlyVoice\src\icon_256x256.ico'
           target: x86
           ahk-tag: v1.1.37.02
           compression: none
 
-      - name: Sign binary
-        if: github.repository_owner == github.actor
+      - name: Sign binary executable file
+        # This step should only run in the original repository, not in forks.
+        if: github.event_name == 'push' && github.repository_owner == github.actor
         uses: dlemstra/code-sign-action@v1
         with:
           certificate: '${{ secrets.CERTIFICATE }}'
           password: '${{ secrets.CERTIFICATE_PASSWORD }}'
-          folder: .\Windows-Hotkey-for-iFlyVoice\src
+          folder: 'Windows-Hotkey-for-iFlyVoice\src'
           files: |
             Win-Hotkey-for-iFlyVoice-32bit.exe
 
-      - name: Upload compiled EXE
+      - name: Upload compiled EXE with Src files (portable version)
         uses: actions/upload-artifact@v4
         with:
-          name: Win-Hotkey-for-iFlyVoice-32bit
-          path: .\Windows-Hotkey-for-iFlyVoice\src\
+          name: win-hotkey-for-iflyvoice-v${{ steps.get_version.outputs.version }}-portable
+          path: 'Windows-Hotkey-for-iFlyVoice\src'
+
+      - name: Build MSI package
+        # This step should only run in the original repository, not in forks.
+        if: github.event_name == 'push' && github.repository_owner == github.actor
+        uses: caphyon/advinst-github-action@v2.0
+        with:
+          advinst-version: '22.0' # Specify your Advanced Installer version
+          aip-path: ${{ github.workspace }}\Windows-Hotkey-for-iFlyVoice\installer.aip # Path to your .aip project file
+          aip-build-name: 'Build'
+          aip-package-name: 'win-hotkey-for-iflyvoice-v${{ steps.get_version.outputs.version }}.msi'
+          aip-output-dir: ${{ github.workspace }}\Windows-Hotkey-for-iFlyVoice\dist
+          aip-commands: |
+            SetVersion ${{ steps.get_version.outputs.version }}
+
+      - name: Sign MSI package
+        # This step should only run in the original repository, not in forks.
+        if: github.event_name == 'push' && github.repository_owner == github.actor
+        uses: dlemstra/code-sign-action@v1
+        with:
+          certificate: '${{ secrets.CERTIFICATE }}'
+          password: '${{ secrets.CERTIFICATE_PASSWORD }}'
+          folder: 'Windows-Hotkey-for-iFlyVoice\dist'
+          files: |
+            win-hotkey-for-iflyvoice-v${{ steps.get_version.outputs.version }}.msi
+
+      - name: Upload compiled MSI package
+        uses: actions/upload-artifact@v4
+        with:
+          name: win-hotkey-for-iflyvoice-installer-v${{ steps.get_version.outputs.version }}
+          path: ${{ github.workspace }}\Windows-Hotkey-for-iFlyVoice\dist\win-hotkey-for-iflyvoice-v${{ steps.get_version.outputs.version }}.msi
