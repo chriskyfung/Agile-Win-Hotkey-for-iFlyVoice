@@ -28,8 +28,11 @@ jobs:
         id: get_version
         run: |
           $fileContent = Get-Content -Path "Windows-Hotkey-for-iFlyVoice\src\Win-Hotkey-for-iFlyVoice.ahk" -TotalCount 1
-          $fileContent -match 'CodeVersion := "([0-9\.]+)"'
-          $version = $matches[1]
+          if ($fileContent -match 'CodeVersion := "([0-9\.]+)') {
+            $version = $matches[1]
+          } else {
+            $version = "0.0.0.${{ github.run_number }}"
+          }
           echo "version=$version" >> $env:GITHUB_OUTPUT
 
       - name: Compile AHK script to EXE
