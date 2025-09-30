@@ -69,6 +69,7 @@ jobs:
         uses: caphyon/advinst-github-action@v2.0
         with:
           advinst-version: '22.0' # Specify your Advanced Installer version
+          advinst-license: ${{ secrets.ADVINST_LICENSE_KEY }}
           aip-path: ${{ github.workspace }}\Windows-Hotkey-for-iFlyVoice\installer.aip # Path to your .aip project file
           aip-build-name: 'Build'
           aip-package-name: 'win-hotkey-for-iflyvoice-v${{ steps.get_version.outputs.version }}.msi'
