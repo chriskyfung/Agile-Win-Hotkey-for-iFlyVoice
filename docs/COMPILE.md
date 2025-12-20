@@ -4,13 +4,15 @@ This document provides instructions on how to compile the `.ahk` script into an 
 
 ## Prerequisites
 
-Before you can compile the script, you must have AutoHotkey installed on your computer. You can download it from the official website: [https://www.autohotkey.com/](https://www.autohotkey.com/)
+Before you can compile the script, you must have AutoHotkey v2 installed on your computer. You can download it from the official website: [https://www.autohotkey.com/](https://www.autohotkey.com/)
 
 ## Compilation Methods
 
 There are several ways to compile an AutoHotkey script. Here are the most common methods:
 
 ### 1. Right-Click Context Menu (Easiest)
+
+This method relies on AutoHotkey v2 being installed and its shell extensions registered.
 
 1. Open Windows Explorer and navigate to the `Windows-Hotkey-for-iFlyVoice\src` directory.
 2. Right-click on the `Win-Hotkey-for-iFlyVoice.ahk` file.
@@ -19,6 +21,8 @@ There are several ways to compile an AutoHotkey script. Here are the most common
 An executable file named `Win-Hotkey-for-iFlyVoice.exe` will be created in the same directory.
 
 ### 2. Using the "Convert .ahk to .exe" Utility (GUI)
+
+This utility is part of the AutoHotkey v2 installation.
 
 1. Open the Start Menu, go to the AutoHotkey program group, and select "Convert .ahk to .exe".
 2. In the "Source (script file)" field, browse to and select the `Win-Hotkey-for-iFlyVoice.ahk` file.
@@ -43,7 +47,7 @@ Ahk2Exe.exe /in "<project-path>\Windows-Hotkey-for-iFlyVoice\src\Win-Hotkey-for-
 ## Current Compile Settings
 
 - **Custom Icon**: `Windows-Hotkey-for-iFlyVoice/src/icon_256x256.ico`
-- **Base File**: `v1.1.34.04 U32 Unicode 32-bit.bin`
+- **Base File**: `v2.0.19 U32 AutoHotkey32.exe`
 
 ## Important Note on Compilation
 

@@ -2,7 +2,7 @@
 
 # Windows-Hotkey-for-iFlyVoice ![Windows badge](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white)
 
-An [AutoHotKey](https://www.autohotkey.com/) script to configure <kbd>Win</kbd>+<kbd>H</kbd> as the custom Hotkey for quick start of the **iFLYTEK Voice Input** Floating Window (讯飞语音悬浮窗).
+An [AutoHotKey v2](https://www.autohotkey.com/) script to configure <kbd>Win</kbd>+<kbd>H</kbd> as the custom Hotkey for quick start of the **iFLYTEK Voice Input** Floating Window (讯飞语音悬浮窗).
 
 <p align="center">
   <img src="docs/images/icon_128x128.png" width="128" height="128" alt="Windows-Hotkey-for-iFlyVoice-Logo">
@@ -52,7 +52,8 @@ Langauge = en-US
 
 ## ✅ Requirements
 
-- **Operation System**: Windows Only
+- **AutoHotkey**: [AutoHotkey v2](https://www.autohotkey.com/download/) (for running from source)
+- **Operating System**: Windows
 - **Software**: iFlyIME (讯飞输入法) for Windows v3.0.1746
 
 ## 🧪 Tested applications
