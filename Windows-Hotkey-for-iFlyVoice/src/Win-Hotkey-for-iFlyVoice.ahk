@@ -1,4 +1,4 @@
-﻿CodeVersion := "4.1.0-alpha", copyright := "chriskyfung.github.io" ; // Declare the Current Version and state the copyright
+﻿CodeVersion := "4.1.0-alpha.1", copyright := "chriskyfung.github.io" ; // Declare the Current Version and state the copyright
 ;@Ahk2Exe-Let version = %A_PriorLine~U)^(.+"){1}(.+)".*$~$2% ; // Extract the version number (=> x.x.x) from the Prior Line
 
 /**
@@ -13,8 +13,8 @@ if !FileExist(ConfigPath)
   ConfigPath := A_ScriptDir . "\config.ini"
 
 If FileExist(ConfigPath) {
-  IniRead, UiLang, % ConfigPath, Preference, Langauge, %UiLang%
-  IniRead, AppPath, % ConfigPath, Preference, iFlyIME_Path, %AppPath%
+  UiLang := IniRead(ConfigPath, "Preference", "Langauge", UiLang)
+  AppPath := IniRead(ConfigPath, "Preference", "iFlyIME_Path", AppPath)
 }
 
 /**
@@ -23,7 +23,7 @@ If FileExist(ConfigPath) {
 LangFilePath := A_ScriptDir . "\lang\" . UiLang . ".lang"
 RegStr := LoadLanguageFile(LangFilePath)
 If !RegStr {
-  MsgBox % "Language file not found: " . LangFilePath
+  MsgBox("Language file not found: " . LangFilePath)
   ; Default fallback
   RegStr := { Info: { Description: "Customize Win + H as the Hotkey of iFLYTEK Voice Input Floating Window", HelpUrl: "https://github.com/chriskyfung/Agile-Win-Hotkey-for-iFlyVoice" }, Menu: { CheckUpdate: "Check Update (&U)", Exit: "Exit (&X)", Help: "Help (&H)", ReinstallIFlyIME: "Reinstall IFlyIME (&I)", RunAsAdministrator: "Run as administrator (&A)", TriggerHotkey: "Trigger Hotkey (&T)", Tip: "Win + H | Start/Stop iFLYTEK Voice Input" }, Msg: { CurrentVersion: "Current Version", ThisIsLastVersion: "It is already the latest version!", NoIflyimeMsg: "It seems that you haven't installed the iFLYTEK Voice Input Method. Would you like to download the installation package and [Manually install] to the default directory?", FailToInstalliFlyIME: "Error occurred: Cannot install iFlyIME" } }
 }
@@ -31,10 +31,10 @@ If !RegStr {
 /**
   Standard AHK Directives
   */
-#NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
+; V1toV2: Removed #NoEnv
 #Warn  ; Enable warnings to assist with detecting common errors.
-SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
-SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
+SendMode("Input")  ; Recommended for new scripts due to its superior speed and reliability.
+SetWorkingDir(A_ScriptDir)  ; Ensures a consistent starting directory.
 
 
 /**
@@ -54,31 +54,27 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 ;@Ahk2Exe-ExeName %A_ScriptName~\.[^\.]+$%-%U_bits%bit.exe
 
 /**
-  Bind the AppPath parameter to the functions
-  */
-BoundTriggerIFlyVoice := Func("TriggerIFlyVoice").Bind(AppPath)
-
-/**
   Set up custom Tray icon menu
   */
-Menu, Tray, NoStandard
-Menu, Tray, Add, % RegStr.Menu.RunAsAdministrator, RunAsAdministrator
-Menu, Tray, Add  ; // Add a separator line.
-Menu, Tray, Add, % RegStr.Menu.ReinstallIFlyIME , InstallIFlyIME
-Menu, Tray, Add  ; // Add a separator line
-Menu, Tray, Add, % RegStr.Menu.TriggerHotkey, % BoundTriggerIFlyVoice
-Menu, Tray, Add  ; // Add a separator line
-Menu, Tray, Add, % RegStr.Menu.CheckUpdate, CheckUpdate
-Menu, Tray, Add, % RegStr.Menu.Help, Help
-Menu, Tray, Add  ; // Add a separator line.
-Menu, Tray, Add, % RegStr.Menu.Exit, Exit
-Menu, Tray, Tip, % RegStr.Menu.Tip
+Tray:= A_TrayMenu
+Tray.Delete() ; V1toV2: not 100% replacement of NoStandard, Only if NoStandard is used at the beginning
+Tray.Add(RegStr.Menu.RunAsAdministrator, RunAsAdministrator)
+Tray.Add()  ; // Add a separator line.
+Tray.Add(RegStr.Menu.ReinstallIFlyIME, InstallIFlyIME)
+Tray.Add()  ; // Add a separator line
+Tray.Add(RegStr.Menu.TriggerHotkey, BoundTriggerIFlyVoice)
+Tray.Add()  ; // Add a separator line
+Tray.Add(RegStr.Menu.CheckUpdate, CheckUpdate)
+Tray.Add(RegStr.Menu.Help, Help)
+Tray.Add()  ; // Add a separator line.
+Tray.Add(RegStr.Menu.Exit, Exit)
+A_IconTip := RegStr.Menu.Tip
 ; // Conditional set the image resource of Tray Icon based on the Compiled Status
-If %A_IsCompiled% {
-	Menu, Tray, Icon, , -141, 1
+If A_IsCompiled {
+	TraySetIcon("",-141,1)
 }
 Else {  
-	Menu, Tray, Icon, icon_256x256.ico , 1, 1
+	TraySetIcon("icon_256x256.ico",1,1)
 }
 Return
 
@@ -91,66 +87,37 @@ Return
   新方案直接發送模擬點擊消息
   A fork of snomiao/CapsLockX/Modules/应用-讯飞输入法语音悬浮窗.ahk for iFlyIME 3.0.1746.
   */
-#h::
-  TriggerIFlyVoice(AppPath)
-Return
+#h::HK1_h()
 
 /**
   Add Alt to the original hotkey for Windows 10 Dictating
   */
-#!h:: Send #h
+#!h:: Send("#h")
 
 /**
   Get the latest release tag via GitHub API and compare it to the currect code version
   */
 CheckUpdate:
-  try {
-    ; Initialize the WinHttpRequest Object
-    WebRequest := ComObjCreate("WinHttp.WinHttpRequest.5.1")
-    ; Download the JSON-formatted release data from GitHub API
-    WebRequest.Open("GET", "https://api.github.com/repos/chriskyfung/Agile-Win-Hotkey-for-iFlyVoice/releases/latest")
-    WebRequest.Send()
-    ; Use Regex to extract the latest version number
-    RegExMatch(WebRequest.ResponseText, "O)""tag_name"":""v(?<ver>[0-9a-zA-Z\.]+)""", SubPat)
-    LatestVersion := SubPat["ver"]
-    ; Compare the version numbers
-    if (Util_VersionCompare(LatestVersion,CodeVersion)) {
-      Run, https://github.com/chriskyfung/Agile-Win-Hotkey-for-iFlyVoice/releases/latest
-    } else {
-      MsgBox % RegStr.Msg.CurrentVersion . ": v" . CodeVersion . "`n`n" . RegStr.Msg.ThisIsLastVersion
-    }
-  } catch e {
-    MsgBox, 16, Update Check Failed, Could not check for updates. Please check your internet connection.
-  }
+CheckUpdate()
 Return
 
 /**
   Open the help page in the default browser
   */
 Help:
-  Run, % RegStr.Info.HelpUrl
+Help()
 Return
 
 /**
   Close this AHK script / execuable
   */
 Exit:
-  ExitApp
+Exit()
+  ExitApp()
 Return
 
 RunAsAdministrator:
-  full_command_line := DllCall("GetCommandLine", "str")
-  if not (A_IsAdmin or RegExMatch(full_command_line, " /restart(?!\S)"))
-  {
-    try
-    {
-      if A_IsCompiled
-        Run *RunAs "%A_ScriptFullPath%" /restart
-      else
-        Run *RunAs "%A_AhkPath%" /restart "%A_ScriptFullPath%"
-    }
-    Return
-  }
+RunAsAdministrator()
 Return
 
 /**
@@ -162,16 +129,17 @@ LoadLanguageFile(LangFilePath) {
   if !FileExist(LangFilePath) {
     return false
   }
-  IniRead, LangSections, % LangFilePath
+  LangSections := IniRead(LangFilePath)
   LocalRegStr := {}
-  Loop, Parse, % LangSections, `n, `r
+  Loop Parse, LangSections, "`n", "`r"
   {
     LangSection := A_LoopField
-    IniRead, LangOutput, % LangFilePath, %LangSection%
-    Loop, Parse, LangOutput, `n, `r
+    LocalRegStr.%LangSection% := {}
+    LangOutput := IniRead(LangFilePath, LangSection)
+    Loop Parse, LangOutput, "`n", "`r"
     {
-      Array := StrSplit(A_LoopField, "=" )
-      LocalRegStr[LangSection, Array[1]] := Array[2]
+      KeyValues := StrSplit(A_LoopField, "=" )
+      LocalRegStr.%LangSection%.%KeyValues[1]% := KeyValues[2]
     }
   }
   return LocalRegStr
@@ -183,7 +151,7 @@ LoadLanguageFile(LangFilePath) {
   If it is not running, launch it
   */
 TriggerIFlyVoice(AppPath) {
-  SplitPath, AppPath, AppExeFile  ; Resolve the execurable file name from AppPath
+  SplitPath(AppPath, &AppExeFile)  ; Resolve the execurable file name from AppPath
 
   If (WinExist("ahk_class BaseGui ahk_exe " . AppExeFile)) {
     FocusAndClick(AppExeFile)
@@ -201,9 +169,9 @@ FocusAndClick(AppExeFile) {
   ; If the floating window UI changes, these may need to be updated.
   clickX := 119
   clickY := 59
-  WinSet, AlwaysOnTop , on, ahk_class BaseGui ahk_exe %AppExeFile%
-  ControlClick, x%clickX% y%clickY%, ahk_class BaseGui ahk_exe %AppExeFile% ; Click on the center of iFlyVoice floating window
-  WinSet, AlwaysOnTop , off, ahk_class BaseGui ahk_exe %AppExeFile%
+  WinSetAlwaysOnTop(1, "ahk_class BaseGui ahk_exe " AppExeFile)
+  ControlClick("x" clickX " y" clickY, "ahk_class BaseGui ahk_exe " AppExeFile) ; Click on the center of iFlyVoice floating window
+  WinSetAlwaysOnTop(0, "ahk_class BaseGui ahk_exe " AppExeFile)
   Return
 }
 
@@ -213,11 +181,12 @@ FocusAndClick(AppExeFile) {
 LaunchIFlyVoice(AppPath) {
   try {
     If (FileExist(AppPath)){
-      Run, % AppPath
+      Run(AppPath)
     } Else{
       global RegStr
-      MsgBox, 4, , % RegStr.Msg.NoIflyimeMsg
-      IfMsgBox, NO, Return
+      msgResult := MsgBox(RegStr.Msg.NoIflyimeMsg, , 4)
+      if (msgResult = "NO")
+        Return
       InstallIFlyIME()
     }
   }
@@ -227,10 +196,10 @@ LaunchIFlyVoice(AppPath) {
 /**
   Download and install iFlyIME from the official website
   */
-InstallIFlyIME() {
+InstallIFlyIME(A_ThisMenuItem:="", A_ThisMenuItemPos:="", A_ThisMenu:="") {
   local TEMPFILEPATH, e
   Try {
-    Run, https://srf.xunfei.cn/
+    Run("https://srf.xunfei.cn/")
     TEMPFILEPATH := A_Temp . "\iFlyIME_Setup_3.0.1746.exe"
 
     If !FileExist(TEMPFILEPATH)
@@ -239,15 +208,15 @@ InstallIFlyIME() {
 
       If !FileExist(TEMPFILEPATH)
       {
-        MsgBox, 16, Installation failed, Could not download the installer. Please check your internet connection.
+        MsgBox("Could not download the installer. Please check your internet connection.", "Installation failed", 16)
         Return False
       }
     }
 
-    Run, %TEMPFILEPATH%
+    Run(TEMPFILEPATH)
     Return True
-  } Catch e {
-    MsgBox, 16, Installation failed, % RegStr.Msg.FailToInstalliFlyIME . "`n`nDetails: " . e.Message
+  } Catch Error as e {
+    MsgBox(RegStr.Msg.FailToInstalliFlyIME . "`n`nDetails: " . e.Message, "Installation failed", 16)
   }
   Return False
 }
@@ -256,10 +225,10 @@ InstallIFlyIME() {
   by Joe DF
   https://github.com/ahkscript/ASPDM/blob/master/Local-Client/Lib/Util.ahk
 */
-Util_VersionCompare(other,local) {
+Util_VersionCompare(other,current) {
 	ver_other:=StrSplit(other,".")
-	ver_local:=StrSplit(local,".")
-	for _index, _num in ver_local
+	ver_current:=StrSplit(current,".")
+	for _index, _num in ver_current
 		if ( (ver_other[_index]+0) > (_num+0) )
 			return 1
 		else if ( (ver_other[_index]+0) < (_num+0) )
@@ -282,7 +251,7 @@ DownloadFile(UrlToFile, SaveFileAs, Overwrite := True, UseProgressBar := True) {
   ; Check if the user wants a progressbar
   If (UseProgressBar) {
     ;Initialize the WinHttpRequest Object
-    WebRequest := ComObjCreate("WinHttp.WinHttpRequest.5.1")
+    WebRequest := ComObject("WinHttp.WinHttpRequest.5.1")
     ; Download the headers
     WebRequest.Open("HEAD", UrlToFile)
     WebRequest.Send()
@@ -292,9 +261,9 @@ DownloadFile(UrlToFile, SaveFileAs, Overwrite := True, UseProgressBar := True) {
     
     ; === Unit Validation ===
     FinalSizeInMB := FinalSize
-    if (FinalSize is not number or FinalSize <= 0)
+    if (!IsNumber(FinalSize) or FinalSize <= 0)
     {
-      MsgBox, 16, Download Error, Invalid file size received from server: '%FinalSize%'.
+      MsgBox("Invalid file size received from server: '" FinalSize "'.", "Download Error", 16)
       Return
     }
     if (FinalSize < 1024) {
@@ -304,22 +273,22 @@ DownloadFile(UrlToFile, SaveFileAs, Overwrite := True, UseProgressBar := True) {
     }
 
     ; Create the progressbar and the timer
-    Progress, H80, , Downloading..., %UrlToFile%
+    ProgressGui := Gui("ToolWindow -Sysmenu Disabled"), ProgressGui.Title := UrlToFile , ProgressGui.SetFont("Bold"), ProgressGui.AddText("x0 w200 Center", "Downloading..."), gocProgress := ProgressGui.AddProgress("x10 w180 h20"), ProgressGui.Show("H80")
     LastSize := 0
     LastSizeTick := A_TickCount
-    SetTimer, __UpdateProgressBar, 100
+    SetTimer __UpdateProgressBar, 100
   }
   ; Download the file
-  UrlDownloadToFile, %UrlToFile%, %SaveFileAs%
+  Download(UrlToFile,SaveFileAs)
   ; Remove the timer and the progressbar because the download has finished
   If (UseProgressBar) {
-    Progress, Off
-    SetTimer, __UpdateProgressBar, Off
+    ProgressGui.Destroy
+    SetTimer __UpdateProgressBar, 0
   }
   Return
   
   ; The label that updates the progressbar
-  __UpdateProgressBar:
+  __UpdateProgressBar() {
     ; Get the current filesize and tick
     CurrentSize := FileOpen(SaveFileAs, "r").Length ; FileGetSize wouldn't return reliable results
     CurrentSizeTick := A_TickCount
@@ -346,6 +315,71 @@ DownloadFile(UrlToFile, SaveFileAs, Overwrite := True, UseProgressBar := True) {
     LastSize := CurrentSize
     
     ; Update the ProgressBar
-    Progress, %PercentDone%, %PercentDone%`% of %FinalSizeInMB% MB, Downloading...  (%Speed%), Downloading %SaveFileAs%
+    ProgressGui := Gui("ToolWindow -Sysmenu Disabled"), ProgressGui.Title := "Downloading " SaveFileAs , ProgressGui.SetFont("Bold"), ProgressGui.AddText("x0 w200 Center", "Downloading...  (" Speed ")"), gocProgress := ProgressGui.AddProgress("x10 w180 h20"), ProgressGui.SetFont(""), ProgressGui.AddText("x0 w200 Center", PercentDone "`% of " FinalSizeInMB " MB"), ProgressGui.Show("")
     Return
+  }
 }
+
+;###############  V1toV2 FUNCS  ###############
+HK1_h() { ; V1toV2: HK->Func
+global
+  TriggerIFlyVoice(AppPath)
+Return
+}
+;##############################################
+CheckUpdate(A_ThisMenuItem:="", A_ThisMenuItemPos:="", MyMenu:="", *) { ; V1toV2: Lbl->Func
+global
+  try {
+    ; Initialize the WinHttpRequest Object
+    WebRequest := ComObject("WinHttp.WinHttpRequest.5.1")
+    ; Download the JSON-formatted release data from GitHub API
+    WebRequest.Open("GET", "https://api.github.com/repos/chriskyfung/Agile-Win-Hotkey-for-iFlyVoice/releases/latest")
+    WebRequest.Send()
+    ; Use Regex to extract the latest version number
+    RegExMatch(WebRequest.ResponseText, "`"tag_name`":`"v(?<ver>[0-9a-zA-Z\.]+)`"", &SubPat)
+    LatestVersion := SubPat["ver"]
+    ; Compare the version numbers
+    if (Util_VersionCompare(LatestVersion,CodeVersion)) {
+      Run("https://github.com/chriskyfung/Agile-Win-Hotkey-for-iFlyVoice/releases/latest")
+    } else {
+      MsgBox(RegStr.Msg.CurrentVersion . ": v" . CodeVersion . "`n`n" . RegStr.Msg.ThisIsLastVersion)
+    }
+  } Catch Error as e {
+    MsgBox("Could not check for updates. Please check your internet connection.", "Update Check Failed", 16)
+  }
+Return
+}
+;##############################################
+Help(A_ThisMenuItem:="", A_ThisMenuItemPos:="", MyMenu:="", *) { ; V1toV2: Lbl->Func
+global
+  Run(RegStr.Info.HelpUrl)
+Return
+}
+;##############################################
+Exit(A_ThisMenuItem:="", A_ThisMenuItemPos:="", MyMenu:="", *) { ; V1toV2: Lbl->Func
+global
+  ExitApp()
+}
+;##############################################
+RunAsAdministrator(A_ThisMenuItem:="", A_ThisMenuItemPos:="", MyMenu:="", *) { ; V1toV2: Lbl->Func
+global
+  full_command_line := DllCall("GetCommandLine", "str")
+  if not (A_IsAdmin or RegExMatch(full_command_line, " /restart(?!\S)"))
+  {
+    try
+    {
+      if A_IsCompiled
+        Run("*RunAs `"" A_ScriptFullPath "`" /restart")
+      else
+        Run("*RunAs `"" A_AhkPath "`" /restart `"" A_ScriptFullPath "`"")
+    }
+    Return
+  }
+Return
+}
+;##############################################
+BoundTriggerIFlyVoice(A_ThisMenuItem:="", A_ThisMenuItemPos:="", MyMenu:="", *) { ; V1toV2: Lbl->Func
+global  
+  TriggerIFlyVoice(AppPath)
+Return
+} 
