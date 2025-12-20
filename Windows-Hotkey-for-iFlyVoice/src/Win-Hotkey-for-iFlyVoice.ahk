@@ -54,29 +54,27 @@ SetWorkingDir(A_ScriptDir)  ; Ensures a consistent starting directory.
 ;@Ahk2Exe-ExeName %A_ScriptName~\.[^\.]+$%-%U_bits%bit.exe
 
 /**
-  Set up custom Tray icon menu
-  */
-Tray:= A_TrayMenu
-Tray.Delete() ; V1toV2: not 100% replacement of NoStandard, Only if NoStandard is used at the beginning
-Tray.Add(RegStr.Menu.RunAsAdministrator, RunAsAdministrator)
-Tray.Add()  ; // Add a separator line.
-Tray.Add(RegStr.Menu.ReinstallIFlyIME, InstallIFlyIME)
-Tray.Add()  ; // Add a separator line
-Tray.Add(RegStr.Menu.TriggerHotkey, BoundTriggerIFlyVoice)
-Tray.Add()  ; // Add a separator line
-Tray.Add(RegStr.Menu.CheckUpdate, CheckUpdate)
-Tray.Add(RegStr.Menu.Help, Help)
-Tray.Add()  ; // Add a separator line.
-Tray.Add(RegStr.Menu.Exit, Exit)
+ *   Set up custom Tray icon menu
+ */
+A_TrayMenu.Delete()
+A_TrayMenu.Add(RegStr.Menu.RunAsAdministrator, RunAsAdministrator)
+A_TrayMenu.Add()  ; // Add a separator line.
+A_TrayMenu.Add(RegStr.Menu.ReinstallIFlyIME, InstallIFlyIME)
+A_TrayMenu.Add()  ; // Add a separator line
+A_TrayMenu.Add(RegStr.Menu.TriggerHotkey, BoundTriggerIFlyVoice)
+A_TrayMenu.Add()  ; // Add a separator line
+A_TrayMenu.Add(RegStr.Menu.CheckUpdate, CheckUpdate)
+A_TrayMenu.Add(RegStr.Menu.Help, Help)
+A_TrayMenu.Add()  ; // Add a separator line.
+A_TrayMenu.Add(RegStr.Menu.Exit, Exit)
 A_IconTip := RegStr.Menu.Tip
 ; // Conditional set the image resource of Tray Icon based on the Compiled Status
-If A_IsCompiled {
-	TraySetIcon("",-141,1)
+if A_IsCompiled {
+    TraySetIcon("", -141, 1)
 }
-Else {  
-	TraySetIcon("icon_256x256.ico",1,1)
+else {
+    TraySetIcon("icon_256x256.ico", 1, 1)
 }
-Return
 
 /**
   Handle the keypress event of Win + H
