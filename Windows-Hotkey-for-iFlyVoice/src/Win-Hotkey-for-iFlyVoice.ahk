@@ -11,36 +11,38 @@ global UiLang := "en-US"
 global AppPath := "C:\Program Files (x86)\iFlytek\iFlyIME\" . iFlyVer . "\iFlyVoice.exe"
 ConfigPath := A_AppData . "\Win-Hotkey-for-iFlyVoice\config.ini"
 if !FileExist(ConfigPath)
-  ConfigPath := A_ScriptDir . "\config.ini"
+    ConfigPath := A_ScriptDir . "\config.ini"
 
-If FileExist(ConfigPath) {
-  UiLang := IniRead(ConfigPath, "Preference", "Langauge", UiLang)
-  AppPath := IniRead(ConfigPath, "Preference", "iFlyIME_Path", AppPath)
+if FileExist(ConfigPath) {
+    UiLang := IniRead(ConfigPath, "Preference", "Langauge", UiLang)
+    AppPath := IniRead(ConfigPath, "Preference", "iFlyIME_Path", AppPath)
 }
 
 /**
-  Load language file based on the selected UI language
-  */
+ *   Load language file based on the selected UI language
+ */
 LangFilePath := A_ScriptDir . "\lang\" . UiLang . ".lang"
 RegStr := LoadLanguageFile(LangFilePath)
 If !RegStr {
-  MsgBox("Language file not found: " . LangFilePath)
-  ; Default fallback
-  RegStr := { Info: { Description: "Customize Win + H as the Hotkey of iFLYTEK Voice Input Floating Window", HelpUrl: "https://github.com/chriskyfung/Agile-Win-Hotkey-for-iFlyVoice" }, Menu: { CheckUpdate: "Check Update (&U)", Exit: "Exit (&X)", Help: "Help (&H)", ReinstallIFlyIME: "Reinstall IFlyIME (&I)", RunAsAdministrator: "Run as administrator (&A)", TriggerHotkey: "Trigger Hotkey (&T)", Tip: "Win + H | Start/Stop iFLYTEK Voice Input" }, Msg: { CurrentVersion: "Current Version", ThisIsLastVersion: "It is already the latest version!", NoIflyimeMsg: "It seems that you haven't installed the iFLYTEK Voice Input Method. Would you like to download the installation package and [Manually install] to the default directory?", FailToInstalliFlyIME: "Error occurred: Cannot install iFlyIME" } }
+    MsgBox("Language file not found: " . LangFilePath)
+    ; Default fallback
+    RegStr := { Info: { Description: "Customize Win + H as the Hotkey of iFLYTEK Voice Input Floating Window", HelpUrl: "https://github.com/chriskyfung/Agile-Win-Hotkey-for-iFlyVoice" },
+    Menu: { CheckUpdate: "Check Update (&U)", Exit: "Exit (&X)", Help: "Help (&H)", ReinstallIFlyIME: "Reinstall IFlyIME (&I)",
+        RunAsAdministrator: "Run as administrator (&A)", TriggerHotkey: "Trigger Hotkey (&T)", Tip: "Win + H | Start/Stop iFLYTEK Voice Input" },
+    Msg: { CurrentVersion: "Current Version", ThisIsLastVersion: "It is already the latest version!", NoIflyimeMsg: "It seems that you haven't installed the iFLYTEK Voice Input Method. Would you like to download the installation package and [Manually install] to the default directory?",
+        FailToInstalliFlyIME: "Error occurred: Cannot install iFlyIME" } }
 }
 
 /**
-  Standard AHK Directives
-  */
-; V1toV2: Removed #NoEnv
+ *   Standard AHK Directives
+ */
 #Warn  ; Enable warnings to assist with detecting common errors.
 SendMode("Input")  ; Recommended for new scripts due to its superior speed and reliability.
 SetWorkingDir(A_ScriptDir)  ; Ensures a consistent starting directory.
 
-
 /**
-  Parameters for Compiling AHK to EXE
-  */
+ *   Parameters for Compiling AHK to EXE
+ */
 #SingleInstance Force
 ;@Ahk2Exe-UpdateManifest 0, , ,0
 ;@Ahk2Exe-Obey U_bits, = %A_PtrSize% * 8
@@ -88,8 +90,8 @@ else {
 #!h:: Send("#h")
 
 /**
-  Get the latest release tag via GitHub API and compare it to the currect code version
-  */
+ *   Get the latest release tag via GitHub API and compare it to the currect code version
+ */
 CheckUpdate:
 CheckUpdate()
 Return
@@ -139,56 +141,56 @@ LoadLanguageFile(LangFilePath) {
 }
 
 /**
-  Trigger the iFlyVoice floating window:
-  If it is already running, focus on it and send a simulated mouse click
-  If it is not running, launch it
-  */
+ *   Trigger the iFlyVoice floating window:
+ *   If it is already running, focus on it and send a simulated mouse click
+ *   If it is not running, launch it
+ */
 TriggerIFlyVoice(AppPath) {
-  SplitPath(AppPath, &AppExeFile)  ; Resolve the execurable file name from AppPath
+    SplitPath(AppPath, &AppExeFile)  ; Resolve the execurable file name from AppPath
 
-  If (WinExist("ahk_class BaseGui ahk_exe " . AppExeFile)) {
-    FocusAndClick(AppExeFile)
-  } Else {
-    LaunchIFlyVoice(AppPath)
-  }
-  Return
-}
-
-/**
-  Focus on the iFlyVoice floating window and send a simulated mouse click
-  */
-FocusAndClick(AppExeFile) {
-  ; Note: These coordinates are based on iFlyIME v3.0.1746.
-  ; If the floating window UI changes, these may need to be updated.
-  clickX := 119
-  clickY := 59
-  WinSetAlwaysOnTop(1, "ahk_class BaseGui ahk_exe " AppExeFile)
-  ControlClick("x" clickX " y" clickY, "ahk_class BaseGui ahk_exe " AppExeFile) ; Click on the center of iFlyVoice floating window
-  WinSetAlwaysOnTop(0, "ahk_class BaseGui ahk_exe " AppExeFile)
-  Return
-}
-
-/**
-  Launch iFlyVoice if it is not running
-  */
-LaunchIFlyVoice(AppPath) {
-  try {
-    If (FileExist(AppPath)){
-      Run(AppPath)
-    } Else{
-      global RegStr
-      msgResult := MsgBox(RegStr.Msg.NoIflyimeMsg, , 4)
-      if (msgResult = "NO")
-        Return
-      InstallIFlyIME()
+    if (WinExist("ahk_class BaseGui ahk_exe " . AppExeFile)) {
+        FocusAndClick(AppExeFile)
+    } else {
+        LaunchIFlyVoice(AppPath)
     }
-  }
-  Return
 }
 
 /**
-  Download and install iFlyIME from the official website
-  */
+ *   Focus on the iFlyVoice floating window and send a simulated mouse click
+ */
+FocusAndClick(AppExeFile) {
+    ; Note: These coordinates are based on iFlyIME v3.0.1746.
+    ; If the floating window UI changes, these may need to be updated.
+    clickX := 119
+    clickY := 59
+    WinSetAlwaysOnTop(1, "ahk_class BaseGui ahk_exe " . AppExeFile)
+    ControlClick("x" . clickX . " y" . clickY, "ahk_class BaseGui ahk_exe " . AppExeFile) ; Click on the center of iFlyVoice floating window
+    WinSetAlwaysOnTop(0, "ahk_class BaseGui ahk_exe " . AppExeFile)
+}
+
+/**
+ *   Launch iFlyVoice if it is not running
+ */
+LaunchIFlyVoice(AppPath) {
+    try {
+        if (FileExist(AppPath)) {
+            Run(AppPath)
+        } else {
+            global RegStr
+            msgResult := MsgBox(RegStr.Msg.NoIflyimeMsg, , "4")
+            if (msgResult = "No")
+                return
+            InstallIFlyIME()
+        }
+    }
+    catch {
+        ; No action needed
+    }
+}
+
+/**
+ *   Download and install iFlyIME from the official website
+ */
 InstallIFlyIME(A_ThisMenuItem:="", A_ThisMenuItemPos:="", A_ThisMenu:="") {
   local TEMPFILEPATH, e
   Try {
@@ -215,18 +217,18 @@ InstallIFlyIME(A_ThisMenuItem:="", A_ThisMenuItemPos:="", A_ThisMenu:="") {
 }
 
 /**
-  by Joe DF
-  https://github.com/ahkscript/ASPDM/blob/master/Local-Client/Lib/Util.ahk
-*/
-Util_VersionCompare(other,current) {
-	ver_other:=StrSplit(other,".")
-	ver_current:=StrSplit(current,".")
-	for _index, _num in ver_current
-		if ( (ver_other[_index]+0) > (_num+0) )
-			return 1
-		else if ( (ver_other[_index]+0) < (_num+0) )
-			return 0
-	return 0
+ *   by Joe DF
+ *   https://github.com/ahkscript/ASPDM/blob/master/Local-Client/Lib/Util.ahk
+ */
+Util_VersionCompare(other, current) {
+    ver_other := StrSplit(other, ".")
+    ver_current := StrSplit(current, ".")
+    for _index, _num in ver_current
+        if ((ver_other[_index] + 0) > (_num + 0))
+            return 1
+        else if ((ver_other[_index] + 0) < (_num + 0))
+            return 0
+    return 0
 }
 
 /**
