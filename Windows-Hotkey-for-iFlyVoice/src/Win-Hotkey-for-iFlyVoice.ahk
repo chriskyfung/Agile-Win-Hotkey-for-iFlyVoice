@@ -221,29 +221,41 @@ LaunchIFlyVoice(AppPath) {
 /**
  *   Download and install iFlyIME from the official website
  */
-InstallIFlyIME(A_ThisMenuItem:="", A_ThisMenuItemPos:="", A_ThisMenu:="") {
-  local TEMPFILEPATH, e
-  Try {
-    Run("https://srf.xunfei.cn/")
-    TEMPFILEPATH := A_Temp . "\iFlyIME_Setup_3.0.1746.exe"
+InstallIFlyIME(*) {
+    global RegStr
+    try {
+        Run("https://srf.xunfei.cn/")
+        TargetFile := "iFlyIME_Setup_" . iFlyVer . ".exe"
+        SaveFileAs := { Filename: TargetFile, FullPath: A_Temp . '\' TargetFile }
+        InstallerIsReally := false
 
-    If !FileExist(TEMPFILEPATH)
-    {
-      DownloadFile("https://download.voicecloud.cn/200ime/iFlyIME_Setup_3.0.1746.exe", TEMPFILEPATH)
+        if FileExist(SaveFileAs.FullPath) {
+            MyGui := Gui("+OwnDialogs +AlwaysOnTop")  ; ToolWindow style optional for taskbar
+            Result := MsgBox(
+                "The installer file is already present on your system.`nWould you like to download a fresh copy?",
+                "Confirm",
+                "YesNo Icon?")
+            if (Result = "No")
+                InstallerIsReally := true
+        }
 
-      If !FileExist(TEMPFILEPATH)
-      {
-        MsgBox("Could not download the installer. Please check your internet connection.", "Installation failed", 16)
-        Return False
-      }
+        if !(InstallerIsReally) {
+            DownloadFile("https://download.voicecloud.cn/200ime/" . TargetFile, SaveFileAs)
+
+            if !FileExist(SaveFileAs.FullPath) {
+                MsgBox("Failed to download the installer. Please check your internet connection.",
+                    "Installation failed", 16)
+                return False
+            }
+            InstallerIsReally := true
+        }
+
+        Run(SaveFileAs.FullPath)
+        return True
+    } catch Error as e {
+        MsgBox(RegStr.Msg.FailToInstalliFlyIME . "`n`nDetails: " . e.Message, "Installation failed", 16)
     }
-
-    Run(TEMPFILEPATH)
-    Return True
-  } Catch Error as e {
-    MsgBox(RegStr.Msg.FailToInstalliFlyIME . "`n`nDetails: " . e.Message, "Installation failed", 16)
-  }
-  Return False
+    return False
 }
 
 /**
