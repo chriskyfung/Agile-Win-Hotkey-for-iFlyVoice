@@ -372,26 +372,6 @@ Return
 }
 
 
-
-
-
-;##############################################
-RunAsAdministrator(A_ThisMenuItem:="", A_ThisMenuItemPos:="", MyMenu:="", *) { ; V1toV2: Lbl->Func
-global
-  full_command_line := DllCall("GetCommandLine", "str")
-  if not (A_IsAdmin or RegExMatch(full_command_line, " /restart(?!\S)"))
-  {
-    try
-    {
-      if A_IsCompiled
-        Run("*RunAs `"" A_ScriptFullPath "`" /restart")
-      else
-        Run("*RunAs `"" A_AhkPath "`" /restart `"" A_ScriptFullPath "`"")
-    }
-    Return
-  }
-Return
-}
 ;##############################################
 BoundTriggerIFlyVoice(*) {
     global AppPath
