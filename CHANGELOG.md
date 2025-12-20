@@ -5,6 +5,58 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.1.0-alpha.2] - 2025-12-21
+
+### Changed
+
+- Migrated the entire script to be fully compatible with AutoHotkey v2.
+- Refactored the downloader logic to use `curl.exe` for improved reliability.
+- Enhanced the download progress bar for a better user experience.
+- Standardized code style, simplified functions, and improved variable management for better maintainability.
+
+### Fixed
+
+- Corrected a bug in the language file loading check to ensure fallback languages load properly.
+
+### Build
+
+- Updated the GitHub Actions workflow to use AutoHotkey v2.0.19 for builds.
+
+### Documentation
+
+- Updated README, GEMINI.md, and compile instructions to reflect the migration to AutoHotkey v2.
+
+## [4.1.0-alpha.1] - 2025-11-27
+
+### Build
+
+- Implement MSI packaging and release automation.
+- Standardize artifact naming and refine version extraction.
+- Trigger build workflow on self-changes.
+
+### Chore
+
+- Add issue templates and security policy.
+- Add recommended extensions for VS Code.
+
+### Documentation
+
+- Update reporting method in Code of Conduct.
+
+## [4.1.0-alpha] - 2025-09-30
+
+### Added
+
+- Add tray menu option to trigger the hotkey.
+
+### Changed
+
+- Refactor hotkey logic for clarity and future enhancements.
+
+### Documentation
+
+- Simplify download section in README.
+
 ## [4.0.1] - 2025-09-24
 
 ### Fixed
