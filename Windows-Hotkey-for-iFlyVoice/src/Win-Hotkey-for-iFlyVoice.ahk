@@ -2,12 +2,13 @@
 ;@Ahk2Exe-Let version = %A_PriorLine~U)^(.+"){1}(.+)".*$~$2% ; // Extract the version number (=> x.x.x) from the Prior Line
 
 /**
-  Load configuration from config.ini and set default values if not present
-  1. UiLang: The UI language (default: "en-US")
-  2. AppPath: The path to the iFlyVoice executable (default: "C:\Program Files (x86)\iFlytek\iFlyIME\3.0.1746\iFlyVoice.exe")
-  */
-UiLang := "en-US"
-AppPath := "C:\Program Files (x86)\iFlytek\iFlyIME\3.0.1746\iFlyVoice.exe"
+ *   Load configuration from config.ini and set default values if not present
+ *   1. UiLang: The UI language (default: "en-US")
+ *   2. AppPath: The path to the iFlyVoice executable (default: "C:\Program Files (x86)\iFlytek\iFlyIME\{iFlyVer}\iFlyVoice.exe")
+ */
+global iFlyVer := "3.0.1746"
+global UiLang := "en-US"
+global AppPath := "C:\Program Files (x86)\iFlytek\iFlyIME\" . iFlyVer . "\iFlyVoice.exe"
 ConfigPath := A_AppData . "\Win-Hotkey-for-iFlyVoice\config.ini"
 if !FileExist(ConfigPath)
   ConfigPath := A_ScriptDir . "\config.ini"
