@@ -77,19 +77,13 @@ else {
 }
 
 /**
-  Handle the keypress event of Win + H
-  
-  原方案使用熱鍵觸發
-  Send ^+h
-  
-  新方案直接發送模擬點擊消息
-  A fork of snomiao/CapsLockX/Modules/应用-讯飞输入法语音悬浮窗.ahk for iFlyIME 3.0.1746.
-  */
-#h::HK1_h()
+ *   Handle the keypress event of Win + H
+ */
+#h:: BoundTriggerIFlyVoice
 
 /**
-  Add Alt to the original hotkey for Windows 10 Dictating
-  */
+ *   Add Alt to the original hotkey for Windows 10 Dictating
+ */
 #!h:: Send("#h")
 
 /**
@@ -319,11 +313,7 @@ DownloadFile(UrlToFile, SaveFileAs, Overwrite := True, UseProgressBar := True) {
 }
 
 ;###############  V1toV2 FUNCS  ###############
-HK1_h() { ; V1toV2: HK->Func
-global
-  TriggerIFlyVoice(AppPath)
-Return
-}
+
 ;##############################################
 CheckUpdate(A_ThisMenuItem:="", A_ThisMenuItemPos:="", MyMenu:="", *) { ; V1toV2: Lbl->Func
 global
@@ -376,8 +366,7 @@ global
 Return
 }
 ;##############################################
-BoundTriggerIFlyVoice(A_ThisMenuItem:="", A_ThisMenuItemPos:="", MyMenu:="", *) { ; V1toV2: Lbl->Func
-global  
-  TriggerIFlyVoice(AppPath)
-Return
-} 
+BoundTriggerIFlyVoice(*) {
+    global AppPath
+    TriggerIFlyVoice(AppPath)
+}
