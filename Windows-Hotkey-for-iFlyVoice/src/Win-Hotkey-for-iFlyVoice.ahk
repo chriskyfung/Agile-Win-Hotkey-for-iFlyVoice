@@ -22,8 +22,8 @@ if FileExist(ConfigPath) {
  *   Load language file based on the selected UI language
  */
 LangFilePath := A_ScriptDir . "\lang\" . UiLang . ".lang"
-RegStr := LoadLanguageFile(LangFilePath)
-If !RegStr {
+global RegStr := LoadLanguageFile(LangFilePath)
+if !IsObject(RegStr) {
     MsgBox("Language file not found: " . LangFilePath)
     ; Default fallback
     RegStr := { Info: { Description: "Customize Win + H as the Hotkey of iFLYTEK Voice Input Floating Window", HelpUrl: "https://github.com/chriskyfung/Agile-Win-Hotkey-for-iFlyVoice" },
