@@ -274,87 +274,98 @@ Util_VersionCompare(other, current) {
 }
 
 /**
-  Download a file from a URL to a local path with optional overwrite and progress bar
-  UrlToFile: The URL of the file to download
-  SaveFileAs: The local path to save the downloaded file
-  Overwrite: (Optional) Whether to overwrite the file if it already exists (default: True)
-  UseProgressBar: (Optional) Whether to show a progress bar during download (default: True)
-  */
-DownloadFile(UrlToFile, SaveFileAs, Overwrite := True, UseProgressBar := True) {
-  local WebRequest, FinalSize, FinalSizeInMB, LastSize, LastSizeTick, CurrentSize, CurrentSizeTick, PercentDone, TimeElapsed, SpeedInKBps, Speed
-  ; Check if the file already exists and if we must not overwrite it
-  If (!Overwrite && FileExist(SaveFileAs))
-    Return
-  ; Check if the user wants a progressbar
-  If (UseProgressBar) {
-    ;Initialize the WinHttpRequest Object
-    WebRequest := ComObject("WinHttp.WinHttpRequest.5.1")
-    ; Download the headers
-    WebRequest.Open("HEAD", UrlToFile)
-    WebRequest.Send()
+ *   Download a file from a URL to a local path with optional overwrite and progress bar
+ */
+DownloadFile(UrlToFile, SaveFileAs := {}, Overwrite := True, UseProgressBar := True) {
+    if (!Overwrite)
+        return
 
-    ; Store the header which holds the file size in a variable:
-    FinalSize := Trim(WebRequest.GetResponseHeader("Content-Length"))
-    
-    ; === Unit Validation ===
-    FinalSizeInMB := FinalSize
-    if (!IsNumber(FinalSize) or FinalSize <= 0)
-    {
-      MsgBox("Invalid file size received from server: '" FinalSize "'.", "Download Error", 16)
-      Return
+    if (UseProgressBar) {
+
+        __RunWaitOne(command) {
+            try {
+                shell := ComObject("WScript.Shell")
+                ; Execute a single command via cmd.exe
+                exec := shell.Exec(A_ComSpec " /C " command)
+                ; Read and return the command's output
+                return exec.StdOut.ReadAll()
+            } catch as e {
+                MsgBox "An error occurred while executing '" . command . "'in the system shell. " . e.Message
+                return
+            }
+        }
+
+        HttpHeaders := __RunWaitOne("curl.exe -sI " UrlToFile)
+        try {
+            RegExMatch(HttpHeaders, "Content-Length: (\d+)", &SubPat)
+            FinalSize := Trim(SubPat[1])
+        } catch as e {
+            MsgBox "There was a problem parsing the downloaded file size."
+            return
+        }
+
+        if (!IsNumber(FinalSize) || FinalSize <= 0) {
+            MsgBox("Invalid file size received from server: '" . FinalSize . "'.", "Download Error", 16)
+            return
+        }
+
+        FinalSizeInMB := FinalSize / 1024 / 1024
+
+        ProgressGui := Gui()
+        ProgressGui.Title := "Downloading..."
+        ProgressGui.AddText("w300 Center", SaveFileAs.Filename)
+        MyProgress := ProgressGui.AddProgress("x10 w280 h20", 0)
+        ProgressText := ProgressGui.AddText("w300 Center", "0% of " . Round(FinalSizeInMB, 2) . " MB")
+        ProgressGui.Show("w300 h80")
+
+        __UpdateProgress() {
+            CurrentSize := FileGetSize(SaveFileAs.FullPath, "B")
+            CurrentSizeTick := A_TickCount
+
+            ; Calculate percent done
+            PercentDone := Round(CurrentSize / FinalSize * 100)
+
+            ; Calculate download speed
+            TimeElapsed := (CurrentSizeTick - LastSizeTick) / 1000 ; in seconds
+            if (TimeElapsed > 0) {
+                SpeedInKBps := (CurrentSize - LastSize) / 1024 / TimeElapsed
+            } else {
+                SpeedInKBps := 0
+            }
+
+            if (SpeedInKBps > 0) {
+                Speed := Round(SpeedInKBps) . " Kb/s"
+            } else {
+                Speed := "0 Kb/s"
+            }
+
+            ; Save the current filesize and tick for the next time
+            LastSizeTick := CurrentSizeTick
+            LastSize := CurrentSize
+
+            CurrentSizeinMB := CurrentSize / 1024 / 1024
+            PercentDone := Round(CurrentSizeinMB / FinalSizeInMB * 100)
+            MyProgress.Value := PercentDone
+            ProgressText.Value := Speed . " - " . Round(CurrentSizeinMB, 2) . " MB of " . Round(FinalSizeInMB, 2) .
+            " MB"
+        }
+
+        LastSize := 0
+        LastSizeTick := A_TickCount
+        ProgressTimer := SetTimer(__UpdateProgress, 100)
     }
-    if (FinalSize < 1024) {
-      FinalSize := FinalSize * 1024 * 1024
-    } else {
-      FinalSizeInMB := FinalSize / 1024 / 1024
+
+    try {
+        Download(UrlToFile, SaveFileAs.FullPath)
+    } catch as e {
+        FileDelete SaveFileAs.FullPath
+        MsgBox "Download failed: " e.Message
     }
 
-    ; Create the progressbar and the timer
-    ProgressGui := Gui("ToolWindow -Sysmenu Disabled"), ProgressGui.Title := UrlToFile , ProgressGui.SetFont("Bold"), ProgressGui.AddText("x0 w200 Center", "Downloading..."), gocProgress := ProgressGui.AddProgress("x10 w180 h20"), ProgressGui.Show("H80")
-    LastSize := 0
-    LastSizeTick := A_TickCount
-    SetTimer __UpdateProgressBar, 100
-  }
-  ; Download the file
-  Download(UrlToFile,SaveFileAs)
-  ; Remove the timer and the progressbar because the download has finished
-  If (UseProgressBar) {
-    ProgressGui.Destroy
-    SetTimer __UpdateProgressBar, 0
-  }
-  Return
-  
-  ; The label that updates the progressbar
-  __UpdateProgressBar() {
-    ; Get the current filesize and tick
-    CurrentSize := FileOpen(SaveFileAs, "r").Length ; FileGetSize wouldn't return reliable results
-    CurrentSizeTick := A_TickCount
-
-    ; Calculate percent done
-    PercentDone := Round(CurrentSize / FinalSize * 100)
-
-    ; Calculate download speed
-    TimeElapsed := (CurrentSizeTick - LastSizeTick) / 1000 ; in seconds
-    if (TimeElapsed > 0) {
-      SpeedInKBps := (CurrentSize - LastSize) / 1024 / TimeElapsed
-    } else {
-      SpeedInKBps := 0
+    if (UseProgressBar) {
+        SetTimer(__UpdateProgress, 0)
+        ProgressGui.Destroy()
     }
-    
-    if (SpeedInKBps > 0) {
-      Speed := Round(SpeedInKBps) . " Kb/s"
-    } else {
-      Speed := "0 Kb/s"
-    }
-
-    ; Save the current filesize and tick for the next time
-    LastSizeTick := CurrentSizeTick
-    LastSize := CurrentSize
-    
-    ; Update the ProgressBar
-    ProgressGui := Gui("ToolWindow -Sysmenu Disabled"), ProgressGui.Title := "Downloading " SaveFileAs , ProgressGui.SetFont("Bold"), ProgressGui.AddText("x0 w200 Center", "Downloading...  (" Speed ")"), gocProgress := ProgressGui.AddProgress("x10 w180 h20"), ProgressGui.SetFont(""), ProgressGui.AddText("x0 w200 Center", PercentDone "`% of " FinalSizeInMB " MB"), ProgressGui.Show("")
-    Return
-  }
 }
 
 BoundTriggerIFlyVoice(*) {
