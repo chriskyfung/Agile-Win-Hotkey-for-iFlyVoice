@@ -1,4 +1,5 @@
-﻿CodeVersion := "4.1.0-alpha.1", copyright := "chriskyfung.github.io" ; // Declare the Current Version and state the copyright
+﻿CodeVersion := "4.1.0-alpha.2"
+copyright := "chriskyfung.github.io" ; // Declare the Current Version and state the copyright
 ;@Ahk2Exe-Let version = %A_PriorLine~U)^(.+"){1}(.+)".*$~$2% ; // Extract the version number (=> x.x.x) from the Prior Line
 
 /**
@@ -51,7 +52,7 @@ SetWorkingDir(A_ScriptDir)  ; Ensures a consistent starting directory.
 ;@Ahk2Exe-SetMainIcon  icon_256x256.ico
 ;@Ahk2Exe-SetName      WinHotkey for iFlyVoice
 ;@Ahk2Exe-SetDescription  Customize Win + H as the Hotkey of iFLYTEK Voice Input Floating Window
-;@Ahk2Exe-SetCopyright	Copyright (c) 2020
+;@Ahk2Exe-SetCopyright	Copyright (c) 2025
 ;@Ahk2Exe-SetCompanyName chriskyfung.github.io
 ;@Ahk2Exe-SetVersion %U_version%.0 ; // Format CodeVersion to x.x.x.0
 ;@Ahk2Exe-ExeName %A_ScriptName~\.[^\.]+$%-%U_bits%bit.exe
