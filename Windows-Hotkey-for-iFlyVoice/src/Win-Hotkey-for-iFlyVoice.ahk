@@ -92,52 +92,82 @@ else {
 /**
  *   Get the latest release tag via GitHub API and compare it to the currect code version
  */
-CheckUpdate:
-CheckUpdate()
-Return
-
-/**
-  Open the help page in the default browser
-  */
-Help:
-Help()
-Return
-
-/**
-  Close this AHK script / execuable
-  */
-Exit:
-Exit()
-  ExitApp()
-Return
-
-RunAsAdministrator:
-RunAsAdministrator()
-Return
-
-/**
-  Load language file and return a nested associative array of sections and keys
-  LangFilePath: The path to the language file
-  Returns: A nested associative array or false if the file does not exist
-  */
-LoadLanguageFile(LangFilePath) {
-  if !FileExist(LangFilePath) {
-    return false
-  }
-  LangSections := IniRead(LangFilePath)
-  LocalRegStr := {}
-  Loop Parse, LangSections, "`n", "`r"
-  {
-    LangSection := A_LoopField
-    LocalRegStr.%LangSection% := {}
-    LangOutput := IniRead(LangFilePath, LangSection)
-    Loop Parse, LangOutput, "`n", "`r"
-    {
-      KeyValues := StrSplit(A_LoopField, "=" )
-      LocalRegStr.%LangSection%.%KeyValues[1]% := KeyValues[2]
+CheckUpdate(*) {
+    global CodeVersion, RegStr
+    try {
+        ; Initialize the WinHttpRequest Object
+        WebRequest := ComObject("WinHttp.WinHttpRequest.5.1")
+        ; Download the JSON-formatted release data from GitHub API
+        WebRequest.Open("GET",
+            "https://api.github.com/repos/chriskyfung/Agile-Win-Hotkey-for-iFlyVoice/releases/latest")
+        WebRequest.Send()
+        ; Use Regex to extract the latest version number
+        RegExMatch(WebRequest.ResponseText, '"tag_name":"v(?<ver>[0-9a-zA-Z\.]+)"', &SubPat)
+        LatestVersion := SubPat.ver
+        ; Compare the version numbers
+        if (Util_VersionCompare(LatestVersion, CodeVersion)) {
+            Run("https://github.com/chriskyfung/Agile-Win-Hotkey-for-iFlyVoice/releases/latest")
+        } else {
+            MsgBox(RegStr.Msg.CurrentVersion . ": v" . CodeVersion . "`n`n" . RegStr.Msg.ThisIsLastVersion)
+        }
+    } catch Error as e {
+        MsgBox("Could not check for updates. Please check your internet connection.", "Update Check Failed", 16)
     }
-  }
-  return LocalRegStr
+}
+
+/**
+ *   Open the help page in the default browser
+ */
+Help(*) {
+    global RegStr
+    Run(RegStr.Info.HelpUrl)
+}
+
+/**
+ *   Close this AHK script / execuable
+ */
+Exit(*) {
+    ExitApp()
+}
+
+RunAsAdministrator(*) {
+    full_command_line := DllCall("GetCommandLine", "str")
+    if not (A_IsAdmin or RegExMatch(full_command_line, " /restart(?!\S)")) {
+        try
+        {
+            if A_IsCompiled
+                Run("*RunAs `"" A_ScriptFullPath "`" /restart")
+            else
+                Run("*RunAs `"" A_AhkPath "`" /restart `"" A_ScriptFullPath "`"")
+        }
+        catch {
+            ; No action needed
+        }
+        ExitApp()
+    }
+}
+
+/**
+ *   Load language file and return a nested associative array of sections and keys
+ *   LangFilePath: The path to the language file
+ *   Returns: A nested associative array or false if the file does not exist
+ */
+LoadLanguageFile(LangFilePath) {
+    if !FileExist(LangFilePath) {
+        return false
+    }
+    LangSections := IniRead(LangFilePath)
+    LocalRegStr := {}
+    loop parse, LangSections, "`n", "`r" {
+        LangSection := A_LoopField
+        LocalRegStr.%LangSection% := {}
+        LangOutput := IniRead(LangFilePath, LangSection)
+        loop parse, LangOutput, "`n", "`r" {
+            KeyValues := StrSplit(A_LoopField, "=")
+            LocalRegStr.%LangSection%.%KeyValues[1]% := KeyValues[2]
+        }
+    }
+    return LocalRegStr
 }
 
 /**
@@ -340,17 +370,11 @@ global
   }
 Return
 }
-;##############################################
-Help(A_ThisMenuItem:="", A_ThisMenuItemPos:="", MyMenu:="", *) { ; V1toV2: Lbl->Func
-global
-  Run(RegStr.Info.HelpUrl)
-Return
-}
-;##############################################
-Exit(A_ThisMenuItem:="", A_ThisMenuItemPos:="", MyMenu:="", *) { ; V1toV2: Lbl->Func
-global
-  ExitApp()
-}
+
+
+
+
+
 ;##############################################
 RunAsAdministrator(A_ThisMenuItem:="", A_ThisMenuItemPos:="", MyMenu:="", *) { ; V1toV2: Lbl->Func
 global
