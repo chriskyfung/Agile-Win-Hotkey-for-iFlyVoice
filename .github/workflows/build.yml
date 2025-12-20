@@ -52,7 +52,7 @@ jobs:
           out: 'Windows-Hotkey-for-iFlyVoice\src\Win-Hotkey-for-iFlyVoice-32bit.exe'
           icon: 'Windows-Hotkey-for-iFlyVoice\src\icon_256x256.ico'
           target: x86
-          ahk-tag: v1.1.37.02
+          ahk-tag: v2.0.19
           compression: none
 
       - name: Sign binary executable file
