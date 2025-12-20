@@ -345,34 +345,6 @@ DownloadFile(UrlToFile, SaveFileAs, Overwrite := True, UseProgressBar := True) {
   }
 }
 
-;###############  V1toV2 FUNCS  ###############
-
-;##############################################
-CheckUpdate(A_ThisMenuItem:="", A_ThisMenuItemPos:="", MyMenu:="", *) { ; V1toV2: Lbl->Func
-global
-  try {
-    ; Initialize the WinHttpRequest Object
-    WebRequest := ComObject("WinHttp.WinHttpRequest.5.1")
-    ; Download the JSON-formatted release data from GitHub API
-    WebRequest.Open("GET", "https://api.github.com/repos/chriskyfung/Agile-Win-Hotkey-for-iFlyVoice/releases/latest")
-    WebRequest.Send()
-    ; Use Regex to extract the latest version number
-    RegExMatch(WebRequest.ResponseText, "`"tag_name`":`"v(?<ver>[0-9a-zA-Z\.]+)`"", &SubPat)
-    LatestVersion := SubPat["ver"]
-    ; Compare the version numbers
-    if (Util_VersionCompare(LatestVersion,CodeVersion)) {
-      Run("https://github.com/chriskyfung/Agile-Win-Hotkey-for-iFlyVoice/releases/latest")
-    } else {
-      MsgBox(RegStr.Msg.CurrentVersion . ": v" . CodeVersion . "`n`n" . RegStr.Msg.ThisIsLastVersion)
-    }
-  } Catch Error as e {
-    MsgBox("Could not check for updates. Please check your internet connection.", "Update Check Failed", 16)
-  }
-Return
-}
-
-
-;##############################################
 BoundTriggerIFlyVoice(*) {
     global AppPath
     TriggerIFlyVoice(AppPath)
