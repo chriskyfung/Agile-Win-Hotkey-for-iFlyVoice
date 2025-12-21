@@ -35,6 +35,16 @@ We are happy to accept pull requests. Please follow these steps:
 
 Please try to match the coding style of the existing files. The code is written in AutoHotkey.
 
+## Localization
+
+If you are contributing changes to the language files (`.lang`), please ensure that you follow these rules:
+
+- **Encoding:** All `.lang` files must be saved with **UTF-16LE** encoding.
+- **Keys:** Use `PascalCase` for all keys.
+- **Structure:** Follow the existing structure of sections (`[Info]`, `[Menu]`, `[Msg]`, etc.).
+
+Our CI/CD pipeline includes checks to validate these requirements.
+
 ## License
 
 By contributing your code, you agree to license your contributions under the [GNU General Public License v3.0](LICENSE).
