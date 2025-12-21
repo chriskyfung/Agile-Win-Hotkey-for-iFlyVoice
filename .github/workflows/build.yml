@@ -45,6 +45,23 @@ jobs:
           echo "semantic_version=$semantic_version" >> $env:GITHUB_OUTPUT
           echo "four_part_version=$four_part_version" >> $env:GITHUB_OUTPUT
 
+      - name: Validate .lang files
+        run: |
+          $langFiles = Get-ChildItem -Path "Windows-Hotkey-for-iFlyVoice/src/lang" -Filter *.lang
+          $allFilesValid = $true
+          foreach ($file in $langFiles) {
+              $bytes = Get-Content -Path $file.FullName -Encoding Byte -TotalCount 2
+              if ($bytes[0] -ne 0xFF -or $bytes[1] -ne 0xFE) {
+                  Write-Error "File $($file.FullName) is not encoded in UTF-16LE."
+                  $allFilesValid = $false
+              }
+          }
+
+          if (-not $allFilesValid) {
+              exit 1
+          }
+        shell: powershell
+
       - name: Compile AHK script to EXE
         uses: benmusson/ahk2exe-action@v1
         with:
