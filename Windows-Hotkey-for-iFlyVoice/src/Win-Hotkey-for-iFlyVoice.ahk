@@ -1,4 +1,4 @@
-﻿CodeVersion := "4.1.0-alpha.2"
+CodeVersion := "4.1.0-alpha.2"
 copyright := "chriskyfung.github.io" ; // Declare the Current Version and state the copyright
 ;@Ahk2Exe-Let version = %A_PriorLine~U)^(.+"){1}(.+)".*$~$2% ; // Extract the version number (=> x.x.x) from the Prior Line
 
@@ -25,13 +25,13 @@ if FileExist(ConfigPath) {
 LangFilePath := A_ScriptDir . "\lang\" . UiLang . ".lang"
 global RegStr := LoadLanguageFile(LangFilePath)
 if !IsObject(RegStr) {
-    MsgBox("Language file not found: " . LangFilePath)
+    MsgBox(Format("Language file not found: {1}", LangFilePath))
     ; Default fallback
-    RegStr := { Info: { Description: "Customize Win + H as the Hotkey of iFLYTEK Voice Input Floating Window", HelpUrl: "https://github.com/chriskyfung/Agile-Win-Hotkey-for-iFlyVoice" },
-    Menu: { CheckUpdate: "Check Update (&U)", Exit: "Exit (&X)", Help: "Help (&H)", ReinstallIFlyIME: "Reinstall IFlyIME (&I)",
-        RunAsAdministrator: "Run as administrator (&A)", TriggerHotkey: "Trigger Hotkey (&T)", Tip: "Win + H | Start/Stop iFLYTEK Voice Input" },
-    Msg: { CurrentVersion: "Current Version", ThisIsLastVersion: "It is already the latest version!", NoIflyimeMsg: "It seems that you haven't installed the iFLYTEK Voice Input Method. Would you like to download the installation package and [Manually install] to the default directory?",
-        FailToInstalliFlyIME: "Error occurred: Cannot install iFlyIME" } }
+    RegStr := { Info: { Description: "Customize Win+H to toggle the iFLYTEK Voice Input window.", HelpUrl: "https://github.com/chriskyfung/Agile-Win-Hotkey-for-iFlyVoice" },
+    Menu: { CheckForUpdates: "Check for &Updates", Exit: "&Exit", Help: "&Help", ReinstallIFlyIME: "&Reinstall iFlyIME", RunAsAdministrator: "Run as &Administrator", TriggerHotkey: "&Trigger Hotkey", Tip: "Win+H | Toggle iFLYTEK Voice Input" },
+    Msg: { CurrentVersion: "Current Version", LatestVersion: "You are using the latest version.", IFlyIME_NotFound: "iFLYTEK Voice Input appears to be missing. Would you like to download and install it?", Details: "Details: {1}", InstallerExists: "The installer is already on your system. Would you like to download a fresh copy?", DownloadProgress: "{1} MB of {2} MB", DownloadProgressWithSpeed: "{1} - {2} MB of {3} MB", DownloadSpeed: "{1} KB/s" },
+    Error: { UpdateCheckFailed: "Could not check for updates. Please check your internet connection.", DownloadFailed: "Failed to download the installer. Please check your internet connection.", InstallFailed: "Failed to install iFlyIME.", ShellExecutionError: "An error occurred while executing a command in the system shell.", ParseFileSizeError: "There was a problem parsing the downloaded file size.", InvalidFileSize: "Invalid file size received from the server: '{1}'.", DownloadFailedWithMessage: "Download failed: {1}", LanguageFileNotFound: "Language file not found: {1}" },
+    Title: { UpdateCheckFailed: "Update Check Failed", Confirm: "Confirm", InstallationFailed: "Installation Failed", Downloading: "Downloading...", DownloadError: "Download Error" } }
 }
 
 /**
@@ -67,7 +67,7 @@ A_TrayMenu.Add(RegStr.Menu.ReinstallIFlyIME, InstallIFlyIME)
 A_TrayMenu.Add()  ; // Add a separator line
 A_TrayMenu.Add(RegStr.Menu.TriggerHotkey, BoundTriggerIFlyVoice)
 A_TrayMenu.Add()  ; // Add a separator line
-A_TrayMenu.Add(RegStr.Menu.CheckUpdate, CheckUpdate)
+A_TrayMenu.Add(RegStr.Menu.CheckForUpdates, CheckUpdate)
 A_TrayMenu.Add(RegStr.Menu.Help, Help)
 A_TrayMenu.Add()  ; // Add a separator line.
 A_TrayMenu.Add(RegStr.Menu.Exit, Exit)
@@ -109,10 +109,10 @@ CheckUpdate(*) {
         if (Util_VersionCompare(LatestVersion, CodeVersion)) {
             Run("https://github.com/chriskyfung/Agile-Win-Hotkey-for-iFlyVoice/releases/latest")
         } else {
-            MsgBox(RegStr.Msg.CurrentVersion . ": v" . CodeVersion . "`n`n" . RegStr.Msg.ThisIsLastVersion)
+            MsgBox(RegStr.Msg.CurrentVersion . ": v" . CodeVersion . "`n`n" . RegStr.Msg.LatestVersion)
         }
     } catch Error as e {
-        MsgBox("Could not check for updates. Please check your internet connection.", "Update Check Failed", 16)
+        MsgBox(RegStr.Error.UpdateCheckFailed, RegStr.Title.UpdateCheckFailed, 16)
     }
 }
 
@@ -208,7 +208,7 @@ LaunchIFlyVoice(AppPath) {
             Run(AppPath)
         } else {
             global RegStr
-            msgResult := MsgBox(RegStr.Msg.NoIflyimeMsg, , "4")
+            msgResult := MsgBox(RegStr.Msg.IFlyIME_NotFound, , "4")
             if (msgResult = "No")
                 return
             InstallIFlyIME()
@@ -232,10 +232,7 @@ InstallIFlyIME(*) {
 
         if FileExist(SaveFileAs.FullPath) {
             MyGui := Gui("+OwnDialogs +AlwaysOnTop")  ; ToolWindow style optional for taskbar
-            Result := MsgBox(
-                "The installer file is already present on your system.`nWould you like to download a fresh copy?",
-                "Confirm",
-                "YesNo Icon?")
+            Result := MsgBox(RegStr.Msg.InstallerExists, RegStr.Title.Confirm, "YesNo Icon?")
             if (Result = "No")
                 InstallerIsReally := true
         }
@@ -244,8 +241,7 @@ InstallIFlyIME(*) {
             DownloadFile("https://download.voicecloud.cn/200ime/" . TargetFile, SaveFileAs)
 
             if !FileExist(SaveFileAs.FullPath) {
-                MsgBox("Failed to download the installer. Please check your internet connection.",
-                    "Installation failed", 16)
+                MsgBox(RegStr.Error.DownloadFailed, RegStr.Title.InstallationFailed, 16)
                 return False
             }
             InstallerIsReally := true
@@ -254,7 +250,7 @@ InstallIFlyIME(*) {
         Run(SaveFileAs.FullPath)
         return True
     } catch Error as e {
-        MsgBox(RegStr.Msg.FailToInstalliFlyIME . "`n`nDetails: " . e.Message, "Installation failed", 16)
+        MsgBox(RegStr.Error.InstallFailed . "`n`n" . Format(RegStr.Msg.Details, e.Message), RegStr.Title.InstallationFailed, 16)
     }
     return False
 }
@@ -291,7 +287,7 @@ DownloadFile(UrlToFile, SaveFileAs := {}, Overwrite := True, UseProgressBar := T
                 ; Read and return the command's output
                 return exec.StdOut.ReadAll()
             } catch as e {
-                MsgBox "An error occurred while executing '" . command . "'in the system shell. " . e.Message
+                MsgBox(RegStr.Error.ShellExecutionError . "`n`n" . Format(RegStr.Msg.Details, e.Message))
                 return
             }
         }
@@ -301,22 +297,22 @@ DownloadFile(UrlToFile, SaveFileAs := {}, Overwrite := True, UseProgressBar := T
             RegExMatch(HttpHeaders, "Content-Length: (\d+)", &SubPat)
             FinalSize := Trim(SubPat[1])
         } catch as e {
-            MsgBox "There was a problem parsing the downloaded file size."
+            MsgBox(RegStr.Error.ParseFileSizeError)
             return
         }
 
         if (!IsNumber(FinalSize) || FinalSize <= 0) {
-            MsgBox("Invalid file size received from server: '" . FinalSize . "'.", "Download Error", 16)
+            MsgBox(Format(RegStr.Error.InvalidFileSize, FinalSize), RegStr.Title.DownloadError, 16)
             return
         }
 
         FinalSizeInMB := FinalSize / 1024 / 1024
 
         ProgressGui := Gui()
-        ProgressGui.Title := "Downloading..."
+        ProgressGui.Title := RegStr.Title.Downloading
         ProgressGui.AddText("w300 Center", SaveFileAs.Filename)
         MyProgress := ProgressGui.AddProgress("x10 w280 h20", 0)
-        ProgressText := ProgressGui.AddText("w300 Center", "0% of " . Round(FinalSizeInMB, 2) . " MB")
+        ProgressText := ProgressGui.AddText("w300 Center", Format(RegStr.Msg.DownloadProgress, 0, Round(FinalSizeInMB, 2)))
         ProgressGui.Show("w300 h80")
 
         __UpdateProgress() {
@@ -335,9 +331,9 @@ DownloadFile(UrlToFile, SaveFileAs := {}, Overwrite := True, UseProgressBar := T
             }
 
             if (SpeedInKBps > 0) {
-                Speed := Round(SpeedInKBps) . " Kb/s"
+                Speed := Format(RegStr.Msg.DownloadSpeed, Round(SpeedInKBps))
             } else {
-                Speed := "0 Kb/s"
+                Speed := Format(RegStr.Msg.DownloadSpeed, 0)
             }
 
             ; Save the current filesize and tick for the next time
@@ -347,8 +343,7 @@ DownloadFile(UrlToFile, SaveFileAs := {}, Overwrite := True, UseProgressBar := T
             CurrentSizeinMB := CurrentSize / 1024 / 1024
             PercentDone := Round(CurrentSizeinMB / FinalSizeInMB * 100)
             MyProgress.Value := PercentDone
-            ProgressText.Value := Speed . " - " . Round(CurrentSizeinMB, 2) . " MB of " . Round(FinalSizeInMB, 2) .
-            " MB"
+            ProgressText.Value := Format(RegStr.Msg.DownloadProgressWithSpeed, Speed, Round(CurrentSizeinMB, 2), Round(FinalSizeInMB, 2))
         }
 
         LastSize := 0
@@ -360,7 +355,7 @@ DownloadFile(UrlToFile, SaveFileAs := {}, Overwrite := True, UseProgressBar := T
         Download(UrlToFile, SaveFileAs.FullPath)
     } catch as e {
         FileDelete SaveFileAs.FullPath
-        MsgBox "Download failed: " e.Message
+        MsgBox(Format(RegStr.Error.DownloadFailedWithMessage, e.Message))
     }
 
     if (UseProgressBar) {
