@@ -23,15 +23,10 @@ if FileExist(ConfigPath) {
  *   Load language file based on the selected UI language
  */
 LangFilePath := A_ScriptDir . "\lang\" . UiLang . ".lang"
-global RegStr := LoadLanguageFile(LangFilePath)
-if !IsObject(RegStr) {
-    MsgBox(Format("Language file not found: {1}", LangFilePath))
-    ; Default fallback
-    RegStr := { Info: { Description: "Customize Win+H to toggle the iFLYTEK Voice Input window.", HelpUrl: "https://github.com/chriskyfung/Agile-Win-Hotkey-for-iFlyVoice" },
-    Menu: { CheckForUpdates: "Check for &Updates", Exit: "&Exit", Help: "&Help", ReinstallIFlyIME: "&Reinstall iFlyIME", RunAsAdministrator: "Run as &Administrator", TriggerHotkey: "&Trigger Hotkey", Tip: "Win+H | Toggle iFLYTEK Voice Input" },
-    Msg: { CurrentVersion: "Current Version", LatestVersion: "You are using the latest version.", IFlyIME_NotFound: "iFLYTEK Voice Input appears to be missing. Would you like to download and install it?", Details: "Details: {1}", InstallerExists: "The installer is already on your system. Would you like to download a fresh copy?", DownloadProgress: "{1} MB of {2} MB", DownloadProgressWithSpeed: "{1} - {2} MB of {3} MB", DownloadSpeed: "{1} KB/s" },
-    Error: { UpdateCheckFailed: "Could not check for updates. Please check your internet connection.", DownloadFailed: "Failed to download the installer. Please check your internet connection.", InstallFailed: "Failed to install iFlyIME.", ShellExecutionError: "An error occurred while executing a command in the system shell.", ParseFileSizeError: "There was a problem parsing the downloaded file size.", InvalidFileSize: "Invalid file size received from the server: '{1}'.", DownloadFailedWithMessage: "Download failed: {1}", LanguageFileNotFound: "Language file not found: {1}" },
-    Title: { UpdateCheckFailed: "Update Check Failed", Confirm: "Confirm", InstallationFailed: "Installation Failed", Downloading: "Downloading...", DownloadError: "Download Error" } }
+if (ValidateLangFile(LangFilePath)) {
+    global RegStr := LoadLanguageFile(LangFilePath)
+} else {
+    ExitApp()
 }
 
 /**
@@ -146,6 +141,28 @@ RunAsAdministrator(*) {
         }
         ExitApp()
     }
+}
+
+/**
+ *   Validate the language file encoding and line endings.
+ *   LangFilePath: The path to the language file.
+ *   Returns: True if valid, False otherwise.
+ */
+ValidateLangFile(LangFilePath) {
+    if !FileExist(LangFilePath) {
+        MsgBox("Language file not found: " . LangFilePath, "Error", 16)
+        return false
+    }
+
+    ; Check for UTF-16 LE BOM
+    LangFile := FileOpen(LangFilePath, "r")
+    LangFile.Close()
+    if (LangFile.Encoding != "UTF-16") {
+        MsgBox("Invalid language file encoding. Please use UTF-16LE.", "Error", 16)
+        return false
+    }
+
+    return true
 }
 
 /**
