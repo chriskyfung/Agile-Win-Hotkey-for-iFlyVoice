@@ -22,6 +22,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Added a note in `CONTRIBUTING.md` specifying that language files must be saved with UTF-16LE encoding.
 
+## [4.1.1] - 2025-12-22
+
+### Fixed
+
+- Corrected tray icon logic for AutoHotKey v2, preventing "Can't load icon" error in compiled executables (Fixes #16).
+
 ## [4.1.0-alpha.2] - 2025-12-21
 
 ### Changed
