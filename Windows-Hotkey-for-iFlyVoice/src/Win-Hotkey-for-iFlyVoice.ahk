@@ -68,10 +68,7 @@ A_TrayMenu.Add()  ; // Add a separator line.
 A_TrayMenu.Add(RegStr.Menu.Exit, Exit)
 A_IconTip := RegStr.Menu.Tip
 ; // Conditional set the image resource of Tray Icon based on the Compiled Status
-if A_IsCompiled {
-    TraySetIcon("", -141, 1)
-}
-else {
+if !A_IsCompiled {
     TraySetIcon("icon_256x256.ico", 1, 1)
 }
 
