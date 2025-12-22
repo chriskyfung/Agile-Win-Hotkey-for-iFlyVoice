@@ -5,6 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.1.0] - 2025-12-22
+
+### Build
+
+- Fully automated the release workflow, including building binaries, code signing, creating zipped packages, and publishing GitHub releases.
+- Added a CI check to validate that all language files adhere to the required UTF-16LE encoding.
+- Configured Dependabot to automatically manage updates for GitHub Actions, enhancing security and stability.
+
+### Changed
+
+- Enforced **UTF-16LE** encoding for all language files (`.lang`) to ensure proper character display across all languages.
+- Refactored localization by replacing hardcoded UI strings with dynamically loaded keys.
+
+### Documentation
+
+- Added a note in `CONTRIBUTING.md` specifying that language files must be saved with UTF-16LE encoding.
+
 ## [4.1.0-alpha.2] - 2025-12-21
 
 ### Changed
