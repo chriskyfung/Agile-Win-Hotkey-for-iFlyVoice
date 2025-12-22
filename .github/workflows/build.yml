@@ -83,15 +83,6 @@ jobs:
           files: |
             Win-Hotkey-for-iFlyVoice-32bit.exe
 
-      - name: Upload compiled EXE with Src files (portable version)
-        # This step should only run in the original repository, not in forks.
-        if: github.repository_owner == github.actor
-        uses: actions/upload-artifact@v6
-        with:
-          name: win-hotkey-for-iflyvoice-v${{ steps.get_version.outputs.semantic_version }}-portable
-          path: 'Windows-Hotkey-for-iFlyVoice\src'
-          retention-days: 7
-
       - name: Build MSI package
         # This step should only run in the original repository, not in forks.
         if: github.repository_owner == github.actor
@@ -117,12 +108,19 @@ jobs:
           files: |
             win-hotkey-for-iflyvoice-v${{ steps.get_version.outputs.semantic_version }}.msi
 
-      - name: Upload compiled MSI package
-        # This step should only run in the original repository, not in forks.
-        if: github.repository_owner == github.actor      
+      - name: Create release asset zips
+        if: github.repository_owner == github.actor
+        run: |
+          New-Item -ItemType Directory -Force -Path "release_assets"
+          Compress-Archive -Path Windows-Hotkey-for-iFlyVoice\src\* -DestinationPath "release_assets/win-hotkey-for-iflyvoice-v${{ steps.get_version.outputs.semantic_version }}-portable.zip"
+          Compress-Archive -Path Windows-Hotkey-for-iFlyVoice\dist\win-hotkey-for-iflyvoice-v${{ steps.get_version.outputs.semantic_version }}.msi -DestinationPath "release_assets/win-hotkey-for-iflyvoice-v${{ steps.get_version.outputs.semantic_version }}-installer.zip"
+        shell: powershell
+
+      - name: Upload release assets
+        if: github.repository_owner == github.actor
         uses: actions/upload-artifact@v6
         with:
-          name: win-hotkey-for-iflyvoice-v${{ steps.get_version.outputs.semantic_version }}-installer
-          path: ${{ github.workspace }}\Windows-Hotkey-for-iFlyVoice\dist\win-hotkey-for-iflyvoice-v${{ steps.get_version.outputs.semantic_version }}.msi
+          name: release-assets
+          path: release_assets/
           retention-days: 7
 
