@@ -12,19 +12,19 @@ on:
       - '.github/workflows/build.yml'
       - 'Windows-Hotkey-for-iFlyVoice/src/**'
 
-permissions:
-  # Needed to checkout the repository.
-  contents: read
-  # Needed to upload artifacts.
-  actions: write
-
 jobs:
-  build:
+  build:    
     runs-on: windows-latest
+
+    permissions:
+      # Needed to checkout the repository.
+      contents: read
+      # Needed to upload artifacts.
+      actions: write
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Get version from AHK file
         id: get_version
@@ -84,10 +84,13 @@ jobs:
             Win-Hotkey-for-iFlyVoice-32bit.exe
 
       - name: Upload compiled EXE with Src files (portable version)
-        uses: actions/upload-artifact@v4
+        # This step should only run in the original repository, not in forks.
+        if: github.repository_owner == github.actor
+        uses: actions/upload-artifact@v6
         with:
           name: win-hotkey-for-iflyvoice-v${{ steps.get_version.outputs.semantic_version }}-portable
           path: 'Windows-Hotkey-for-iFlyVoice\src'
+          retention-days: 7
 
       - name: Build MSI package
         # This step should only run in the original repository, not in forks.
@@ -115,7 +118,11 @@ jobs:
             win-hotkey-for-iflyvoice-v${{ steps.get_version.outputs.semantic_version }}.msi
 
       - name: Upload compiled MSI package
-        uses: actions/upload-artifact@v4
+        # This step should only run in the original repository, not in forks.
+        if: github.repository_owner == github.actor      
+        uses: actions/upload-artifact@v6
         with:
           name: win-hotkey-for-iflyvoice-v${{ steps.get_version.outputs.semantic_version }}-installer
           path: ${{ github.workspace }}\Windows-Hotkey-for-iFlyVoice\dist\win-hotkey-for-iflyvoice-v${{ steps.get_version.outputs.semantic_version }}.msi
+          retention-days: 7
+
