@@ -1,6 +1,17 @@
 # Agile-Win-Hotkey-for-iFlyVoice ![Windows badge](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white)
 
 <p align="center">
+  <a href="README.md" title="English README">
+    <img src="https://img.shields.io/badge/English-blue?style=for-the-badge" alt="English">
+  </a>
+  <a href="README.zh-CN.md" title="简体中文 README">
+    <img src="https://img.shields.io/badge/简体中文-red?style=for-the-badge" alt="简体中文">
+  </a>
+  <a href="README.zh-TW.md" title="繁體中文 README">
+    <img src="https://img.shields.io/badge/繁體中文-green?style=for-the-badge" alt="繁體中文">
+  </a>
+</p>
+<p align="center">
   <a href="https://support.microsoft.com/windows/use-voice-typing-to-talk-instead-of-type-on-your-pc-fec94565-c4bd-329d-e59a-af033fa5689f" title="Visit Microsoft Support">
     <img src="https://img.shields.io/badge/Made%20for-Windows-1f425f.svg" alt="Made for Windows">
   </a>
