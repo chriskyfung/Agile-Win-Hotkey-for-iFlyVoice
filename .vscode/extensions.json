@@ -1,6 +1,7 @@
 {
   "recommendations": [
-    "cweijan.vscode-autohotkey-plus",
-    "github.vscode-github-actions"
+    "github.vscode-github-actions",
+    "mark-wiemer.vscode-autohotkey-plus-plus",
+    "helsmy.autohotkey-debug"
   ]
 }
