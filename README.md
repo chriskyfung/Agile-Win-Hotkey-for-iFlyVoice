@@ -18,6 +18,9 @@
   <a href="https://github.com/chriskyfung/Agile-Win-Hotkey-for-iFlyVoice/releases/latest/">
     <img src="https://img.shields.io/github/v/release/chriskyfung/Agile-Win-Hotkey-for-iFlyVoice" alt="GitHub release (latest by date)">
   </a>
+  <a href="https://github.com/chriskyfung/Agile-Win-Hotkey-for-iFlyVoice/actions/workflows/build.yml">
+    <img src="https://github.com/chriskyfung/Agile-Win-Hotkey-for-iFlyVoice/actions/workflows/build.yml/badge.svg" alt="Build AutoHotkey Executable">
+  </a>
   <a href="https://github.com/chriskyfung/Agile-Win-Hotkey-for-iFlyVoice/releases">
     <img src="https://img.shields.io/github/downloads/chriskyfung/Agile-Win-Hotkey-for-iFlyVoice/total" alt="GitHub all releases Download Count">
   </a>
