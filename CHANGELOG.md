@@ -5,6 +5,32 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.1.2] - 2026-02-28
+
+### Build
+
+- Renamed the GitHub Actions workflow from 'Build AutoHotkey Executable' to 'build' for simplicity.
+- Grouped Dependabot updates for GitHub Actions to reduce noise.
+- Updated the `actions/download-artifact` GitHub Action to version 8.
+- Updated the `actions/upload-artifact` GitHub Action to version 7.
+
+### Changed
+
+- Updated Chinese language files for improved localization and clarity.
+- Updated recommended VS Code extensions for AutoHotkey and added debug support.
+
+### Documentation
+
+- Added a GitHub Actions workflow status badge to the README.
+- Added language badges and a Simplified Chinese version of the README.
+- Enhanced the README with an improved structure, clearer feature descriptions, and additional relevant links.
+
+## [4.1.1] - 2025-12-22
+
+### Fixed
+
+- Corrected tray icon logic for AutoHotKey v2, preventing "Can't load icon" error in compiled executables (Fixes #16).
+
 ## [4.1.0] - 2025-12-22
 
 ### Build
@@ -21,12 +47,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Documentation
 
 - Added a note in `CONTRIBUTING.md` specifying that language files must be saved with UTF-16LE encoding.
-
-## [4.1.1] - 2025-12-22
-
-### Fixed
-
-- Corrected tray icon logic for AutoHotKey v2, preventing "Can't load icon" error in compiled executables (Fixes #16).
 
 ## [4.1.0-alpha.2] - 2025-12-21
 
