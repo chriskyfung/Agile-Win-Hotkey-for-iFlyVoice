@@ -1,4 +1,5 @@
-name: Build AutoHotkey Executable
+# Build AutoHotkey Executable
+name: build
 
 on:
   push:
