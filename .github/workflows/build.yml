@@ -92,7 +92,7 @@ jobs:
       - name: Build MSI package
         # This step should only run in the original repository, not in forks.
         if: github.repository_owner == github.actor
-        uses: caphyon/advinst-github-action@v2.0
+        uses: caphyon/advinst-github-action@v2.0.3
         with:
           advinst-version: '22.0' # Specify your Advanced Installer version
           advinst-license: ${{ secrets.ADVINST_LICENSE_KEY }}
