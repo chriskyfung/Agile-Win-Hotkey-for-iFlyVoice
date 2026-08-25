@@ -1,4 +1,4 @@
-# Agile-Win-Hotkey-for-iFlyVoice (简体中文) ![Windows badge](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white)
+# Win Hotkey for iFlyVoice (简体中文) ![Windows badge](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white)
 
 <p align="center">
   <a href="README.md" title="英文 README">
@@ -30,7 +30,7 @@
   <img src="docs/images/icon_128x128.png" width="128" height="128" alt="Agile Win Hotkey for iFlyVoice Logo">
 </p>
 
-使用 **Agile-Win-Hotkey-for-iFlyVoice** 提升您在 Windows 上的听写体验。这个 [AutoHotkey v2](https://www.autohotkey.com/) 脚本智能地重新配置了 <kbd>Win</kbd>+<kbd>H</kbd> 热键，将其转换为一个强大的快捷方式，用于无缝控制 **iFLYTEK 语音输入** 悬浮窗 (讯飞语音悬浮窗)。
+使用 **Win Hotkey for iFlyVoice** 提升您在 Windows 上的听写体验。这个 [AutoHotkey v2](https://www.autohotkey.com/) 脚本智能地重新配置了 <kbd>Win</kbd>+<kbd>H</kbd> 热键，将其转换为一个强大的快捷方式，用于无缝控制 **iFLYTEK 语音输入** 悬浮窗 (讯飞语音悬浮窗)。
 
 <p align="center">
   <a href="https://chriskyfung.github.io/Agile-Win-Hotkey-for-iFlyVoice/" title="GitHub Pages">

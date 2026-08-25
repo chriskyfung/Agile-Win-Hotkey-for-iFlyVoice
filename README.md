@@ -1,4 +1,4 @@
-# Agile-Win-Hotkey-for-iFlyVoice ![Windows badge](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white)
+# Win Hotkey for iFlyVoice ![Windows badge](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white)
 
 <p align="center">
   <a href="README.md" title="English README">
@@ -33,7 +33,7 @@
   <img src="docs/images/icon_128x128.png" width="128" height="128" alt="Agile Win Hotkey for iFlyVoice Logo">
 </p>
 
-Elevate your dictation experience on Windows with **Agile-Win-Hotkey-for-iFlyVoice**. This [AutoHotkey v2](https://www.autohotkey.com/) script intelligently reconfigures the <kbd>Win</kbd>+<kbd>H</kbd> hotkey, transforming it into a powerful shortcut for seamless control of the **iFLYTEK Voice Input** Floating Window (讯飞语音悬浮窗).
+Elevate your dictation experience on Windows with **Win Hotkey for iFlyVoice**. This [AutoHotkey v2](https://www.autohotkey.com/) script intelligently reconfigures the <kbd>Win</kbd>+<kbd>H</kbd> hotkey, transforming it into a powerful shortcut for seamless control of the **iFLYTEK Voice Input** Floating Window (讯飞语音悬浮窗).
 
 <p align="center">
   <a href="https://chriskyfung.github.io/Agile-Win-Hotkey-for-iFlyVoice/" title="GitHub Pages">
