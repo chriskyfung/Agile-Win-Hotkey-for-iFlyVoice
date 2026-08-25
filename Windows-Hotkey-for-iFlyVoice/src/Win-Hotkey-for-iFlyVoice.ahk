@@ -15,7 +15,7 @@ if !FileExist(ConfigPath)
     ConfigPath := A_ScriptDir . "\config.ini"
 
 if FileExist(ConfigPath) {
-    UiLang := IniRead(ConfigPath, "Preference", "Langauge", UiLang)
+    UiLang := IniRead(ConfigPath, "Preference", "Language", UiLang)
     AppPath := IniRead(ConfigPath, "Preference", "iFlyIME_Path", AppPath)
 }
 

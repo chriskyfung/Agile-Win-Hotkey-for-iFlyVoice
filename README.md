@@ -1,4 +1,4 @@
-# Agile-Win-Hotkey-for-iFlyVoice ![Windows badge](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white)
+# Win Hotkey for iFlyVoice ![Windows badge](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white)
 
 <p align="center">
   <a href="README.md" title="English README">
@@ -33,7 +33,7 @@
   <img src="docs/images/icon_128x128.png" width="128" height="128" alt="Agile Win Hotkey for iFlyVoice Logo">
 </p>
 
-Elevate your dictation experience on Windows with **Agile-Win-Hotkey-for-iFlyVoice**. This [AutoHotkey v2](https://www.autohotkey.com/) script intelligently reconfigures the <kbd>Win</kbd>+<kbd>H</kbd> hotkey, transforming it into a powerful shortcut for seamless control of the **iFLYTEK Voice Input** Floating Window (讯飞语音悬浮窗).
+Elevate your dictation experience on Windows with **Win Hotkey for iFlyVoice**. This [AutoHotkey v2](https://www.autohotkey.com/) script intelligently reconfigures the <kbd>Win</kbd>+<kbd>H</kbd> hotkey, transforming it into a powerful shortcut for seamless control of the **iFLYTEK Voice Input** Floating Window (讯飞语音悬浮窗).
 
 <p align="center">
   <a href="https://chriskyfung.github.io/Agile-Win-Hotkey-for-iFlyVoice/" title="GitHub Pages">
@@ -76,19 +76,19 @@ Elevate your dictation experience on Windows with **Agile-Win-Hotkey-for-iFlyVoi
 
 ## ⚙️ Configuration (Optional)
 
-Tailor the script's behavior to your preferences by creating a `config.ini` file. Place this file in `%APPDATA%\Agile-Win-Hotkey-for-iFlyVoice\` (typically `C:\Users\<Your Username>\AppData\Roaming\Agile-Win-Hotkey-for-iFlyVoice\`).
+Tailor the script's behavior to your preferences by creating a `config.ini` file. Place this file in `%APPDATA%\Win-Hotkey-for-iFlyVoice\` (typically `C:\Users\<Your Username>\AppData\Roaming\Win-Hotkey-for-iFlyVoice\`).
 
 Here are the available customization options:
 
 ```ini
 [Preference]
 iFlyIME_Path = C:\path\to\your\iFlyVoice.exe
-Langauge = en-US
+Language = en-US
 ```
 
 - **`iFlyIME_Path`**: Set a custom path for `iFlyVoice.exe`. If not specified, the script will look for it in the default installation directory (`C:\Program Files (x86)\iFlytek\iFlyIME\3.0.1746\`).
 
-- **`Langauge`**: Change the display language for messages and the tray menu. Supported languages are:
+- **`Language`**: Change the display language for messages and the tray menu. Supported languages are:
   - `en-US` (English - default)
   - `zh-CN` (Simplified Chinese)
   - `zh-TW` (Traditional Chinese)

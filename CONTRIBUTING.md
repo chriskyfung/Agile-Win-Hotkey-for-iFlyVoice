@@ -1,6 +1,6 @@
-# Contributing to Agile-Win-Hotkey-for-iFlyVoice
+# Contributing to Win Hotkey for iFlyVoice
 
-Thank you for your interest in contributing to Agile-Win-Hotkey-for-iFlyVoice! We appreciate your effort in making this project better.
+Thank you for your interest in contributing to Win Hotkey for iFlyVoice! We appreciate your effort in making this project better.
 
 This document outlines the guidelines for contributing to this project. By participating, you agree to abide by our [Code of Conduct](CODE_OF_CONDUCT.md).
 

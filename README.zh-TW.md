@@ -1,4 +1,4 @@
-# Agile-Win-Hotkey-for-iFlyVoice (繁體中文) ![Windows badge](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white)
+# Win Hotkey for iFlyVoice (繁體中文) ![Windows badge](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white)
 
 <p align="center">
   <a href="README.md" title="英文 README">
@@ -30,7 +30,7 @@
   <img src="docs/images/icon_128x128.png" width="128" height="128" alt="Agile Win Hotkey for iFlyVoice Logo">
 </p>
 
-使用 **Agile-Win-Hotkey-for-iFlyVoice** 提升您在 Windows 上的聽寫體驗。這個 [AutoHotkey v2](https://www.autohotkey.com/) 腳本智能地重新配置了 <kbd>Win</kbd>+<kbd>H</kbd> 熱鍵，將其轉換為一個強大的快捷方式，用於無縫控制 **iFLYTEK 語音輸入** 懸浮窗 (訊飛語音懸浮窗)。
+使用 **Win Hotkey for iFlyVoice** 提升您在 Windows 上的聽寫體驗。這個 [AutoHotkey v2](https://www.autohotkey.com/) 腳本智能地重新配置了 <kbd>Win</kbd>+<kbd>H</kbd> 熱鍵，將其轉換為一個強大的快捷方式，用於無縫控制 **iFLYTEK 語音輸入** 懸浮窗 (訊飛語音懸浮窗)。
 
 <p align="center">
   <a href="https://chriskyfung.github.io/Agile-Win-Hotkey-for-iFlyVoice/" title="GitHub Pages">
@@ -73,19 +73,19 @@
 
 ## ⚙️ 配置 (可選)
 
-透過創建 `config.ini` 文件，根據您的偏好調整腳本行為。將此文件放置在 `%APPDATA%\Agile-Win-Hotkey-for-iFlyVoice\` (通常是 `C:\Users\<您的用戶名>\AppData\Roaming\Agile-Win-Hotkey-for-iFlyVoice\`)。
+透過創建 `config.ini` 文件，根據您的偏好調整腳本行為。將此文件放置在 `%APPDATA%\Win-Hotkey-for-iFlyVoice\` (通常是 `C:\Users\<您的用戶名>\AppData\Roaming\Win-Hotkey-for-iFlyVoice\`)。
 
 以下是可用的自定義選項：
 
 ```ini
 [Preference]
 iFlyIME_Path = C:\path\to\your\iFlyVoice.exe
-Langauge = en-US
+Language = en-US
 ```
 
 - **`iFlyIME_Path`**：為 `iFlyVoice.exe` 設定自定義路徑。如果未指定，腳本將在預設安裝目錄 (`C:\Program Files (x86)\iFlytek\iFlyIME\3.0.1746\`) 中查找。
 
-- **`Langauge`**：更改消息和托盤菜單的顯示語言。支援的語言有：
+- **`Language`**：更改消息和托盤菜單的顯示語言。支援的語言有：
   - `en-US` (英語 - 預設)
   - `zh-CN` (簡體中文)
   - `zh-TW` (繁體中文)
