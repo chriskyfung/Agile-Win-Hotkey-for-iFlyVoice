@@ -80,12 +80,12 @@
 ```ini
 [Preference]
 iFlyIME_Path = C:\path\to\your\iFlyVoice.exe
-Langauge = en-US
+Language = en-US
 ```
 
 - **`iFlyIME_Path`**：为 `iFlyVoice.exe` 设置自定义路径。如果未指定，脚本将在默认安装目录 (`C:\Program Files (x86)\iFlytek\iFlyIME\3.0.1746\`) 中查找。
 
-- **`Langauge`**：更改消息和托盘菜单的显示语言。支持的语言有：
+- **`Language`**：更改消息和托盘菜单的显示语言。支持的语言有：
   - `en-US` (英语 - 默认)
   - `zh-CN` (简体中文)
   - `zh-TW` (繁体中文)

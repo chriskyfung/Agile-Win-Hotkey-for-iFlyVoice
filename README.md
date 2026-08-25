@@ -83,12 +83,12 @@ Here are the available customization options:
 ```ini
 [Preference]
 iFlyIME_Path = C:\path\to\your\iFlyVoice.exe
-Langauge = en-US
+Language = en-US
 ```
 
 - **`iFlyIME_Path`**: Set a custom path for `iFlyVoice.exe`. If not specified, the script will look for it in the default installation directory (`C:\Program Files (x86)\iFlytek\iFlyIME\3.0.1746\`).
 
-- **`Langauge`**: Change the display language for messages and the tray menu. Supported languages are:
+- **`Language`**: Change the display language for messages and the tray menu. Supported languages are:
   - `en-US` (English - default)
   - `zh-CN` (Simplified Chinese)
   - `zh-TW` (Traditional Chinese)

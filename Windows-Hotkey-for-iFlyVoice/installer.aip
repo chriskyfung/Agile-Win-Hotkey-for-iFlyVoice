@@ -424,7 +424,7 @@
     <ROW Name="icon_256x256_1.exe" SourcePath="icon_256x256.ico" Index="0"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiIniFileComponent">
-    <ROW IniFile="Langauge_1" FileName="config.ini" DirProperty="AppDataFolder" Section="Preference" Key="Langauge" Value="zh-TW" Action="0" Component_="WinHotkeyforiFlyVoice32bit.exe"/>
+    <ROW IniFile="Language_1" FileName="config.ini" DirProperty="AppDataFolder" Section="Preference" Key="Language" Value="zh-TW" Action="0" Component_="WinHotkeyforiFlyVoice32bit.exe"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiInstExSeqComponent">
     <ROW Action="AI_DOWNGRADE" Condition="AI_NEWERPRODUCTFOUND AND (UILevel &lt;&gt; 5)" Sequence="210"/>
