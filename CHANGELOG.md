@@ -5,6 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.1.3] - 2026-08-25
+
+### Build
+
+- Updated the `actions/checkout` GitHub Action to version 7.
+- Updated the `softprops/action-gh-release` GitHub Action to version 3.
+- Bumped `caphyon/advinst-github-action` from 2.0 to v2.0.3 to ensure compatibility with Node.js 24.
+
+### Fixed
+
+- Corrected the misspelled `Langauge` key to `Language` in the configuration file, source code, installer, and README files, so the language preference is now applied correctly (Fixes #25).
+
+### Documentation
+
+- Renamed the project to "Win Hotkey for iFlyVoice" in all documentation files.
+- Corrected the `config.ini` path in the README files.
+
 ## [4.1.2] - 2026-02-28
 
 ### Build
