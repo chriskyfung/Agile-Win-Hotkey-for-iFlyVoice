@@ -76,7 +76,7 @@ Elevate your dictation experience on Windows with **Agile-Win-Hotkey-for-iFlyVoi
 
 ## ⚙️ Configuration (Optional)
 
-Tailor the script's behavior to your preferences by creating a `config.ini` file. Place this file in `%APPDATA%\Agile-Win-Hotkey-for-iFlyVoice\` (typically `C:\Users\<Your Username>\AppData\Roaming\Agile-Win-Hotkey-for-iFlyVoice\`).
+Tailor the script's behavior to your preferences by creating a `config.ini` file. Place this file in `%APPDATA%\Win-Hotkey-for-iFlyVoice\` (typically `C:\Users\<Your Username>\AppData\Roaming\Win-Hotkey-for-iFlyVoice\`).
 
 Here are the available customization options:
 

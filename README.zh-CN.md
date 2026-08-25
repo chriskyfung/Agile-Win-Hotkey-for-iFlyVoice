@@ -73,7 +73,7 @@
 
 ## ⚙️ 配置 (可选)
 
-通过创建 `config.ini` 文件，根据您的偏好调整脚本行为。将此文件放置在 `%APPDATA%\Agile-Win-Hotkey-for-iFlyVoice\` (通常是 `C:\Users\<您的用户名>\AppData\Roaming\Agile-Win-Hotkey-for-iFlyVoice\`)。
+通过创建 `config.ini` 文件，根据您的偏好调整脚本行为。将此文件放置在 `%APPDATA%\Win-Hotkey-for-iFlyVoice\` (通常是 `C:\Users\<您的用户名>\AppData\Roaming\Win-Hotkey-for-iFlyVoice\`)。
 
 以下是可用的自定义选项：
 
